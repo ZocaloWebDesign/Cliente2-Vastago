@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vástago · Muestras tipográficas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Cormorant+Garamond:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500;600&family=DM+Sans:wght@400;500;600&family=Instrument+Sans:wght@400;500;600&family=Just+Another+Hand&family=Gaegu:wght@400;700&family=Patrick+Hand+SC&display=swap" rel="stylesheet">
+<style>
+:root{
+  --arena:#E1D3C0; --camel:#D5BF9E; --bordo:#AA6766; --bordo-os:#8E4F4E;
+  --tinta:#161311; --blanco:#FFFFFF; --hueso:#F4EDE2;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--hueso);color:var(--tinta);font-family:Inter,sans-serif;padding:32px 20px 80px}
+.wrap{max-width:1080px;margin:0 auto}
+h1.page{font:600 13px Inter;letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-os);margin-bottom:6px}
+p.lead{max-width:62ch;color:#4a4039;margin-bottom:36px;line-height:1.5}
+.combo{border:1px solid rgba(22,19,17,.15);border-radius:6px;margin-bottom:40px;overflow:hidden;background:var(--arena)}
+.combo>header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;padding:14px 22px;background:var(--tinta);color:var(--arena);font:500 13px Inter}
+.combo>header b{font-weight:600;letter-spacing:.06em}
+.combo>header span{opacity:.75}
+.hero{padding:44px 22px 36px;text-align:center}
+.hero img{width:min(340px,70%);display:block;margin:0 auto 18px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:760px){.row{grid-template-columns:1fr}}
+.cell{padding:30px 26px;border-top:1px solid rgba(22,19,17,.12)}
+.cell.dark{background:var(--bordo);color:var(--blanco)}
+.tag{font:500 11px Inter;letter-spacing:.12em;text-transform:uppercase;opacity:.7;margin-bottom:10px;display:block}
+.btn{display:inline-block;padding:12px 22px;background:var(--tinta);color:var(--arena);border-radius:2px;margin-top:16px;font-size:15px}
+.btn.alt{background:var(--blanco);color:var(--bordo-os)}
+.versiculo{background:var(--camel);padding:34px 26px;border-top:1px solid rgba(22,19,17,.12);text-align:center}
+
+/* COMBO A */
+.A h2,.A h3{font-family:Fraunces,serif;font-weight:400;font-optical-sizing:auto}
+.A .h-hero{font:400 clamp(30px,5vw,46px)/1.1 Fraunces,serif;letter-spacing:-.01em}
+.A h2{font-size:34px;line-height:1.1;margin-bottom:12px}
+.A p,.A .btn,.A li{font-family:Inter,sans-serif}
+.A p{line-height:1.6;font-size:16px}
+.A .acento{font-family:'Just Another Hand',cursive;font-size:30px;letter-spacing:.04em;text-transform:uppercase}
+.A .versiculo .acento{font-size:36px;line-height:1.15;display:block}
+/* COMBO B */
+.B h2{font:500 36px/1.05 'Cormorant Garamond',serif;margin-bottom:12px}
+.B .h-hero{font:500 clamp(32px,5vw,50px)/1.05 'Cormorant Garamond',serif}
+.B p,.B .btn{font-family:'DM Sans',sans-serif}
+.B p{line-height:1.6;font-size:16px}
+.B .acento{font-family:Gaegu,cursive;font-size:26px;font-weight:700}
+.B .versiculo .acento{font-size:30px;line-height:1.25;display:block}
+/* COMBO C */
+.C h2{font:500 34px/1.1 Newsreader,serif;margin-bottom:12px}
+.C .h-hero{font:400 clamp(30px,5vw,44px)/1.1 Newsreader,serif;font-style:italic}
+.C p,.C .btn{font-family:'Instrument Sans',sans-serif}
+.C p{line-height:1.6;font-size:16px}
+.C .acento{font-family:'Patrick Hand SC',cursive;font-size:24px;letter-spacing:.05em}
+.C .versiculo .acento{font-size:28px;line-height:1.3;display:block}
+.nota{padding:18px 26px;font-size:13.5px;line-height:1.55;background:var(--hueso);border-top:1px solid rgba(22,19,17,.12)}
+.nota b{color:var(--bordo-os)}
+.mini{display:flex;flex-wrap:wrap;gap:22px;padding:22px 26px;border-top:1px solid rgba(22,19,17,.12)}
+.mini div{font-size:15px}
+.mini small{display:block;font:500 11px Inter;letter-spacing:.1em;text-transform:uppercase;opacity:.65;margin-bottom:4px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 class="page">Vástago · Fe en obra — Muestras tipográficas</h1>
+  <p class="lead">Tres combinaciones para comparar en contexto, con el logo real y solo los colores de marca. En cada una: título (serif), texto (sans) y un acento manuscrito que se usa poco (versículos, etiquetas).</p>
+
+  <!-- A -->
+  <section class="combo A">
+    <header><b>OPCIÓN A · Editorial cálida</b><span>Fraunces · Inter · Just Another Hand</span></header>
+    <div class="hero">
+      <img src="logo-negro.png" alt="Vástago Fe en obra">
+      <div class="h-hero">Pintura con versículos, hecha a mano</div>
+    </div>
+    <div class="row">
+      <div class="cell">
+        <span class="tag">Sección</span>
+        <h2>Encargá tu cuadro</h2>
+        <p>Contanos la idea o el versículo que querés pintar. Te mandamos un boceto, acordamos la seña y empezamos la obra.</p>
+        <span class="btn">Hacer un encargo</span>
+      </div>
+      <div class="cell dark">
+        <span class="tag">Taller</span>
+        <h2>Aprendé a pintar</h2>
+        <p>Clases de pintura y de construcción de atriles. Cupos limitados.</p>
+        <span class="btn alt">Ver el taller</span>
+      </div>
+    </div>
+    <div class="versiculo"><span class="acento">El amor es paciente, es bondadoso</span><p style="font-size:13px;margin-top:6px;opacity:.7">1 Corintios 13</p></div>
+    <div class="mini">
+      <div><small>Etiqueta de obra</small><span class="acento" style="font-size:24px">Serie Juana · Disponible</span></div>
+      <div><small>Medidas / datos</small>40 × 50 cm · Acrílico sobre lienzo</div>
+    </div>
+    <div class="nota"><b>Lo bueno:</b> Fraunces tiene mucho carácter "humano" (curvas suaves y algo irregulares), cercano a la V del logo. Just Another Hand es alta y angosta, parecida a "FE EN OBRA". <b>Cuidado:</b> el acento se vuelve poco legible por debajo de ~22px; usarlo solo para frases cortas.</div>
+  </section>
+
+  <!-- B -->
+  <section class="combo B">
+    <header><b>OPCIÓN B · Clásica, más serena</b><span>Cormorant Garamond · DM Sans · Gaegu</span></header>
+    <div class="hero">
+      <img src="logo-negro.png" alt="Vástago Fe en obra">
+      <div class="h-hero">Pintura con versículos, hecha a mano</div>
+    </div>
+    <div class="row">
+      <div class="cell">
+        <span class="tag">Sección</span>
+        <h2>Encargá tu cuadro</h2>
+        <p>Contanos la idea o el versículo que querés pintar. Te mandamos un boceto, acordamos la seña y empezamos la obra.</p>
+        <span class="btn">Hacer un encargo</span>
+      </div>
+      <div class="cell dark">
+        <span class="tag">Taller</span>
+        <h2>Aprendé a pintar</h2>
+        <p>Clases de pintura y de construcción de atriles. Cupos limitados.</p>
+        <span class="btn alt">Ver el taller</span>
+      </div>
+    </div>
+    <div class="versiculo"><span class="acento">El amor es paciente, es bondadoso</span><p style="font-size:13px;margin-top:6px;opacity:.7">1 Corintios 13</p></div>
+    <div class="mini">
+      <div><small>Etiqueta de obra</small><span class="acento">Serie Juana · Disponible</span></div>
+      <div><small>Medidas / datos</small>40 × 50 cm · Acrílico sobre lienzo</div>
+    </div>
+    <div class="nota"><b>Lo bueno:</b> el más elegante y "de galería". Los títulos finos de Cormorant contrastan lindo con la letra gruesa del logo. <b>Cuidado:</b> Cormorant es delgada; en celular conviene usarla grande (28px+) y nunca en bordó claro sobre arena.</div>
+  </section>
+
+  <!-- C -->
+  <section class="combo C">
+    <header><b>OPCIÓN C · Literaria, cercana</b><span>Newsreader · Instrument Sans · Patrick Hand SC</span></header>
+    <div class="hero">
+      <img src="logo-negro.png" alt="Vástago Fe en obra">
+      <div class="h-hero">Pintura con versículos, hecha a mano</div>
+    </div>
+    <div class="row">
+      <div class="cell">
+        <span class="tag">Sección</span>
+        <h2>Encargá tu cuadro</h2>
+        <p>Contanos la idea o el versículo que querés pintar. Te mandamos un boceto, acordamos la seña y empezamos la obra.</p>
+        <span class="btn">Hacer un encargo</span>
+      </div>
+      <div class="cell dark">
+        <span class="tag">Taller</span>
+        <h2>Aprendé a pintar</h2>
+        <p>Clases de pintura y de construcción de atriles. Cupos limitados.</p>
+        <span class="btn alt">Ver el taller</span>
+      </div>
+    </div>
+    <div class="versiculo"><span class="acento">El amor es paciente, es bondadoso</span><p style="font-size:13px;margin-top:6px;opacity:.7">1 Corintios 13</p></div>
+    <div class="mini">
+      <div><small>Etiqueta de obra</small><span class="acento">Serie Juana · Disponible</span></div>
+      <div><small>Medidas / datos</small>40 × 50 cm · Acrílico sobre lienzo</div>
+    </div>
+    <div class="nota"><b>Lo bueno:</b> Newsreader está pensada para leer (ideal si habrá textos largos: historia, proceso). La itálica del título se siente "escrita". <b>Cuidado:</b> el acento Patrick Hand SC es más "escolar" y menos parecido al logo.</div>
+  </section>
+</div>
+</body>
+</html>
