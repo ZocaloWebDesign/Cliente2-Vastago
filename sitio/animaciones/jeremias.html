@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vástago · Animación Jeremías 18</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+#pincel,#punta,.dots,.down{display:none!important}
+:root{--bordo:#AA6766;--bordo-os:#8E4F4E;--tinta:#161311}
+*{box-sizing:border-box;margin:0}
+html,body{background:#fff}
+body{color:var(--tinta);font:400 16px/1.5 Inter,sans-serif}
+.track{height:calc(100vh + 160vh);position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background-color:#fff;
+  background-image:repeating-linear-gradient(0deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px),repeating-linear-gradient(90deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px)}
+.top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:2.2vh 4.4vw;z-index:5}
+.top img{height:6.4vh;min-height:44px}
+.menu{font:500 15px Inter;display:flex;gap:10px;align-items:center}
+.menu i{display:inline-block;width:26px;height:2px;background:var(--tinta);box-shadow:0 7px 0 var(--tinta),0 -7px 0 var(--tinta)}
+.obra{position:absolute;left:50%;top:51%;height:80vh;aspect-ratio:1000/1500;transform:translate(-50%,-50%);z-index:2;background:#FBF9F5;
+  box-shadow:0 .4vh 1vh rgba(40,30,20,.12),0 3vh 6vh rgba(40,30,20,.16),0 0 0 1px rgba(40,30,20,.07)}
+.obra svg{width:100%;height:100%;display:block}
+.cap{position:absolute;right:calc(50% + 26.7vh + 2.5vw);text-align:right;top:51%;transform:translateY(-50%);z-index:3;max-width:18vw}
+.cap .n{font:600 12px Inter;letter-spacing:.16em;text-transform:uppercase;color:var(--bordo-os)}
+.cap .t{font:400 clamp(20px,2.2vw,30px)/1.15 'Patrick Hand',cursive;margin-top:1.2vh}
+.rail{position:absolute;left:1.5vw;top:22vh;height:56vh;width:2px;background:rgba(22,19,17,.18);z-index:6}
+.rail b{position:absolute;left:-3px;top:0;width:8px;height:0;background:var(--bordo-os)}
+.rail u{position:absolute;left:-5px;width:12px;height:2px;background:rgba(22,19,17,.45)}
+.rail em{position:absolute;left:16px;font:500 11px Inter;font-style:normal;letter-spacing:.08em;color:#5a4f46;transform:translateY(-50%);white-space:nowrap}
+.dots{position:absolute;left:8vw;bottom:5vh;display:flex;gap:10px;align-items:center;z-index:5}
+.dots s{width:40px;height:3px;background:rgba(22,19,17,.2);display:block;text-decoration:none}
+.dots s.on{background:var(--bordo-os)}
+.dots small{font:500 11px Inter;letter-spacing:.12em;margin-left:10px;color:#5a4f46}
+.down{position:absolute;left:0;right:0;bottom:1.2vh;text-align:center;font:500 12px Inter;letter-spacing:.14em;text-transform:uppercase;color:#5a4f46;z-index:4}
+.down i{display:block;margin:4px auto 0;width:1.5px;height:16px;background:var(--bordo-os)}
+.hud{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:20;background:rgba(22,19,17,.92);color:#E1D3C0;border-radius:40px;padding:8px 10px 8px 18px;display:flex;gap:14px;align-items:center;font:500 13px Inter;box-shadow:0 8px 24px rgba(0,0,0,.25);white-space:nowrap}
+.hud b{font-weight:600;color:#D5BF9E;letter-spacing:.1em;font-size:11px;text-transform:uppercase}
+.hud .fase{min-width:340px}
+.hud button{white-space:nowrap;font:600 12px Inter;border:0;border-radius:30px;padding:8px 14px;cursor:pointer;background:#AA6766;color:#fff}
+.hud button.g{background:rgba(255,255,255,.14)}
+@media (max-width:1100px){.cap{display:none}}
+@media (max-width:900px){.obra{height:70vh}.rail{display:none}.hud .fase{min-width:0;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="hud"><b>Demo</b><span class="fase" id="fase">Scroll 0 %</span><button id="play">▶ Ver sola</button><button class="g" id="reset">↺ Inicio</button></div>
+<div class="track" id="track">
+<section class="stage" id="stage">
+  <div class="top"><img src="logo-negro.png" alt="Vástago · Fe en obra"><div class="menu">Menú <i></i></div></div>
+  <div class="cap"><div class="n">04 / 04 · Obra</div><div class="t">Jeremías 18</div></div>
+  <div class="obra" id="obra">
+    <svg id="svg" viewBox="0 0 1000 1500" xmlns="http://www.w3.org/2000/svg" aria-label="Jeremías 18 (animación)">
+      <defs>
+        <!-- balance de blancos: el tono del panel pasa de gris-violáceo a un rosa cálido más fiel -->
+        <filter id="expo" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1.18 .02 0 0 .02  0 1.10 0 0 .015  0 0 .98 0 .02  0 0 0 1 0"/></filter>
+        <filter id="rugoso" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="3" seed="5"/><feDisplacementMap in="SourceGraphic" scale="44"/></filter>
+        <filter id="rugosoF" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="8"/><feDisplacementMap in="SourceGraphic" scale="22"/></filter>
+        <filter id="ola" x="-10%" y="-20%" width="120%" height="140%"><feTurbulence id="tola" type="fractalNoise" baseFrequency=".02 .06" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="60"/></filter>
+        <filter id="suave" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="22"/></filter>
+        <mask id="mFondo" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1200" height="1700"><g id="trazos" fill="none" stroke="#fff" stroke-width="330" stroke-linecap="round" filter="url(#rugoso)"></g></mask>
+        <mask id="mVasija" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1500"><g filter="url(#ola)"><rect id="rv" x="150" y="1500" width="800" height="0" fill="#fff"/></g></mask>
+        <mask id="mManoI" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1500"><g filter="url(#suave)"><rect id="ri" x="-300" y="560" width="0" height="560" fill="#fff"/></g></mask>
+        <mask id="mManoD" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1500"><g filter="url(#suave)"><rect id="rd" x="1300" y="470" width="0" height="360" fill="#fff"/></g></mask>
+        <mask id="mTexto" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1500"><g filter="url(#rugosoF)" fill="#fff"><rect id="tA" x="-20" y="-20" width="0" height="360"/><rect id="tB" x="-20" y="300" width="0" height="540"/><rect id="tC" x="-20" y="810" width="0" height="520"/></g></mask>
+        <clipPath id="cLienzo"><rect width="1000" height="1500"/></clipPath>
+      </defs>
+      <g clip-path="url(#cLienzo)">
+        <rect width="1000" height="1500" fill="#FBF9F5"/>
+        <g filter="url(#expo)">
+          <g mask="url(#mFondo)"><image href="jeremias/bg.webp" width="1000" height="1500"/></g>
+                  </g>
+        <g id="figuras" filter="url(#expo)">
+          <g mask="url(#mVasija)"><image href="jeremias/fig.webp" width="1000" height="1500" clip-path="url(#cVas)"/></g>
+          <g mask="url(#mManoI)"><image href="jeremias/fig.webp" width="1000" height="1500" clip-path="url(#cHI)"/></g>
+          <g mask="url(#mManoD)"><image href="jeremias/fig.webp" width="1000" height="1500" clip-path="url(#cHD)"/></g>
+        </g>
+        <g filter="url(#expo)"><g mask="url(#mTexto)"><image href="jeremias/txt.webp" width="1000" height="1500"/></g></g>
+        <g id="pincel" opacity="0"><g transform="rotate(-38) scale(1.6)">
+          <path d="M0 0 C14 -16 44 -18 66 -13 L66 13 C44 18 14 16 0 0Z" id="cerdas" fill="#C98E7F" stroke="#7a4a3d" stroke-width="2"/>
+          <rect x="66" y="-14" width="48" height="28" rx="3" fill="#B7B7BC" stroke="#6c6c72" stroke-width="2"/>
+          <rect x="114" y="-9" width="300" height="18" rx="9" fill="#5B3B2C"/>
+        </g></g>
+      </g>
+    </svg>
+  </div>
+  <div class="rail" id="rail"><b id="railfill"></b></div>
+  <div class="dots"><s></s><s></s><s></s><s class="on"></s><small>4 / 4 · avanza al hacer scroll</small></div>
+  <div class="down" id="down">Seguí bajando<i></i></div>
+</section>
+</div>
+<script>
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a));
+const eOut=t=>1-Math.pow(1-t,3);
+const eInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const lerp=(a,b,t)=>a+(b-a)*t;
+const NS='http://www.w3.org/2000/svg';
+const $=id=>document.getElementById(id);
+const el=(n,a={},p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const params=new URLSearchParams(location.search);
+let fixedP=params.has('p')?parseFloat(params.get('p')):null;
+const LIVE=params.has('embed');
+if(LIVE){document.head.insertAdjacentHTML('beforeend','<style>.hud,.top .menu{display:none!important}html,body{overflow:hidden}</style>');addEventListener('message',e=>{if(e.data&&typeof e.data.p==='number')fixedP=e.data.p})}
+/* zonas de la figura (se recortan de la misma capa) */
+const defs=document.querySelector('defs');
+const cp=(id,pts)=>{const c=el('clipPath',{id},defs);el('polygon',{points:pts},c)};
+cp('cVas','230,845 760,845 800,1000 800,1200 830,1500 230,1500 235,1250 268,1130 250,1020');
+cp('cHI','230,500 520,500 560,660 540,900 560,1060 230,1060 235,880 250,720');
+cp('cHD','380,470 1000,470 1000,800 760,820 600,800 380,640');
+/* fondo: pasadas de pincel de arriba a abajo */
+const TR=[];const gT=$('trazos');
+for(let k=0;k<9;k++){const dir=k%2==0?1:-1,y=-40+k*190,tilt=(k%2==0?26:-22),x0=dir>0?-140:1140,x1=dir>0?1140:-140;
+  const p=el('path',{d:`M${x0} ${y} Q 500 ${y+tilt*2.2} ${x1} ${y+tilt}`},gT);const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;TR.push({p,L})}
+const FASES=[[0,'Scroll {p} % · el lienzo blanco queda listo'],[.05,'Scroll {p} % · el fondo rosado se pinta'],[.30,'Scroll {p} % · la vasija se modela desde la base'],[.55,'Scroll {p} % · las manos del alfarero entran'],[.74,'Scroll {p} % · el versículo se escribe'],[.94,'Scroll {p} % · la obra queda quieta']];
+const pin=$('pincel'),cerdas=$('cerdas');
+function render(p,time){
+  let brush=null;
+  TR.forEach((o,k)=>{const a=.05+k*.022,q=eInOut(seg(p,a,a+.075));o.p.style.strokeDashoffset=o.L*(1-q);if(q>.01&&q<.99){const pt=o.p.getPointAtLength(o.L*q);brush={x:pt.x,y:pt.y,col:'#D9A29A'}}});
+  /* vasija: sube desde la base, con borde ondulante como arcilla en el torno */
+  const qv=eInOut(seg(p,.30,.58));const top=1500-qv*(1500-830);
+  $('rv').setAttribute('y',top);$('rv').setAttribute('height',1500-top+40);
+  $('tola').setAttribute('baseFrequency',`.02 ${(.06+.01*Math.sin(time*2)).toFixed(4)}`);
+  if(qv>.01&&qv<.99)brush={x:500+Math.sin(qv*18)*170,y:top,col:'#7A4A33'};
+  /* manos: entran desde cada lado */
+  const qi=eOut(seg(p,.54,.68)),qd=eOut(seg(p,.62,.76));
+  $('ri').setAttribute('x',-100);$('ri').setAttribute('width',800*qi);
+  $('rd').setAttribute('x',1100-800*qd);$('rd').setAttribute('width',800*qd+300);
+  if(qi>.01&&qi<.99)brush={x:-100+800*qi,y:820,col:'#B76C55'};
+  else if(qd>.01&&qd<.99)brush={x:1100-800*qd,y:640,col:'#B76C55'};
+  /* texto */
+  const qA=eOut(seg(p,.74,.82)),qB=eOut(seg(p,.80,.89)),qC=eOut(seg(p,.88,.95));
+  $('tA').setAttribute('width',1100*qA);$('tB').setAttribute('width',1100*qB);$('tC').setAttribute('width',1100*qC);
+  if(qA>.01&&qA<.99)brush={x:-20+1100*qA,y:150,col:'#F2EBB5'};
+  else if(qB>.01&&qB<.99)brush={x:-20+1100*qB,y:560-380*qB,col:'#F2EBB5'};
+  else if(qC>.01&&qC<.99)brush={x:-20+1100*qC,y:1050,col:'#F2EBB5'};
+  if(brush){pin.setAttribute('transform',`translate(${brush.x} ${brush.y})`);cerdas.setAttribute('fill',brush.col);pin.setAttribute('opacity',1)}else pin.setAttribute('opacity',0);
+  $('railfill').style.height=((.75+p*.25)*100)+'%';
+  let f=FASES[0][1];FASES.forEach(([a,t])=>{if(p>=a)f=t});$('fase').textContent=f.replace('{p}',Math.round(p*100));
+  $('down').style.opacity=1-seg(p,.93,1)*.8;
+}
+[0,25,50,75,100].forEach(v=>{const u=document.createElement('u');u.style.top=v+'%';const e=document.createElement('em');e.style.top=v+'%';e.textContent=v+'%';$('rail').append(u,e)});
+let target=0,shown=0,t0=performance.now();
+const progresoScroll=()=>clamp(scrollY/($('track').offsetHeight-innerHeight));
+function loop(now){const time=(now-t0)/1000;target=fixedP!==null?fixedP:(reduce?1:progresoScroll());shown+=(target-shown)*(fixedP!==null||reduce?1:.14);if(Math.abs(target-shown)<.0004)shown=target;render(shown,(fixedP!==null&&!LIVE)?1:time);requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+let anim=null;const maxScroll=()=>$('track').offsetHeight-innerHeight;
+function parar(){if(anim){cancelAnimationFrame(anim);anim=null;$('play').textContent='▶ Ver sola'}}
+$('play').onclick=()=>{if(anim){parar();return}if(scrollY>=maxScroll()-4)scrollTo(0,0);const from=scrollY,to=maxScroll(),dur=24000,s=performance.now();$('play').textContent='❚❚ Pausar';const step=n=>{const t=clamp((n-s)/dur);scrollTo(0,lerp(from,to,t));if(t<1)anim=requestAnimationFrame(step);else parar()};anim=requestAnimationFrame(step)};
+$('reset').onclick=()=>{parar();scrollTo({top:0,behavior:'smooth'})};
+addEventListener('wheel',parar,{passive:true});addEventListener('touchstart',parar,{passive:true});
+</script>
+</body>
+</html>

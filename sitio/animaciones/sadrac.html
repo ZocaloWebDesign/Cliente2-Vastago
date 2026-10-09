@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vástago · Animación Sadrac, Mesac y Abednego</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+#pincel,#punta,.dots,.down{display:none!important}
+:root{--bordo:#AA6766;--bordo-os:#8E4F4E;--tinta:#161311}
+*{box-sizing:border-box;margin:0}
+html,body{background:#fff}
+body{color:var(--tinta);font:400 16px/1.5 Inter,sans-serif}
+.track{height:calc(100vh + 160vh);position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background-color:#fff;
+  background-image:repeating-linear-gradient(0deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px),repeating-linear-gradient(90deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px)}
+.top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:2.2vh 4.4vw;z-index:5}
+.top img{height:6.4vh;min-height:44px}
+.menu{font:500 15px Inter;display:flex;gap:10px;align-items:center}
+.menu i{display:inline-block;width:26px;height:2px;background:var(--tinta);box-shadow:0 7px 0 var(--tinta),0 -7px 0 var(--tinta)}
+.obra{position:absolute;left:50%;top:51%;height:80vh;aspect-ratio:1200/1600;transform:translate(-50%,-50%);z-index:2;background:#F7F6F2;
+  box-shadow:0 .4vh 1vh rgba(40,30,20,.12),0 3vh 6vh rgba(40,30,20,.16),0 0 0 1px rgba(40,30,20,.07)}
+.obra svg{width:100%;height:100%;display:block}
+.cap{position:absolute;right:calc(50% + 30vh + 2.5vw);text-align:right;top:51%;transform:translateY(-50%);z-index:3;max-width:18vw}
+.cap .n{font:600 12px Inter;letter-spacing:.16em;text-transform:uppercase;color:var(--bordo-os)}
+.cap .t{font:400 clamp(20px,2.2vw,30px)/1.15 'Patrick Hand',cursive;margin-top:1.2vh}
+.rail{position:absolute;left:1.5vw;top:22vh;height:56vh;width:2px;background:rgba(22,19,17,.18);z-index:6}
+.rail b{position:absolute;left:-3px;top:0;width:8px;height:0;background:var(--bordo-os)}
+.rail u{position:absolute;left:-5px;width:12px;height:2px;background:rgba(22,19,17,.45)}
+.rail em{position:absolute;left:16px;font:500 11px Inter;font-style:normal;letter-spacing:.08em;color:#5a4f46;transform:translateY(-50%);white-space:nowrap}
+.dots{position:absolute;left:8vw;bottom:5vh;display:flex;gap:10px;align-items:center;z-index:5}
+.dots s{width:40px;height:3px;background:rgba(22,19,17,.2);display:block;text-decoration:none}
+.dots s.on{background:var(--bordo-os)}
+.dots small{font:500 11px Inter;letter-spacing:.12em;margin-left:10px;color:#5a4f46}
+.down{position:absolute;left:0;right:0;bottom:1.2vh;text-align:center;font:500 12px Inter;letter-spacing:.14em;text-transform:uppercase;color:#5a4f46;z-index:4}
+.down i{display:block;margin:4px auto 0;width:1.5px;height:16px;background:var(--bordo-os)}
+.hud{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:20;background:rgba(22,19,17,.92);color:#E1D3C0;border-radius:40px;padding:8px 10px 8px 18px;display:flex;gap:14px;align-items:center;font:500 13px Inter;box-shadow:0 8px 24px rgba(0,0,0,.25);white-space:nowrap}
+.hud b{font-weight:600;color:#D5BF9E;letter-spacing:.1em;font-size:11px;text-transform:uppercase}
+.hud .fase{min-width:330px}
+.hud button{white-space:nowrap;font:600 12px Inter;border:0;border-radius:30px;padding:8px 14px;cursor:pointer;background:#AA6766;color:#fff}
+.hud button.g{background:rgba(255,255,255,.14)}
+@media (max-width:1100px){.cap{display:none}}
+@media (max-width:900px){.obra{height:70vh}.rail{display:none}.hud .fase{min-width:0;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="hud"><b>Demo</b><span class="fase" id="fase">Scroll 0 %</span><button id="play">▶ Ver sola</button><button class="g" id="reset">↺ Inicio</button></div>
+<div class="track" id="track">
+<section class="stage" id="stage">
+  <div class="top"><img src="logo-negro.png" alt="Vástago · Fe en obra"><div class="menu">Menú <i></i></div></div>
+  <div class="cap"><div class="n">03 / 04 · Obra</div><div class="t">Sadrac, Mesac y Abednego</div></div>
+  <div class="obra" id="obra">
+    <svg id="svg" viewBox="0 0 1200 1600" xmlns="http://www.w3.org/2000/svg" aria-label="Sadrac, Mesac y Abednego (animación)">
+      <defs>
+        <filter id="lengua" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".010 .028" numOctaves="3" seed="7"/><feDisplacementMap in="SourceGraphic" scale="150"/></filter>
+        <filter id="rugosoF" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="8"/><feDisplacementMap in="SourceGraphic" scale="26"/></filter>
+        <filter id="difuso" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="55"/></filter>
+        <filter id="chispa" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.2"/></filter>
+        <filter id="vivo" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence id="tvivo" type="fractalNoise" baseFrequency=".008 .02" numOctaves="2" seed="3"/><feDisplacementMap id="dvivo" in="SourceGraphic" scale="0"/></filter>
+        <mask id="mFuego" maskUnits="userSpaceOnUse" x="-200" y="-300" width="1600" height="2200"><g id="barras" fill="#fff" filter="url(#lengua)"></g></mask>
+        <mask id="mResto" maskUnits="userSpaceOnUse" x="-200" y="-200" width="1600" height="2000"><circle id="radial" cx="600" cy="720" r="0" fill="#fff" filter="url(#difuso)"/></mask>
+        <mask id="mTexto" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="1600"><g filter="url(#rugosoF)" fill="#fff"><rect id="t1" x="20" y="60" width="0" height="175"/><rect id="t2" x="20" y="225" width="0" height="170"/></g></mask>
+        <mask id="mFirma" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="1600"><g filter="url(#rugosoF)" fill="#fff"><rect id="s1" x="440" y="1360" width="0" height="140"/><rect id="s2" x="760" y="1500" width="0" height="100"/></g></mask>
+        <clipPath id="cLienzo"><rect width="1200" height="1600"/></clipPath>
+      </defs>
+      <g clip-path="url(#cLienzo)">
+        <rect width="1200" height="1600" fill="#F7F6F2"/>
+        <g mask="url(#mResto)"><image href="sadrac/rest.webp" width="1200" height="1600"/></g>
+        <g mask="url(#mFuego)"><g filter="url(#vivo)"><image href="sadrac/flames.webp" width="1200" height="1600"/></g></g>
+        <g mask="url(#mTexto)"><image href="sadrac/text.webp" width="1200" height="1600"/></g>
+        <g mask="url(#mFirma)"><image href="sadrac/sig.webp" width="1200" height="1600"/></g>
+        <g id="chispas"></g>
+        <g id="pincel" opacity="0"><g transform="rotate(-38) scale(1.7)">
+          <path d="M0 0 C14 -16 44 -18 66 -13 L66 13 C44 18 14 16 0 0Z" fill="#1F5A9C" stroke="#14375f" stroke-width="2"/>
+          <rect x="66" y="-14" width="48" height="28" rx="3" fill="#B7B7BC" stroke="#6c6c72" stroke-width="2"/>
+          <rect x="114" y="-9" width="300" height="18" rx="9" fill="#5B3B2C"/>
+        </g></g>
+      </g>
+    </svg>
+  </div>
+  <div class="rail" id="rail"><b id="railfill"></b></div>
+  <div class="dots"><s></s><s></s><s class="on"></s><s></s><small>3 / 4 · avanza al hacer scroll</small></div>
+  <div class="down" id="down">Seguí bajando<i></i></div>
+</section>
+</div>
+<script>
+const W=1200,H=1600,TXT=[61,95,1186,363];
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a));
+const eOut=t=>1-Math.pow(1-t,3);
+const eInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const lerp=(a,b,t)=>a+(b-a)*t;
+const NS='http://www.w3.org/2000/svg';
+const $=id=>document.getElementById(id);
+const el=(n,a={},p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const params=new URLSearchParams(location.search);
+let fixedP=params.has('p')?parseFloat(params.get('p')):null;
+const LIVE=params.has('embed');
+if(LIVE){document.head.insertAdjacentHTML('beforeend','<style>.hud,.top .menu{display:none!important}html,body{overflow:hidden}</style>');addEventListener('message',e=>{if(e.data&&typeof e.data.p==='number')fixedP=e.data.p})}
+const rnd=s=>{let x=Math.sin(s*127.1+311.7)*43758.5453;return x-Math.floor(x)};
+
+/* fuego: lenguas que suben desde abajo, primero el centro */
+const NB=34,BARS=[];const gB=$('barras');
+for(let i=0;i<NB;i++){const cx=(i+.5)*W/NB,w=W/NB*1.9;BARS.push({cx,w,d:Math.abs(cx-W/2)/W*.42+rnd(i*3+1)*.14,tip:70+rnd(i*5+2)*120,top:H*(.04+rnd(i*7+3)*.26),p:el('polygon',{points:'0,0'},gB)})}
+/* chispas */
+const gC=$('chispas'),SP=[];
+for(let i=0;i<30;i++){SP.push({e:el('circle',{r:2+rnd(i*3)*3.5,fill:rnd(i*5)<.5?'#FFC93C':'#FF7A2F',filter:'url(#chispa)'},gC),x:W*(.18+rnd(i*7)*.64),y0:H*(.55+rnd(i*11)*.45),v:60+rnd(i*13)*110,ph:rnd(i*17)*6.28})}
+
+const FASES=[[0,'Scroll {p} % · el lienzo blanco queda listo'],[.04,'Scroll {p} % · el fuego sube desde abajo'],[.38,'Scroll {p} % · aparecen las figuras dentro del fuego'],[.66,'Scroll {p} % · el texto azul se escribe'],[.86,'Scroll {p} % · firma y cita'],[.95,'Scroll {p} % · la obra queda quieta, el fuego se mueve']];
+const pin=$('pincel');
+function render(p,time){
+  let brush=null;
+  const t=seg(p,.04,.42);
+  BARS.forEach(b=>{const q=eInOut(clamp((t-b.d)/(1-.42)));const yTop=H-q*(H-b.top+60);b.p.setAttribute('points',`${b.cx-b.w/2},${H+60} ${b.cx-b.w/2},${yTop+b.tip} ${b.cx},${yTop} ${b.cx+b.w/2},${yTop+b.tip} ${b.cx+b.w/2},${H+60}`)});
+  const qr=eInOut(seg(p,.40,.66));$('radial').setAttribute('r',qr*1100);
+  // texto: dos líneas
+  const q1=eOut(seg(p,.66,.76)),q2=eOut(seg(p,.75,.85)),mw=TXT[2]-TXT[0]+80;
+  $('t1').setAttribute('width',mw*q1+20);$('t2').setAttribute('width',mw*q2+20);
+  if(q1>.01&&q1<.99)brush={x:TXT[0]-30+mw*q1,y:TXT[1]+70};
+  else if(q2>.01&&q2<.99)brush={x:TXT[0]-30+mw*q2,y:TXT[1]+210};
+  // firma y cita
+  const s1=eOut(seg(p,.86,.92)),s2=eOut(seg(p,.91,.95));
+  $('s1').setAttribute('width',620*s1);$('s2').setAttribute('width',440*s2);
+  if(s1>.01&&s1<.99)brush={x:440+620*s1,y:1440};else if(s2>.01&&s2<.99)brush={x:760+440*s2,y:1552};
+  if(brush){pin.setAttribute('transform',`translate(${brush.x} ${brush.y})`);pin.setAttribute('opacity',1)}else pin.setAttribute('opacity',0);
+  // fuego vivo (movimiento propio, sutil)
+  const vivo=seg(p,.40,.5);
+  $('tvivo').setAttribute('baseFrequency',`.008 ${(.02+.004*Math.sin(time*1.6)).toFixed(4)}`);
+  $('dvivo').setAttribute('scale',(vivo*5).toFixed(2));
+  // chispas
+  const sa=seg(p,.18,.4);
+  SP.forEach(s=>{const y=s.y0-((time*s.v)%(H*.7));const o=Math.max(0,Math.min(1,(s.y0-y)/120))*Math.max(0,1-(s.y0-y)/(H*.6));s.e.setAttribute('cx',s.x+Math.sin(time*1.3+s.ph)*18);s.e.setAttribute('cy',y);s.e.setAttribute('opacity',(o*sa*.85).toFixed(2))});
+  $('railfill').style.height=((.5+p*.25)*100)+'%';
+  let f=FASES[0][1];FASES.forEach(([a,tt])=>{if(p>=a)f=tt});$('fase').textContent=f.replace('{p}',Math.round(p*100));
+  $('down').style.opacity=1-seg(p,.93,1)*.8;
+}
+[0,25,50,75,100].forEach(v=>{const u=document.createElement('u');u.style.top=v+'%';const e=document.createElement('em');e.style.top=v+'%';e.textContent=v+'%';$('rail').append(u,e)});
+let target=0,shown=0,t0=performance.now();
+const progresoScroll=()=>clamp(scrollY/($('track').offsetHeight-innerHeight));
+function loop(now){const time=(now-t0)/1000;target=fixedP!==null?fixedP:(reduce?1:progresoScroll());shown+=(target-shown)*(fixedP!==null||reduce?1:.14);if(Math.abs(target-shown)<.0004)shown=target;render(shown,(fixedP!==null&&!LIVE)?(params.get('t')?parseFloat(params.get('t')):1.2):time);requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+let anim=null;const maxScroll=()=>$('track').offsetHeight-innerHeight;
+function parar(){if(anim){cancelAnimationFrame(anim);anim=null;$('play').textContent='▶ Ver sola'}}
+$('play').onclick=()=>{if(anim){parar();return}if(scrollY>=maxScroll()-4)scrollTo(0,0);const from=scrollY,to=maxScroll(),dur=24000,s=performance.now();$('play').textContent='❚❚ Pausar';const step=n=>{const t=clamp((n-s)/dur);scrollTo(0,lerp(from,to,t));if(t<1)anim=requestAnimationFrame(step);else parar()};anim=requestAnimationFrame(step)};
+$('reset').onclick=()=>{parar();scrollTo({top:0,behavior:'smooth'})};
+addEventListener('wheel',parar,{passive:true});addEventListener('touchstart',parar,{passive:true});
+</script>
+</body>
+</html>

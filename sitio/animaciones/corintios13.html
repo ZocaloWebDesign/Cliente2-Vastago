@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vástago · Animación 1 Corintios 13</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+#pincel,#punta,.dots,.down{display:none!important}
+:root{--bordo:#AA6766;--bordo-os:#8E4F4E;--tinta:#161311}
+*{box-sizing:border-box;margin:0}
+html,body{background:#fff}
+body{color:var(--tinta);font:400 16px/1.5 Inter,sans-serif}
+.track{height:calc(100vh + 160vh);position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background-color:#fff;
+  background-image:repeating-linear-gradient(0deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px),repeating-linear-gradient(90deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px)}
+.top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:2.2vh 4.4vw;z-index:5}
+.top img{height:6.4vh;min-height:44px}
+.menu{font:500 15px Inter;display:flex;gap:10px;align-items:center}
+.menu i{display:inline-block;width:26px;height:2px;background:var(--tinta);box-shadow:0 7px 0 var(--tinta),0 -7px 0 var(--tinta)}
+.obra{position:absolute;left:50%;top:51%;height:82vh;aspect-ratio:1000/1196;transform:translate(-50%,-50%);z-index:2;background:#FBF9F5;
+  box-shadow:0 .4vh 1vh rgba(40,30,20,.12),0 3vh 6vh rgba(40,30,20,.16),0 0 0 1px rgba(40,30,20,.07)}
+.obra svg{width:100%;height:100%;display:block}
+.cap{position:absolute;right:calc(50% + 34.3vh + 2.5vw);text-align:right;top:51%;transform:translateY(-50%);z-index:3;max-width:18vw}
+.cap .n{font:600 12px Inter;letter-spacing:.16em;text-transform:uppercase;color:var(--bordo-os)}
+.cap .t{font:400 clamp(20px,2.2vw,30px)/1.15 'Patrick Hand',cursive;margin-top:1.2vh}
+.rail{position:absolute;left:1.5vw;top:22vh;height:56vh;width:2px;background:rgba(22,19,17,.18);z-index:6}
+.rail b{position:absolute;left:-3px;top:0;width:8px;height:0;background:var(--bordo-os)}
+.rail u{position:absolute;left:-5px;width:12px;height:2px;background:rgba(22,19,17,.45)}
+.rail em{position:absolute;left:16px;font:500 11px Inter;font-style:normal;letter-spacing:.08em;color:#5a4f46;transform:translateY(-50%);white-space:nowrap}
+.dots{position:absolute;left:8vw;bottom:5vh;display:flex;gap:10px;align-items:center;z-index:5}
+.dots s{width:40px;height:3px;background:rgba(22,19,17,.2);display:block;text-decoration:none}
+.dots s.on{background:var(--bordo-os)}
+.dots small{font:500 11px Inter;letter-spacing:.12em;margin-left:10px;color:#5a4f46}
+.down{position:absolute;left:0;right:0;bottom:1.2vh;text-align:center;font:500 12px Inter;letter-spacing:.14em;text-transform:uppercase;color:#5a4f46;z-index:4}
+.down i{display:block;margin:4px auto 0;width:1.5px;height:16px;background:var(--bordo-os)}
+.hud{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:20;background:rgba(22,19,17,.92);color:#E1D3C0;border-radius:40px;padding:8px 10px 8px 18px;display:flex;gap:14px;align-items:center;font:500 13px Inter;box-shadow:0 8px 24px rgba(0,0,0,.25);white-space:nowrap}
+.hud b{font-weight:600;color:#D5BF9E;letter-spacing:.1em;font-size:11px;text-transform:uppercase}
+.hud .fase{min-width:330px}
+.hud button{white-space:nowrap;font:600 12px Inter;border:0;border-radius:30px;padding:8px 14px;cursor:pointer;background:#AA6766;color:#fff}
+.hud button.g{background:rgba(255,255,255,.14)}
+@media (max-width:1100px){.cap{display:none}}
+@media (max-width:900px){.obra{height:70vh}.rail{display:none}.hud .fase{min-width:0;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="hud"><b>Demo</b><span class="fase" id="fase">Scroll 0 %</span><button id="play">▶ Ver sola</button><button class="g" id="reset">↺ Inicio</button></div>
+<div class="track" id="track">
+<section class="stage" id="stage">
+  <div class="top"><img src="logo-negro.png" alt="Vástago · Fe en obra"><div class="menu">Menú <i></i></div></div>
+  <div class="cap"><div class="n">01 / 04 · Obra</div><div class="t">1 Corintios 13</div></div>
+  <div class="obra" id="obra">
+    <svg id="svg" viewBox="0 0 1000 1196" xmlns="http://www.w3.org/2000/svg" aria-label="1 Corintios 13 (animación)">
+      <defs>
+        <filter id="expo" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1.04 0 0 0 .01  0 1.03 0 0 .01  0 0 1.03 0 .01  0 0 0 1 0"/></filter>
+        <filter id="rugoso" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="3" seed="5"/><feDisplacementMap in="SourceGraphic" scale="42"/></filter>
+        <filter id="rugosoF" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="8"/><feDisplacementMap in="SourceGraphic" scale="9"/></filter>
+        <mask id="mFondo" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1200" height="1400"><g id="trazos" fill="none" stroke="#fff" stroke-width="350" stroke-linecap="round" filter="url(#rugoso)"></g></mask>
+        <mask id="mTexto" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1196"><g id="lineas" fill="#fff" filter="url(#rugosoF)"></g></mask>
+        <mask id="mCorazon" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1196"><g id="trCor" fill="none" stroke="#fff" stroke-width="120" stroke-linecap="round" filter="url(#rugoso)"></g></mask>
+        <mask id="mSig" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1196"><rect id="rsig" x="760" y="1090" width="0" height="120" fill="#fff" filter="url(#rugosoF)"/></mask>
+        <mask id="mEscombro" maskUnits="userSpaceOnUse" x="0" y="0" width="1000" height="1196"><circle id="rad" cx="500" cy="580" r="0" fill="#fff"/></mask>
+        <clipPath id="cLienzo"><rect width="1000" height="1196"/></clipPath>
+      </defs>
+      <g clip-path="url(#cLienzo)">
+        <rect width="1000" height="1196" fill="#FBF9F5"/>
+        <g filter="url(#expo)">
+          <g mask="url(#mFondo)"><image href="corintios/bg.webp" width="1000" height="1196"/></g>
+          <g mask="url(#mTexto)"><image href="corintios/txt.webp" width="1000" height="1196"/></g>
+          <g mask="url(#mSig)"><image href="corintios/sig.webp" width="1000" height="1196"/></g>
+          <g id="gCor"><g mask="url(#mCorazon)"><image href="corintios/heart.webp" width="1000" height="1196"/></g></g>
+          <g mask="url(#mEscombro)"><image href="corintios/debris.webp" width="1000" height="1196"/></g>
+          <g id="esq"></g>
+        </g>
+        <g id="pincel" opacity="0"><g transform="rotate(-38) scale(1.5)">
+          <path d="M0 0 C14 -16 44 -18 66 -13 L66 13 C44 18 14 16 0 0Z" id="cerdas" fill="#D9B8AB" stroke="#7a5a4c" stroke-width="2"/>
+          <rect x="66" y="-14" width="48" height="28" rx="3" fill="#B7B7BC" stroke="#6c6c72" stroke-width="2"/>
+          <rect x="114" y="-9" width="300" height="18" rx="9" fill="#5B3B2C"/>
+        </g></g>
+        <circle id="punta" r="8" fill="#fff" stroke="#8E4F4E" stroke-width="2" opacity="0"/>
+      </g>
+    </svg>
+  </div>
+  <div class="rail" id="rail"><b id="railfill"></b></div>
+  <div class="dots"><s class="on"></s><s></s><s></s><s></s><small>1 / 4 · avanza al hacer scroll</small></div>
+  <div class="down" id="down">Seguí bajando<i></i></div>
+</section>
+</div>
+<script>
+const META={"heart":[399,441,602,717],"sig":[786,1117,976,1182],"shards":[{"cx":485.6,"cy":353.9,"x0":461,"y0":339,"x1":511,"y1":368,"a":1145},{"cx":579,"cy":371.7,"x0":565,"y0":354,"x1":591,"y1":393,"a":875},{"cx":394.2,"cy":401,"x0":367,"y0":375,"x1":423,"y1":433,"a":2276},{"cx":281,"cy":390.8,"x0":266,"y0":379,"x1":293,"y1":405,"a":645},{"cx":439,"cy":406.1,"x0":428,"y0":394,"x1":449,"y1":419,"a":515},{"cx":496.8,"cy":417.6,"x0":479,"y0":399,"x1":514,"y1":437,"a":1153},{"cx":287,"cy":431,"x0":271,"y0":417,"x1":303,"y1":446,"a":843},{"cx":632,"cy":454.2,"x0":619,"y0":438,"x1":645,"y1":470,"a":691},{"cx":754.8,"cy":499.8,"x0":732,"y0":471,"x1":777,"y1":529,"a":1729},{"cx":367.2,"cy":515,"x0":347,"y0":500,"x1":389,"y1":530,"a":1039},{"cx":651.1,"cy":529.6,"x0":635,"y0":517,"x1":667,"y1":542,"a":768},{"cx":268.2,"cy":552.2,"x0":242,"y0":530,"x1":294,"y1":573,"a":1784},{"cx":796.1,"cy":614.9,"x0":777,"y0":588,"x1":818,"y1":640,"a":1559},{"cx":705.6,"cy":630.5,"x0":691,"y0":613,"x1":722,"y1":648,"a":901},{"cx":259.5,"cy":636.9,"x0":235,"y0":614,"x1":285,"y1":661,"a":1853},{"cx":366.8,"cy":684.3,"x0":331,"y0":639,"x1":399,"y1":729,"a":3542},{"cx":678.8,"cy":716.1,"x0":652,"y0":671,"x1":713,"y1":759,"a":3879},{"cx":507.7,"cy":736.6,"x0":459,"y0":703,"x1":555,"y1":770,"a":3748},{"cx":392.1,"cy":789.1,"x0":366,"y0":770,"x1":416,"y1":809,"a":1380}]};
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a));
+const eOut=t=>1-Math.pow(1-t,3);
+const eInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const eBack=t=>{const c1=1.5,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const NS='http://www.w3.org/2000/svg';
+const $=id=>document.getElementById(id);
+const el=(n,a={},p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const params=new URLSearchParams(location.search);
+let fixedP=params.has('p')?parseFloat(params.get('p')):null;
+const LIVE=params.has('embed');
+if(LIVE){document.head.insertAdjacentHTML('beforeend','<style>.hud,.top .menu{display:none!important}html,body{overflow:hidden}</style>');addEventListener('message',e=>{if(e.data&&typeof e.data.p==='number')fixedP=e.data.p})}
+const rnd=s=>{let x=Math.sin(s*127.1+311.7)*43758.5453;return x-Math.floor(x)};
+const defs=document.querySelector('defs');
+const H=1196,HB=META.heart,HC=[(HB[0]+HB[2])/2,(HB[1]+HB[3])/2];
+/* fondo */
+const TR=[];const gT=$('trazos');
+for(let k=0;k<7;k++){const dir=k%2==0?1:-1,y=-20+k*205,tilt=(k%2==0?26:-22),x0=dir>0?-140:1140,x1=dir>0?1140:-140;
+  const p=el('path',{d:`M${x0} ${y} Q 500 ${y+tilt*2.2} ${x1} ${y+tilt}`},gT);const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;TR.push({p,L})}
+/* texto: 21 líneas */
+const CY=[44,86,123,162,206,247,290,331,372,411,452,492,533,572,612,652,692,735,776,823,862].map(v=>v*1196/900);
+const LR=CY.map((c,i)=>{const a=i?(CY[i-1]+c)/2:0,b=i<CY.length-1?(c+CY[i+1])/2:H;return el('rect',{x:-20,y:a-16,width:0,height:b-a+32},$('lineas'))});
+/* corazón: pasadas diagonales */
+const TC=[];const gC=$('trCor');
+for(let k=0;k<6;k++){const dir=k%2==0?1:-1,y=HB[1]+30+k*((HB[3]-HB[1]-60)/5);
+  const p=el('path',{d:dir>0?`M${HB[0]-40} ${y} L${HB[2]+40} ${y+30}`:`M${HB[2]+40} ${y} L${HB[0]-40} ${y+30}`},gC);const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;TC.push({p,L})}
+/* esquirlas: cada una recorta su caja de la capa y vuela desde el corazón */
+const SH=META.shards.map((c,i)=>{
+  const id='cs'+i;const cp=el('clipPath',{id},defs);el('rect',{x:c.x0-3,y:c.y0-3,width:c.x1-c.x0+6,height:c.y1-c.y0+6},cp);
+  const g=el('g',{},$('esq'));const gi=el('g',{'clip-path':`url(#${id})`},g);el('image',{href:'corintios/shards.webp',width:1000,height:1196},gi);
+  return{g,cx:c.cx,cy:c.cy,i,ang:(i%2?1:-1)*(160+rnd(i*7+1)*160),d:Math.hypot(c.cx-HC[0],c.cy-HC[1])}});
+const FASES=[[0,'Scroll {p} % · el pincel pinta el fondo'],[.12,'Scroll {p} % · el versículo se escribe línea por línea'],[.60,'Scroll {p} % · se pinta el corazón'],[.76,'Scroll {p} % · el corazón rompe el texto: salen las esquirlas'],[.93,'Scroll {p} % · la obra queda quieta y el corazón late']];
+const pin=$('pincel'),cerdas=$('cerdas'),punta=$('punta');
+function render(p,time){
+  let brush=null,dot=null;
+  TR.forEach((o,k)=>{const a=k*.016,q=eInOut(seg(p,a,a+.07));o.p.style.strokeDashoffset=o.L*(1-q);if(q>.01&&q<.99){const pt=o.p.getPointAtLength(o.L*q);brush={x:pt.x,y:pt.y,col:'#D9B8AB'}}});
+  LR.forEach((r,i)=>{const a=.11+i*.0235,q=eOut(seg(p,a,a+.045));r.setAttribute('width',1040*q);if(q>.01&&q<.99)dot={x:-20+1040*q,y:CY[i]}});
+  const qs=eOut(seg(p,.62,.68));$('rsig').setAttribute('x',760);$('rsig').setAttribute('width',260*qs);
+  if(qs>.01&&qs<.99)dot={x:760+260*qs,y:1150};
+  TC.forEach((o,k)=>{const a=.62+k*.014,q=eInOut(seg(p,a,a+.045));o.p.style.strokeDashoffset=o.L*(1-q);if(q>.01&&q<.99){const pt=o.p.getPointAtLength(o.L*q);brush={x:pt.x,y:pt.y,col:'#B3203A'}}});
+  const beat=Math.max(0,Math.sin(time*2.3))**7,done=seg(p,.93,.97);
+  const sc=lerp(.94,1,eOut(seg(p,.62,.76)))*(1+.026*beat*done);
+  $('gCor').setAttribute('transform',`translate(${HC[0]} ${HC[1]}) scale(${sc}) translate(${-HC[0]} ${-HC[1]})`);
+  $('rad').setAttribute('r',eOut(seg(p,.76,.88))*620);
+  SH.forEach(o=>{const a=.76+o.i*.004,q=eOut(seg(p,a,a+.11)),fl=seg(p,.9,1);
+    const x=lerp(HC[0]-o.cx,0,q)+Math.sin(time*.8+o.i)*2.5*done,y=lerp(HC[1]-o.cy,0,q)+Math.sin(time*1.1+o.i*1.7)*3*done+fl*3;
+    const s=.25+.75*q,rot=(1-q)*o.ang;
+    o.g.setAttribute('transform',`translate(${o.cx+x} ${o.cy+y}) rotate(${rot}) scale(${s}) translate(${-o.cx} ${-o.cy})`);o.g.setAttribute('opacity',clamp(q*6))});
+  if(brush){pin.setAttribute('transform',`translate(${brush.x} ${brush.y})`);cerdas.setAttribute('fill',brush.col);pin.setAttribute('opacity',1);punta.setAttribute('opacity',0)}
+  else{pin.setAttribute('opacity',0);if(dot){punta.setAttribute('cx',dot.x);punta.setAttribute('cy',dot.y);punta.setAttribute('opacity',.9)}else punta.setAttribute('opacity',0)}
+  $('railfill').style.height=(p*.25*100)+'%';
+  let f=FASES[0][1];FASES.forEach(([a,t])=>{if(p>=a)f=t});$('fase').textContent=f.replace('{p}',Math.round(p*100));
+  $('down').style.opacity=1-seg(p,.93,1)*.8;
+}
+[0,25,50,75,100].forEach(v=>{const u=document.createElement('u');u.style.top=v+'%';const e=document.createElement('em');e.style.top=v+'%';e.textContent=v+'%';$('rail').append(u,e)});
+let target=0,shown=0,t0=performance.now();
+const progresoScroll=()=>clamp(scrollY/($('track').offsetHeight-innerHeight));
+function loop(now){const time=(now-t0)/1000;target=fixedP!==null?fixedP:(reduce?1:progresoScroll());shown+=(target-shown)*(fixedP!==null||reduce?1:.14);if(Math.abs(target-shown)<.0004)shown=target;render(shown,(fixedP!==null&&!LIVE)?(params.get('t')?parseFloat(params.get('t')):.4):time);requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+let anim=null;const maxScroll=()=>$('track').offsetHeight-innerHeight;
+function parar(){if(anim){cancelAnimationFrame(anim);anim=null;$('play').textContent='▶ Ver sola'}}
+$('play').onclick=()=>{if(anim){parar();return}if(scrollY>=maxScroll()-4)scrollTo(0,0);const from=scrollY,to=maxScroll(),dur=24000,s=performance.now();$('play').textContent='❚❚ Pausar';const step=n=>{const t=clamp((n-s)/dur);scrollTo(0,lerp(from,to,t));if(t<1)anim=requestAnimationFrame(step);else parar()};anim=requestAnimationFrame(step)};
+$('reset').onclick=()=>{parar();scrollTo({top:0,behavior:'smooth'})};
+addEventListener('wheel',parar,{passive:true});addEventListener('touchstart',parar,{passive:true});
+</script>
+</body>
+</html>

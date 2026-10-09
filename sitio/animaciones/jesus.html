@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vástago · Animación Jesús</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+#pincel,#punta,.dots,.down{display:none!important}
+:root{--bordo:#AA6766;--bordo-os:#8E4F4E;--tinta:#161311}
+*{box-sizing:border-box;margin:0}
+html,body{background:#fff}
+body{color:var(--tinta);font:400 16px/1.5 Inter,sans-serif}
+.track{height:calc(100vh + 160vh);position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background-color:#fff;
+  background-image:repeating-linear-gradient(0deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px),repeating-linear-gradient(90deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px)}
+.top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:2.2vh 4.4vw;z-index:5}
+.top img{height:6.4vh;min-height:44px}
+.menu{font:500 15px Inter;display:flex;gap:10px;align-items:center}
+.menu i{display:inline-block;width:26px;height:2px;background:var(--tinta);box-shadow:0 7px 0 var(--tinta),0 -7px 0 var(--tinta)}
+.obra{position:absolute;left:50%;top:50%;width:min(72vw,112vh);aspect-ratio:1600/1067;transform:translate(-50%,-52%);z-index:2;background:#EEEFF1;
+  box-shadow:0 .4vh 1vh rgba(40,30,20,.12),0 3vh 6vh rgba(40,30,20,.16),0 0 0 1px rgba(40,30,20,.07)}
+.obra::after{content:"";position:absolute;left:1%;right:1%;bottom:-.8vh;height:.8vh;background:linear-gradient(#e6e3de,#cdc9c2);z-index:-1}
+.obra svg{width:100%;height:100%;display:block}
+.cap{position:absolute;right:0;text-align:right;top:calc(100% + 2.6vh)}
+.cap .n{font:600 12px Inter;letter-spacing:.16em;text-transform:uppercase;color:var(--bordo-os)}
+.cap .t{font:400 clamp(20px,2.2vw,30px)/1.15 'Patrick Hand',cursive;margin-top:.8vh}
+.rail{position:absolute;left:1.5vw;top:22vh;height:56vh;width:2px;background:rgba(22,19,17,.18);z-index:6}
+.rail b{position:absolute;left:-3px;top:0;width:8px;height:0;background:var(--bordo-os)}
+.rail u{position:absolute;left:-5px;width:12px;height:2px;background:rgba(22,19,17,.45)}
+.rail em{position:absolute;left:16px;font:500 11px Inter;font-style:normal;letter-spacing:.08em;color:#5a4f46;transform:translateY(-50%);white-space:nowrap}
+.dots{position:absolute;left:4.4vw;bottom:5vh;display:flex;gap:10px;align-items:center;z-index:5}
+.dots s{width:40px;height:3px;background:rgba(22,19,17,.2);display:block;text-decoration:none}
+.dots s.on{background:var(--bordo-os)}
+.dots small{font:500 11px Inter;letter-spacing:.12em;margin-left:10px;color:#5a4f46}
+.down{position:absolute;left:0;right:0;bottom:1.6vh;text-align:center;font:500 12px Inter;letter-spacing:.14em;text-transform:uppercase;color:#5a4f46;z-index:4}
+.down i{display:block;margin:4px auto 0;width:1.5px;height:18px;background:var(--bordo-os)}
+.hud{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:20;background:rgba(22,19,17,.92);color:#E1D3C0;border-radius:40px;padding:8px 10px 8px 18px;display:flex;gap:14px;align-items:center;font:500 13px Inter;box-shadow:0 8px 24px rgba(0,0,0,.25);white-space:nowrap}
+.hud b{font-weight:600;color:#D5BF9E;letter-spacing:.1em;font-size:11px;text-transform:uppercase}
+.hud .fase{min-width:330px}
+.hud button{white-space:nowrap;font:600 12px Inter;border:0;border-radius:30px;padding:8px 14px;cursor:pointer;background:#AA6766;color:#fff}
+.hud button.g{background:rgba(255,255,255,.14)}
+@media (max-width:900px){.obra{width:92vw}.rail{display:none}.hud .fase{min-width:0;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="hud"><b>Demo</b><span class="fase" id="fase">Scroll 0 %</span><button id="play">▶ Ver sola</button><button class="g" id="reset">↺ Inicio</button></div>
+<div class="track" id="track">
+<section class="stage" id="stage">
+  <div class="top"><img src="logo-negro.png" alt="Vástago · Fe en obra"><div class="menu">Menú <i></i></div></div>
+  <div class="obra" id="obra">
+    <svg id="svg" viewBox="0 0 1600 1067" xmlns="http://www.w3.org/2000/svg" aria-label="Jesús (animación)">
+      <defs>
+        <!-- balance de blancos: el lienzo de la foto es gris-azulado; lo llevamos a blanco -->
+        <filter id="expo" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1.30 0 0 0 .02  0 1.26 0 0 .02  0 0 1.17 0 .02  0 0 0 1 0"/></filter>
+        <filter id="suave" x="-2%" y="-2%" width="104%" height="104%"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="rugoso" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".025" numOctaves="3" seed="5"/><feDisplacementMap in="SourceGraphic" scale="46"/></filter>
+        <filter id="rugosoF" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="8"/><feDisplacementMap in="SourceGraphic" scale="22"/></filter>
+        <mask id="mMapa" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1800" height="1300"><g id="trazos" fill="none" stroke="#fff" stroke-width="270" stroke-linecap="round" filter="url(#rugoso)"></g></mask>
+        <mask id="mCorona" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="1067"><polygon id="cuña" points="0,0" fill="#fff" filter="url(#rugosoF)"/></mask>
+        <mask id="mGotas" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="1067"><g id="gotasM" fill="#fff"></g></mask>
+        <mask id="mTexto" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="1067"><rect id="wTexto" x="0" y="0" width="0" height="1067" fill="#fff" filter="url(#rugosoF)"/></mask>
+        <clipPath id="cLienzo"><rect width="1600" height="1067"/></clipPath>
+      </defs>
+      <g clip-path="url(#cLienzo)">
+        <g filter="url(#expo)">
+          <rect width="1600" height="1067" fill="#C9CBD0"/><image href="jesus/base.jpg" x="0" y="0" width="1600" height="1067" filter="url(#suave)" preserveAspectRatio="none" opacity=".6"/>
+          <g mask="url(#mMapa)"><image href="jesus/map.png" width="1600" height="1067"/></g>
+          <g mask="url(#mCorona)"><image href="jesus/crown.png" width="1600" height="1067"/></g>
+          <g mask="url(#mGotas)"><image href="jesus/drops.png" width="1600" height="1067"/></g>
+          <g mask="url(#mTexto)"><image href="jesus/text.png" width="1600" height="1067"/></g>
+          <image id="firma" href="jesus/sig.png" width="1600" height="1067" opacity="0"/>
+        </g>
+        <g id="pincel" opacity="0"><g transform="rotate(-38) scale(1.35)">
+          <path d="M0 0 C14 -16 44 -18 66 -13 L66 13 C44 18 14 16 0 0Z" id="cerdas" fill="#D9A53F" stroke="#7a5a2c" stroke-width="2"/>
+          <rect x="66" y="-14" width="48" height="28" rx="3" fill="#B7B7BC" stroke="#6c6c72" stroke-width="2"/>
+          <rect x="114" y="-9" width="300" height="18" rx="9" fill="#5B3B2C"/>
+        </g></g>
+      </g>
+    </svg>
+    <div class="cap"><div class="n">02 / 04 · Obra</div><div class="t">Jesús</div></div>
+  </div>
+  <div class="rail" id="rail"><b id="railfill"></b></div>
+  <div class="dots"><s></s><s class="on"></s><s></s><s></s><small>2 / 4 · avanza al hacer scroll</small></div>
+  <div class="down" id="down">Seguí bajando<i></i></div>
+</section>
+</div>
+<script>
+const META={"cx":813.0,"cy":427.5,"radius":[336.5,340.6,355.9,340.2,336.6,336.3,336.7,337.2,339.2,341.9,342.3,336.4,336.5,353.6,344.6,348.4,350.5,351.2,351.8,354.4,357.3,354.0,359.8,365.5,364.3,360.6,357.8,354.7,352.1,350.7,354.2,373.8,379.7,377.0,364.6,366.4,366.6,366.0,369.3,371.3,372.1,371.5,366.9,368.9,368.1,359.6,380.9,374.2,372.2,376.2,379.7,383.9,385.9,384.1,391.0,397.0,390.0,395.3,392.3,386.7,387.1,386.8,387.1,387.5,389.9,386.4,386.0,389.4,388.9,388.5,392.6,392.0,389.2,383.4,380.5,383.3,384.3,381.5,379.6,382.9,395.0,453.8,436.4,377.8,381.8,385.1,380.6,378.2,366.1,376.1,375.0,375.2,378.5,380.6,379.0,375.8,374.2,374.4,376.0,377.9,379.9,385.3,388.1,384.8,380.0,380.0,378.7,368.0,366.7,379.7,382.4,387.0,393.5,443.0,432.5,418.9,405.9,401.8,390.0,396.2,395.1,416.0,409.5,402.7,401.4,399.9,397.5,394.9,403.9,432.2,425.2,404.4,404.6,405.7,392.8,390.7,388.0,380.5,391.3,388.9,387.5,387.1,386.6,388.4,415.2,414.8,410.1,393.0,410.6,411.4,411.3,400.5,396.7,392.2,390.9,396.5,414.2,428.2,429.1,394.7,392.3,393.3,396.4,397.3,399.4,400.7,401.7,399.1,393.0,385.6,380.4,379.1,375.0,371.0,367.0,367.6,368.4,372.0,386.6,388.5,389.5,385.6,371.8,381.3,401.7,383.3,377.0,376.3,376.9,366.1,373.2,380.0,380.5,381.8,385.2,386.5,385.9,386.4,387.2,386.3,389.6,389.1,389.0,387.8,384.9,385.1,379.7,375.3,371.9,382.1,380.9,372.0,374.1,378.2,380.7,368.3,367.0,360.0,382.4,397.4,381.1,372.9,371.4,366.8,356.7,381.5,389.4,375.4,388.0,408.2,392.6,378.0,380.3,383.1,383.5,374.5,372.2,374.5,370.7,345.5,333.9,338.6,348.2,350.9,362.1,363.1,355.5,363.3,363.2,368.4,370.2,374.9,377.5,383.3,385.2,365.4,363.7,374.7,371.0,371.2,359.8,362.0,371.0,382.6,385.9,386.4,385.9,370.2,368.1,388.0,400.0,370.1,365.3,370.6,377.1,381.7,400.9,408.3,411.3,412.2,412.9,405.7,403.2,407.8,400.8,396.1,411.1,411.6,403.3,384.7,381.7,382.3,383.5,384.6,387.8,396.0,401.8,405.4,405.3,399.1,394.0,393.2,389.7,388.3,389.2,388.2,389.3,382.7,377.8,376.4,371.8,362.9,360.0,363.9,381.5,360.3,361.1,362.6,364.4,360.0,357.6,360.8,361.4,358.4,355.3,357.7,368.4,356.8,352.5,351.8,352.8,359.2,360.9,358.6,353.3,346.9,330.5,322.3,321.7,329.5,331.9,344.8,344.2,342.5,344.4,343.9,344.6,345.7,345.6,345.9,341.9,329.7,327.5,330.8,341.8,337.4,336.2,335.9,335.6,335.5],"text":[599,881,1052,1066],"drops":[[1084,11,5],[1055,20,7],[634,74,8],[589,73,6],[600,78,7],[620,82,6],[590,87,5],[1045,90,6],[580,92,6],[1036,91,5],[1060,99,10],[1051,120,10],[988,118,5],[711,127,6],[576,142,9],[1076,144,8],[602,146,7],[984,156,10],[1102,167,7],[1187,179,5],[700,185,5],[656,202,8],[1403,202,5],[1353,272,5],[1354,276,6],[498,297,6],[1353,348,5],[1175,360,9],[1202,358,8],[1288,365,8],[1195,369,8],[1183,369,5],[1194,386,8],[1220,400,7],[1209,402,7],[1210,416,6],[1220,417,6],[389,417,6],[418,473,6],[422,481,6],[425,496,6],[425,500,5],[1273,536,7],[1261,571,12],[296,606,8],[1273,614,5],[1078,623,8],[281,625,8],[470,655,6],[821,688,7],[456,713,9],[1195,731,7],[138,733,5],[1245,742,10],[504,744,9],[1338,748,5],[1131,765,19],[578,760,6],[125,796,33],[320,769,7],[475,776,10],[1165,782,14],[847,776,7],[1187,781,7],[678,785,7],[811,793,13],[147,787,8],[557,789,5],[20,790,6],[94,791,7],[646,794,9],[1144,796,12],[58,791,5],[292,794,5],[180,795,6],[835,802,6],[202,813,9],[810,810,6],[230,814,9],[800,812,6],[186,818,7],[1275,829,14],[499,824,7],[1176,829,8],[823,829,6],[153,838,12],[886,836,7],[987,840,6],[1176,841,5],[880,846,8],[397,873,12],[503,872,8],[1212,905,13],[81,907,7],[191,916,7],[1180,926,8],[266,931,8],[649,938,10],[325,940,6],[1192,947,13],[1240,953,8],[381,954,7],[1085,955,5],[604,960,7],[1286,964,9],[463,967,8],[522,970,9],[1071,967,5],[149,974,8],[606,971,5],[503,978,17],[1142,975,7],[542,977,8],[247,979,6],[1051,978,7],[381,986,19],[1164,982,8],[234,990,8],[518,992,8],[1159,995,7],[1267,1001,11],[543,1014,12],[1278,1018,15],[1216,1031,6],[448,1051,5],[426,1064,8]]};
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a));
+const eInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const eBack=t=>{const c1=2.2,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const NS='http://www.w3.org/2000/svg';
+const $=id=>document.getElementById(id);
+const el=(n,a={},p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const params=new URLSearchParams(location.search);
+let fixedP=params.has('p')?parseFloat(params.get('p')):null;
+const LIVE=params.has('embed');
+if(LIVE){document.head.insertAdjacentHTML('beforeend','<style>.hud,.top .menu{display:none!important}html,body{overflow:hidden}</style>');addEventListener('message',e=>{if(e.data&&typeof e.data.p==='number')fixedP=e.data.p})}
+const rnd=s=>{let x=Math.sin(s*127.1+311.7)*43758.5453;return x-Math.floor(x)};
+
+/* mapa: pasadas de pincel por filas (de arriba a abajo) */
+const TR=[];const gT=$('trazos');
+const MB=[90,60,1585,900],ROWH=118;const ROWS=Math.ceil((MB[3]-MB[1]+120)/ROWH);
+for(let k=0;k<ROWS;k++){
+  const dir=k%2==0?1:-1,y=MB[1]-60+k*ROWH,tilt=(k%2==0?30:-26);
+  const x0=dir>0?MB[0]-120:MB[2]+120,x1=dir>0?MB[2]+120:MB[0]-120;
+  const p=el('path',{d:`M${x0} ${y} Q ${(MB[0]+MB[2])/2} ${y+tilt*2.2} ${x1} ${y+tilt}`},gT);
+  const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=L;TR.push({p,L,k});
+}
+/* gotas */
+const gM=$('gotasM'),GOT=META.drops.map((d,i)=>({c:el('circle',{cx:d[0],cy:d[1],r:0},gM),r:d[2],t:.60+rnd(i*7+3)*.17}));
+/* corona: cuña horaria desde las 12 */
+const R=META.radius,CX=META.cx,CY=META.cy;
+function cuña(deg){const pts=[[CX,CY]];const n=Math.max(2,Math.ceil(deg/4));for(let i=0;i<=n;i++){const a=(deg*i/n)*Math.PI/180;pts.push([CX+Math.sin(a)*1300,CY-Math.cos(a)*1300])}return pts.map(p=>p.join(',')).join(' ')}
+const FASES=[[0,'Scroll {p} % · el lienzo blanco queda listo'],[.05,'Scroll {p} % · el mapa se pinta con pasadas de pincel y espátula'],[.30,'Scroll {p} % · la corona de espinas se dibuja'],[.60,'Scroll {p} % · caen las salpicaduras de sangre'],[.76,'Scroll {p} % · "Jesús" se escribe en rojo'],[.92,'Scroll {p} % · la obra queda quieta']];
+const pin=$('pincel'),cerdas=$('cerdas');
+const TX=META.text;
+function render(p){
+  let brush=null;
+  TR.forEach(o=>{const a=.05+o.k*(.25-.07)/(ROWS-1),q=eInOut(seg(p,a,a+.075));o.p.style.strokeDashoffset=o.L*(1-q);if(q>.01&&q<.99){const pt=o.p.getPointAtLength(o.L*q);brush={x:pt.x,y:pt.y,col:'#2a2a30',flip:o.k%2?-1:1}}});
+  const qc=eInOut(seg(p,.30,.60));const deg=qc*360;
+  $('cuña').setAttribute('points',deg<.5?'0,0':cuña(deg));
+  if(qc>.005&&qc<.995){const a=deg*Math.PI/180,r=R[Math.floor(deg)%360]||430;brush={x:CX+Math.sin(a)*r,y:CY-Math.cos(a)*r,col:'#D9A53F',flip:1}}
+  GOT.forEach(g=>{const t=eBack(seg(p,g.t,g.t+.025));g.c.setAttribute('r',Math.max(0,t)*g.r*1.7)});
+  const ql=eInOut(seg(p,.76,.90)),x0=TX[0]-70,wid=(TX[2]-TX[0]+140);
+  $('wTexto').setAttribute('x',x0-20);$('wTexto').setAttribute('width',(wid+20)*ql);
+  if(ql>.005&&ql<.995){brush={x:x0+wid*ql,y:TX[1]+(TX[3]-TX[1])*(.35+.3*Math.sin(ql*24)),col:'#A31B3A',flip:1}}
+  $('firma').setAttribute('opacity',seg(p,.92,.97));
+  if(brush){pin.setAttribute('transform',`translate(${brush.x} ${brush.y}) scale(${brush.flip} 1)`);cerdas.setAttribute('fill',brush.col);pin.setAttribute('opacity',1)}else pin.setAttribute('opacity',0);
+  $('railfill').style.height=((.25+p*.25)*100)+'%';
+  let f=FASES[0][1];FASES.forEach(([a,t])=>{if(p>=a)f=t});$('fase').textContent=f.replace('{p}',Math.round(p*100));
+  $('down').style.opacity=1-seg(p,.93,1)*.8;
+}
+[0,25,50,75,100].forEach(v=>{const u=document.createElement('u');u.style.top=v+'%';const e=document.createElement('em');e.style.top=v+'%';e.textContent=v+'%';$('rail').append(u,e)});
+let target=0,shown=0;
+const progresoScroll=()=>clamp(scrollY/($('track').offsetHeight-innerHeight));
+function loop(){
+  target=fixedP!==null?fixedP:(reduce?1:progresoScroll());
+  shown+=(target-shown)*(fixedP!==null||reduce?1:.14);
+  if(Math.abs(target-shown)<.0004)shown=target;
+  render(shown);requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+let anim=null;const maxScroll=()=>$('track').offsetHeight-innerHeight;
+function parar(){if(anim){cancelAnimationFrame(anim);anim=null;$('play').textContent='▶ Ver sola'}}
+$('play').onclick=()=>{if(anim){parar();return}if(scrollY>=maxScroll()-4)scrollTo(0,0);const from=scrollY,to=maxScroll(),dur=24000,s=performance.now();$('play').textContent='❚❚ Pausar';const step=n=>{const t=clamp((n-s)/dur);scrollTo(0,lerp(from,to,t));if(t<1)anim=requestAnimationFrame(step);else parar()};anim=requestAnimationFrame(step)};
+$('reset').onclick=()=>{parar();scrollTo({top:0,behavior:'smooth'})};
+addEventListener('wheel',parar,{passive:true});addEventListener('touchstart',parar,{passive:true});
+</script>
+</body>
+</html>

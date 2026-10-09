@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vástago · Fe en obra</title>
+<meta name="description" content="Obras de arte con pasajes bíblicos pintados a mano. Cuadros, encargos, talleres y esculturas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&family=Just+Another+Hand&display=swap" rel="stylesheet">
+<style>
+:root{
+  --arena:#E1D3C0; --camel:#D5BF9E; --bordo:#AA6766; --bordo-os:#8E4F4E; --tinta:#161311; --blanco:#fff;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mano:'Just Another Hand','Patrick Hand',cursive;
+  --gut:clamp(20px,6vw,88px);
+}
+*{box-sizing:border-box;margin:0}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{background:#fff;color:var(--tinta);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+/* lienzo: trama sutil de tela sobre blanco */
+.lienzo{background-color:#fff;background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px)}
+
+/* ---------- navegación ---------- */
+.nav-btn{position:fixed;top:2.2vh;right:4.4vw;z-index:60;font:500 15px var(--sans);display:flex;gap:10px;align-items:center;background:none;border:0;cursor:pointer;color:var(--tinta);padding:10px 4px;min-height:44px}
+.nav-btn i{display:inline-block;width:26px;height:2px;background:currentColor;box-shadow:0 7px 0 currentColor,0 -7px 0 currentColor}
+.nav-btn:focus-visible,.menu a:focus-visible,.btn:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
+.menu{position:fixed;inset:0;z-index:70;background:var(--tinta);color:var(--arena);display:flex;flex-direction:column;justify-content:center;padding:var(--gut);visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
+.menu.on{visibility:visible;opacity:1}
+.menu a{font:400 clamp(32px,6vw,64px)/1.25 var(--serif);text-decoration:none;display:block;width:max-content}
+.menu a:hover{color:var(--camel)}
+.menu .x{position:absolute;top:2.2vh;right:4.4vw;background:none;border:0;color:var(--arena);font:500 15px var(--sans);cursor:pointer;min-height:44px;padding:10px 4px}
+.menu small{font:var(--mano);font-size:28px;color:var(--bordo);margin-top:28px}
+
+/* ---------- hero con scroll (4 obras) ---------- */
+.track{height:calc(100vh + 800vh);position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#fff}
+.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff;pointer-events:none}
+.skip{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:50;font:500 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;background:var(--tinta);color:var(--arena);border-radius:40px;padding:11px 18px;transition:opacity .3s}
+.skip:hover{background:var(--bordo-os)}
+
+/* ---------- secciones ---------- */
+section.s{position:relative;padding:clamp(72px,12vh,140px) var(--gut);border-top:1px solid rgba(120,98,66,.2)}
+#obras{border-top:0}
+.eyebrow{font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bordo-os)}
+h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spacing:-.01em}
+.lead{color:#4a4039;max-width:54ch}
+.tablon{display:block;width:100%;max-width:220px;height:6px;margin:22px 0 0;background:var(--bordo);clip-path:polygon(0 40%,12% 20%,30% 55%,52% 25%,74% 60%,100% 30%,100% 70%,70% 100%,46% 70%,22% 95%,0 75%)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 24px;border-radius:40px;font:600 14px var(--sans);text-decoration:none;background:var(--tinta);color:#fff;border:0;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bordo-os)}
+.btn.o{background:none;color:var(--tinta);box-shadow:inset 0 0 0 1.5px var(--tinta)}
+.btn.o:hover{background:var(--tinta);color:#fff}
+/* botón "origin": el relleno nace desde donde entra el puntero */
+.btn.origin{position:relative;overflow:hidden;transition:color .3s cubic-bezier(.16,1,.3,1),transform .2s cubic-bezier(.16,1,.3,1)}
+.btn.origin:hover{background:none}
+.btn.origin.filled{color:#fff}
+.btn.origin:not(.o):hover{background:var(--tinta)}
+.btn.origin:not(.o) .of{background:var(--bordo-os)}
+.btn.origin:active{transform:scale(.985)}
+.btn.origin .of{position:absolute;border-radius:50%;background:var(--tinta);pointer-events:none;transform:translate(-50%,-50%) scale(0);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn.origin.filled .of{transform:translate(-50%,-50%) scale(1)}
+.btn.origin .ot{position:relative;z-index:1;display:inline-flex;align-items:center;gap:8px}
+.btn .arr{flex:none;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.btn.origin.filled .arr,.btn:not(.origin):hover .arr{transform:translateX(5px)}
+@media (prefers-reduced-motion:reduce){.btn.origin,.btn.origin .of,.btn .arr{transition:none}}
+
+.mano{font-family:var(--mano);font-weight:400}
+
+/* obras */
+/* subgrid: foto, título, técnica y precio quedan alineados entre cards aunque un título ocupe dos líneas */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));column-gap:28px;row-gap:0;margin-top:44px}
+.card{display:grid;grid-template-rows:subgrid;grid-row:span 4;align-content:start;margin-bottom:44px}
+.card .ph{aspect-ratio:3/4;background:var(--camel);display:grid;place-items:center;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-os);box-shadow:0 2px 6px rgba(40,30,20,.12),0 18px 36px rgba(40,30,20,.12)}
+.card h3{font:400 22px/1.2 var(--serif);margin-top:18px}
+.card p{font-size:13.5px;color:#5a4f46}
+.card .pr{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:14px;font-weight:500}
+.card .pr a{font-size:13px;color:var(--bordo-os);font-weight:600}
+
+/* grupo animado: las cards entran una tras otra (preset "blur-slide", escalonado 0,1 s) */
+.js .ag-item{opacity:0;filter:blur(4px);transform:translateY(20px);transition:opacity .8s ease,filter .8s ease,transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0)*100ms)}
+.js .ag.in .ag-item{opacity:1;filter:blur(0);transform:none}
+@media (prefers-reduced-motion:reduce){.js .ag-item{opacity:1;filter:none;transform:none;transition:none}}
+
+/* encargos */
+.split{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(28px,6vw,90px);align-items:center}
+.video{aspect-ratio:16/10;background:var(--camel);display:grid;place-items:center;position:relative;box-shadow:0 18px 40px rgba(40,30,20,.14)}
+.video span{position:absolute;bottom:14px;left:16px;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-os)}
+.play{width:68px;height:68px;border-radius:50%;background:var(--tinta);display:grid;place-items:center}
+.play::after{content:"";border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
+.pasos{list-style:none;padding:0;margin:24px 0 30px;display:grid;gap:10px}
+.pasos li{display:flex;gap:14px;align-items:baseline;color:#4a4039}
+.pasos b{font:400 26px var(--mano);color:var(--bordo-os);min-width:22px}
+
+/* taller */
+.dos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-top:40px}
+.tcard{background:rgba(255,255,255,.7);padding:18px 18px 26px;box-shadow:0 2px 6px rgba(40,30,20,.08),0 14px 30px rgba(40,30,20,.08)}
+.tcard .ph{aspect-ratio:16/10;background:var(--camel);display:grid;place-items:center;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-os)}
+.tcard h3{font:400 28px var(--serif);margin:20px 0 6px}
+.tcard p{color:#4a4039;margin-bottom:14px}
+.tcard a{font-weight:600;font-size:14px;color:var(--bordo-os)}
+
+/* expo */
+.photo{aspect-ratio:4/3;background:var(--camel);display:grid;place-items:center;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-os);box-shadow:0 18px 40px rgba(40,30,20,.14)}
+
+/* tienda */
+.prox{text-align:center}
+.prox .big{font:400 clamp(48px,9vw,120px)/1 var(--mano);letter-spacing:.02em;margin-bottom:10px}
+
+/* footer */
+footer{background:var(--tinta);color:var(--arena);padding:64px var(--gut) 40px}
+.fgrid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:36px}
+footer img{height:64px;margin-bottom:14px}
+footer h4{font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--camel);margin-bottom:12px}
+footer a{display:block;text-decoration:none;font-size:14px;padding:3px 0}
+footer a:hover{color:#fff}
+footer p{font-size:14px;max-width:30ch;opacity:.8}
+.copy{margin-top:48px;font-size:12px;opacity:.55}
+
+@media (max-width:820px){
+  .split{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .fgrid>div:first-child{grid-column:1/-1}
+}
+
+</style>
+</head>
+<body>
+
+<button class="nav-btn" id="abrir" aria-label="Abrir menú" aria-expanded="false">Menú <i></i></button>
+<nav class="menu" id="menu" aria-label="Principal">
+  <button class="x" id="cerrar">Cerrar ✕</button>
+  <a href="#obras">Obras</a>
+  <a href="#encargos">Encargos</a>
+  <a href="#taller">Taller</a>
+  <a href="#exposiciones">Exposiciones</a>
+  <a href="#tienda">Tienda</a>
+  <a href="#contacto">Contacto</a>
+  <small>Fe en obra</small>
+</nav>
+
+<!-- HERO: la pantalla queda fija y el scroll pinta las 4 obras -->
+<div class="track" id="track">
+  <div class="stage" id="stage"></div>
+</div>
+<a class="skip" id="skip" href="#obras">Saltar a la galería ↓</a>
+
+<section class="s lienzo" id="obras">
+  <p class="eyebrow">Galería</p>
+  <h2>Obras</h2>
+  <p class="lead">Pasajes bíblicos pintados a mano. Algunas con precio publicado, otras a consultar.</p>
+  <span class="tablon"></span>
+  <div class="grid ag">
+    <article class="card"><div class="ph">1 Corintios 13</div><h3>1 Corintios 13</h3><p>Técnica · medidas</p><div class="pr"><span>$ — precio publicado</span><a href="#contacto">Comprar</a></div></article>
+    <article class="card"><div class="ph">Jesús</div><h3>Jesús</h3><p>Técnica · medidas</p><div class="pr"><span>Consultar</span><a href="#contacto">Consultar</a></div></article>
+    <article class="card"><div class="ph">Sadrac, Mesac y Abednego</div><h3>Sadrac, Mesac y Abednego</h3><p>Técnica · medidas</p><div class="pr"><span>Consultar</span><a href="#contacto">Consultar</a></div></article>
+    <article class="card"><div class="ph">Jeremías 18</div><h3>Jeremías 18</h3><p>Técnica · medidas</p><div class="pr"><span>$ — precio publicado</span><a href="#contacto">Comprar</a></div></article>
+  </div>
+  <p style="margin-top:36px"><a class="btn o origin" href="#obras">Ver todas las obras <svg class="arr" width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6h17"/><path d="M13 1.5 18 6l-5 4.5"/></svg></a></p>
+</section>
+
+<section class="s lienzo" id="encargos">
+  <div class="split">
+    <div>
+      <p class="eyebrow">Encargos</p>
+      <h2>Cada obra empieza con un versículo</h2>
+      <p class="lead">Contanos tu idea. Te mandamos un boceto, acordamos la seña y la pintamos.</p>
+      <ol class="pasos">
+        <li><b>1</b> Contás tu idea o el versículo</li>
+        <li><b>2</b> Te enviamos un boceto</li>
+        <li><b>3</b> Acordamos la seña</li>
+        <li><b>4</b> La pintamos y te la entregamos</li>
+      </ol>
+      <a class="btn origin" href="#contacto">Cómo encargar <svg class="arr" width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6h17"/><path d="M13 1.5 18 6l-5 4.5"/></svg></a>
+    </div>
+    <div class="video"><div class="play" role="img" aria-label="Reproducir video de proceso"></div><span>Video de proceso</span></div>
+  </div>
+</section>
+
+<section class="s lienzo" id="taller">
+  <p class="eyebrow">Taller</p>
+  <h2>Dos formas de aprender con las manos</h2>
+  <span class="tablon"></span>
+  <div class="dos">
+    <article class="tcard"><div class="ph">Foto de clase · Pintura</div><h3>Pintura</h3><p>Qué se aprende, horarios y cupos.</p><a href="#contacto">Inscribirse →</a></article>
+    <article class="tcard"><div class="ph">Foto de taller · Atriles</div><h3>Atriles</h3><p>Construcción de atriles en madera.</p><a href="#contacto">Inscribirse →</a></article>
+  </div>
+</section>
+
+<section class="s lienzo" id="exposiciones">
+  <div class="split">
+    <div class="photo">Foto de una muestra en galería</div>
+    <div>
+      <p class="eyebrow">Exposiciones</p>
+      <h2>Obra a la venta en galería</h2>
+      <p class="lead">Muestras pasadas y próximas, con fotos del montaje y las obras disponibles en cada una.</p>
+      <p style="margin-top:26px"><a class="btn" href="#contacto">Ver exposiciones</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="s lienzo prox" id="tienda">
+  <p class="eyebrow">Tienda</p>
+  <div class="big">Tienda · Próximamente</div>
+  <p class="lead" style="margin:0 auto">Estamos preparando algo nuevo.</p>
+</section>
+
+<footer id="contacto">
+  <div class="fgrid">
+    <div><img src="logos/logo-blanco.png" alt="Vástago · Fe en obra"><p>Obras de arte, productos de diseño y música.</p></div>
+    <div><h4>Explorar</h4><a href="#obras">Obras</a><a href="#encargos">Encargos</a><a href="#taller">Taller</a></div>
+    <div><h4>Vástago</h4><a href="#exposiciones">Exposiciones</a><a href="#tienda">Tienda</a><a href="#">Sobre Vástago</a></div>
+    <div><h4>Contacto</h4><a href="#">WhatsApp</a><a href="https://www.instagram.com/vastago.obras" target="_blank" rel="noopener">Instagram @vastago.obras</a><a href="#">Mail</a></div>
+  </div>
+  <p class="copy">© Vástago · Fe en obra</p>
+</footer>
+
+<script>document.documentElement.classList.add('js')</script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script>
+/* scroll suave (Lenis); con "reducir movimiento" queda el scroll nativo */
+const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let lenis=null;
+if(window.Lenis&&!reduceMotion){
+  lenis=new Lenis({lerp:.09,smoothWheel:true});
+  (function raf(t){lenis.raf(t);requestAnimationFrame(raf)})(performance.now());
+}
+/* menú */
+const menu=document.getElementById('menu'),abrir=document.getElementById('abrir');
+const setMenu=on=>{menu.classList.toggle('on',on);abrir.setAttribute('aria-expanded',on);if(lenis)on?lenis.stop():lenis.start()};
+/* anclas: con Lenis hay que desplazar por JS */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const t=id.length>1&&document.querySelector(id);if(!t)return;e.preventDefault();setTimeout(()=>{lenis?lenis.scrollTo(t,{duration:1.6}):t.scrollIntoView({behavior:reduceMotion?'auto':'smooth'})},lenis?60:0)}));
+abrir.onclick=()=>setMenu(true);
+document.getElementById('cerrar').onclick=()=>setMenu(false);
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+
+/* hero: cada tramo de scroll pinta una obra (las animaciones viven en /animaciones) */
+const FILES=['corintios13','jesus','sadrac','jeremias'];
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const track=document.getElementById('track'),stage=document.getElementById('stage');
+const frames=FILES.map((f,i)=>{const fr=document.createElement('iframe');fr.src='animaciones/'+f+'.html?embed=1&p=0';fr.setAttribute('scrolling','no');fr.setAttribute('aria-hidden','true');fr.tabIndex=-1;fr.style.zIndex=10-i;stage.appendChild(fr);return fr});
+const total=()=>track.offsetHeight-innerHeight;
+/* cada obra: se pinta (0–70 %), queda quieta (70–88 %) y recién ahí se disuelve hacia la siguiente */
+const PINTA=.70,PAUSA=.88;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let shown=0;
+function loop(){
+  const g=clamp(scrollY/total());
+  shown+=(g-shown)*((reduce||lenis)?1:.14);if(Math.abs(g-shown)<.0003)shown=g;
+  const x=shown*4,idx=Math.min(3,Math.floor(x)),local=x-idx>=1?1:x-idx;
+  const lp=(idx===3&&shown>=.9999)?1:local;
+  frames.forEach((fr,i)=>{
+    let p=0,op=0;
+    if(i<idx){p=1;op=0}
+    else if(i===idx){p=clamp(lp/PINTA);op=1;if(i<3)op=1-clamp((lp-PAUSA)/(1-PAUSA))}
+    else if(i===idx+1){p=0;op=1}
+    fr.style.opacity=op;fr.style.visibility=op>0?'visible':'hidden';
+    if(op>0&&fr.contentWindow)fr.contentWindow.postMessage({p},'*');
+  });
+  document.getElementById('skip').style.opacity=scrollY>total()+innerHeight*.3?0:1;
+  requestAnimationFrame(loop)
+}
+requestAnimationFrame(loop);
+
+/* AnimatedGroup: cada hijo directo de .ag entra con retraso escalonado al aparecer en pantalla */
+document.querySelectorAll('.ag').forEach(g=>{
+  [...g.children].forEach((c,i)=>{c.classList.add('ag-item');c.style.setProperty('--i',i)});
+  const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){g.classList.add('in');io.disconnect()}},{threshold:.15});
+  io.observe(g);
+});
+
+/* OriginButton: el relleno circular crece desde el punto de entrada (puntero, toque o centro con teclado) */
+document.querySelectorAll('.origin').forEach(b=>{
+  b.innerHTML='<span class="of" aria-hidden="true"></span><span class="ot">'+b.innerHTML+'</span>';
+  const of=b.querySelector('.of');
+  const setOrigin=(x,y)=>{const r=b.getBoundingClientRect();
+    const d=Math.ceil(2*Math.max(Math.hypot(x,y),Math.hypot(r.width-x,y),Math.hypot(x,r.height-y),Math.hypot(r.width-x,r.height-y)));
+    Object.assign(of.style,{left:x+'px',top:y+'px',width:d+'px',height:d+'px'})};
+  const fromPointer=e=>{const r=b.getBoundingClientRect();setOrigin(e.clientX-r.left,e.clientY-r.top)};
+  const fromCenter=()=>{const r=b.getBoundingClientRect();setOrigin(r.width/2,r.height/2)};
+  const on=()=>b.classList.add('filled'),off=()=>b.classList.remove('filled');
+  b.addEventListener('pointerenter',e=>{fromPointer(e);on()});
+  b.addEventListener('pointerdown',e=>{fromPointer(e);on()});
+  b.addEventListener('pointerleave',off);
+  b.addEventListener('focus',()=>{if(b.matches(':focus-visible')){fromCenter();on()}});
+  b.addEventListener('blur',off);
+});
+</script>
+</body>
+</html>
