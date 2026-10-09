@@ -144,6 +144,18 @@ Tres caminos, de más a menos arriesgado:
 
 Posibles toques de interacción (si vamos por el camino 1): línea de tablón que se "dibuja" al hacer scroll; ver una obra a pantalla completa con el versículo al costado; hover que revela el detalle.
 
+### Idea nueva del cliente-equipo (8 oct): sitio-lienzo con animación de obras
+
+- **Fondo = lienzo.** Textura de tela cruda (trama sutil) en arena/hueso de marca, en todo el sitio.
+- **Primera pantalla (hero) animada con distintas obras.** Las obras aparecen "pintándose" sobre el lienzo, una tras otra. Solo logo + obra + versículo; sin menú pesado ni grillas.
+- **Recién al bajar (scroll)** aparece el resto: galería/obras, exposiciones, encargos, taller, etc.
+- **Decidido (8 oct, actualizado):** **Opción 2 — el hero avanza con el scroll** (la pantalla queda fija ~4 pantallas de scroll y cada tramo pinta una obra; al subir, se "despinta"). *Antes se había elegido la opción 1 (cambia solo); se cambió.* Además: **lienzo blanco en todo el sitio**, con una obra distinta cortada por un borde en cada sección. **Boceto vigente: `boceto-lienzo-scroll.png`** (hero con scroll sobre lienzo blanco, con la secuencia de las 4 obras).
+- **Obras del hero (4):** 1 Corintios 13, Jesús, Sadrac, Mesac y Abednego, y Jeremías 18. **Serie Juana queda para otra ocasión.**
+- **Comportamiento:** ~7 s por obra (≈28 s el ciclo), cada obra "se pinta" sobre el lienzo y se disuelve con un trazo de pincel hacia la siguiente; pausa al pasar el mouse; puntos para saltar a una obra; en celular se cambia al tocar o deslizar; con "reducir movimiento" se muestra una sola imagen estática.
+- **Animación por obra:** 1 Cor 13 → el versículo se escribe línea por línea, luego entra el corazón rojo y flotan las esquirlas; Jesús → se dibuja la corona de espinas y "cae" el nombre rojo; Sadrac → las llamas encienden desde abajo; Jeremías 18 → las manos entran y modelan la vasija.
+- **Bocetos hechos (solo `boceto-lienzo-scroll.png` está en el repo):** `boceto-inicio.png` (v0, sin lienzo), `boceto-lienzo-opcion1-hero-automatico.png` (descartado), `boceto-lienzo-opcion2-scroll.png` (primera versión de la opción 2), `boceto-lienzo-blanco.png` (lienzo blanco con hero automático, reemplazado) y **`boceto-lienzo-scroll.png` (vigente)**.
+- **Pendiente:** fotos recortadas y de frente de las 4 obras (con calidad pareja), y decidir si el versículo de cada obra es el texto real pintado o una cita aparte.
+
 **Paleta del sitio = solo colores de marca** (arena, camel, bordó, tinta, blanco). Los colores de las obras no entran en la interfaz; se ven después si hace falta.
 
 ---
