@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vástago · Hero con las 4 obras</title>
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{background:#fff;font:400 16px/1.5 Inter,system-ui,sans-serif;color:#161311}
+.track{height:calc(100vh + 640vh);position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#fff}
+.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff;pointer-events:none}
+.hud{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:50;background:rgba(22,19,17,.92);color:#E1D3C0;border-radius:40px;padding:8px 10px 8px 18px;display:flex;gap:10px;align-items:center;font:500 13px Inter,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.25);white-space:nowrap}
+.hud b{font-weight:600;color:#D5BF9E;letter-spacing:.1em;font-size:11px;text-transform:uppercase}
+.hud button{white-space:nowrap;font:600 12px Inter,sans-serif;border:0;border-radius:30px;padding:8px 13px;cursor:pointer;background:#AA6766;color:#fff}
+.hud button.g{background:rgba(255,255,255,.14)}
+.hud button.n{padding:8px 11px;background:rgba(255,255,255,.14)}
+.hud button.n.on{background:#AA6766}
+.gal{min-height:70vh;padding:12vh 8vw;background:#fff;background-image:repeating-linear-gradient(0deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px),repeating-linear-gradient(90deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px);border-top:1px solid rgba(120,98,66,.2);box-shadow:0 -20px 40px rgba(70,48,24,.08)}
+.gal small{font:600 12px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#8E4F4E}
+.gal h2{font:400 clamp(36px,5vw,64px)/1.1 Georgia,serif;margin:8px 0 10px}
+.gal p{color:#4a4039;max-width:52ch}
+@media (max-width:900px){.hud b{display:none}}
+</style>
+</head>
+<body>
+<div class="hud"><b>Demo</b><button id="play">▶ Ver las 4 solas</button><button class="g" id="reset">↺</button><span id="nums"></span></div>
+<div class="track" id="track">
+  <div class="stage" id="stage"></div>
+</div>
+<section class="gal"><small>Galería</small><h2>Obras</h2><p>Acá empieza la galería, sobre el mismo lienzo blanco (placeholder: lo diseñamos después).</p></section>
+<script>
+const FILES=['corintios13','jesus','sadrac','jeremias'];
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const $=id=>document.getElementById(id);
+const frames=FILES.map((f,i)=>{const fr=document.createElement('iframe');fr.src=f+'.html?embed=1&p=0';fr.setAttribute('scrolling','no');fr.setAttribute('aria-hidden','true');fr.style.zIndex=10-i;$('stage').appendChild(fr);return fr});
+const nums=FILES.map((_,i)=>{const b=document.createElement('button');b.className='n';b.textContent=i+1;b.onclick=()=>{parar();irA(i)};$('nums').appendChild(b);return b});
+const total=()=>$('track').offsetHeight-innerHeight;
+function irA(i){scrollTo({top:total()*(i/4)+2,behavior:'smooth'})}
+const GP=new URLSearchParams(location.search).has('g')?parseFloat(new URLSearchParams(location.search).get('g')):null;
+let shown=GP!==null?GP:0,last=-1;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function loop(){
+  const g=GP!==null?GP:clamp(scrollY/total());
+  shown+=(g-shown)*(reduce?1:.14);if(Math.abs(g-shown)<.0003)shown=g;
+  const x=shown*4,idx=Math.min(3,Math.floor(x)),local=x-idx>=1?1:x-idx;
+  const lp=(idx===3&&shown>=.9999)?1:local;
+  frames.forEach((fr,i)=>{
+    let p=0,op=0;
+    if(i<idx){p=1;op=0}
+    else if(i===idx){p=lp;op=1;if(i<3)op=1-clamp((lp-.94)/.06)}
+    else if(i===idx+1){p=0;op=1}
+    fr.style.opacity=op;fr.style.visibility=op>0?'visible':'hidden';
+    if(op>0&&fr.contentWindow)fr.contentWindow.postMessage({p},'*');
+  });
+  nums.forEach((b,i)=>b.classList.toggle('on',i===idx));
+  requestAnimationFrame(loop)
+}
+requestAnimationFrame(loop);
+let anim=null;
+function parar(){if(anim){cancelAnimationFrame(anim);anim=null;$('play').textContent='▶ Ver las 4 solas'}}
+$('play').onclick=()=>{if(anim){parar();return}if(scrollY>=total()-4)scrollTo(0,0);const from=scrollY,to=total(),dur=96000*(to-from)/to+4000,s=performance.now();$('play').textContent='❚❚ Pausar';const step=n=>{const t=clamp((n-s)/dur);scrollTo(0,from+(to-from)*t);if(t<1)anim=requestAnimationFrame(step);else parar()};anim=requestAnimationFrame(step)};
+$('reset').onclick=()=>{parar();scrollTo({top:0,behavior:'smooth'})};
+addEventListener('wheel',parar,{passive:true});addEventListener('touchstart',parar,{passive:true});
+</script>
+</body>
+</html>

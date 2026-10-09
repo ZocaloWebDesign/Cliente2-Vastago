@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vástago · Animación Jesús</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Patrick+Hand&family=Satisfy&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bordo:#AA6766;--bordo-os:#8E4F4E;--tinta:#161311}
+*{box-sizing:border-box;margin:0}
+html,body{background:#fff}
+body{color:var(--tinta);font:400 16px/1.5 Inter,sans-serif}
+.track{height:calc(100vh + 160vh);position:relative}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background-color:#fff;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg, rgba(90,80,70,.028) 0 1px, transparent 1px 4px)}
+.top{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:2.2vh 4.4vw;z-index:5}
+.top img{height:6.4vh;min-height:44px}
+.menu{font:500 15px Inter;display:flex;gap:10px;align-items:center}
+.menu i{display:inline-block;width:26px;height:2px;background:var(--tinta);box-shadow:0 7px 0 var(--tinta),0 -7px 0 var(--tinta)}
+
+/* cuadro apaisado al centro */
+.obra{position:absolute;left:50%;top:50%;width:min(72vw,112vh);aspect-ratio:1400/942;transform:translate(-50%,-52%);z-index:2;background:#EFEFF1;
+  box-shadow:0 .4vh 1vh rgba(40,30,20,.12),0 3vh 6vh rgba(40,30,20,.16),0 0 0 1px rgba(40,30,20,.07)}
+.obra::after{content:"";position:absolute;left:1%;right:1%;bottom:-.8vh;height:.8vh;background:linear-gradient(#e6e3de,#cdc9c2);z-index:-1}
+.obra svg{width:100%;height:100%;display:block}
+.cap{position:absolute;right:0;text-align:right;top:calc(100% + 2.6vh);}
+.cap .n{font:600 12px Inter;letter-spacing:.16em;text-transform:uppercase;color:var(--bordo-os)}
+.cap .t{font:400 clamp(20px,2.2vw,30px)/1.15 'Patrick Hand',cursive;margin-top:.8vh}
+
+/* progreso */
+.rail{position:absolute;left:1.5vw;top:22vh;height:56vh;width:2px;background:rgba(22,19,17,.18);z-index:6}
+.rail b{position:absolute;left:-3px;top:0;width:8px;height:0;background:var(--bordo-os)}
+.rail u{position:absolute;left:-5px;width:12px;height:2px;background:rgba(22,19,17,.45)}
+.rail em{position:absolute;left:16px;font:500 11px Inter;font-style:normal;letter-spacing:.08em;color:#5a4f46;transform:translateY(-50%);white-space:nowrap}
+.dots{position:absolute;left:4.4vw;bottom:5vh;display:flex;gap:10px;align-items:center;z-index:5}
+.dots s{width:40px;height:3px;background:rgba(22,19,17,.2);display:block;text-decoration:none}
+.dots s.on{background:var(--bordo-os)}
+.dots small{font:500 11px Inter;letter-spacing:.12em;margin-left:10px;color:#5a4f46}
+.down{position:absolute;left:0;right:0;bottom:1.6vh;text-align:center;font:500 12px Inter;letter-spacing:.14em;text-transform:uppercase;color:#5a4f46;z-index:4}
+.down i{display:block;margin:4px auto 0;width:1.5px;height:18px;background:var(--bordo-os)}
+
+/* demo */
+.hud{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:20;background:rgba(22,19,17,.92);color:#E1D3C0;border-radius:40px;padding:8px 10px 8px 18px;display:flex;gap:14px;align-items:center;font:500 13px Inter;box-shadow:0 8px 24px rgba(0,0,0,.25);white-space:nowrap}
+.hud b{font-weight:600;color:#D5BF9E;letter-spacing:.1em;font-size:11px;text-transform:uppercase}
+.hud .fase{min-width:330px}
+.hud button{white-space:nowrap;font:600 12px Inter;border:0;border-radius:30px;padding:8px 14px;cursor:pointer;background:#AA6766;color:#fff}
+.hud button.g{background:rgba(255,255,255,.14)}
+@media (max-width:900px){.obra{width:92vw}.rail{display:none}.hud .fase{min-width:0;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="hud"><b>Demo</b><span class="fase" id="fase">Scroll 0 %</span><button id="play">▶ Ver sola</button><button class="g" id="reset">↺ Inicio</button></div>
+
+<div class="track" id="track">
+<section class="stage" id="stage">
+  <div class="top"><img src="logo-negro.png" alt="Vástago · Fe en obra"><div class="menu">Menú <i></i></div></div>
+
+  <div class="obra" id="obra">
+    <svg id="svg" viewBox="0 0 1400 942" xmlns="http://www.w3.org/2000/svg" aria-label="Jesús (animación)">
+      <defs>
+        <filter id="tela" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .35 0 0 0 0 .33 0 0 0 0 .32 0 0 0 .10 0"/></filter>
+        <!-- bordes de espátula -->
+        <filter id="knife" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency=".06" numOctaves="3" seed="6"/><feDisplacementMap in="SourceGraphic" scale="9"/></filter>
+        <filter id="rugoso" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="3" seed="5"/><feDisplacementMap in="SourceGraphic" scale="40"/></filter>
+        <filter id="pintado" x="-5%" y="-10%" width="110%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" result="d"/><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="9" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 -.32" result="g2"/><feComposite in="g2" in2="d" operator="in" result="g3"/><feMerge><feMergeNode in="d"/><feMergeNode in="g3"/></feMerge></filter>
+        <linearGradient id="gRojo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C8334F"/><stop offset=".6" stop-color="#A31B3A"/><stop offset="1" stop-color="#7C1229"/></linearGradient>
+        <radialGradient id="gMancha"><stop offset="0" stop-color="#E88FA3" stop-opacity=".3"/><stop offset="1" stop-color="#E88FA3" stop-opacity="0"/></radialGradient>
+        <mask id="mLetra" maskUnits="userSpaceOnUse" x="0" y="600" width="1400" height="342"><rect id="wLetra" x="420" y="690" width="0" height="250" fill="#fff" filter="url(#rugoso)"/></mask>
+        <clipPath id="cLienzo"><rect width="1400" height="942"/></clipPath>
+      </defs>
+      <g clip-path="url(#cLienzo)">
+        <rect width="1400" height="942" fill="#EFEFF1"/>
+        <rect width="1400" height="942" filter="url(#tela)"/>
+        <!-- manchas rosadas suaves (detrás) -->
+        <ellipse id="mancha1" cx="1075" cy="735" rx="110" ry="85" fill="url(#gMancha)" opacity="0"/>
+        <ellipse id="mancha2" cx="620" cy="770" rx="90" ry="60" fill="url(#gMancha)" opacity="0"/>
+        <!-- continentes -->
+        <g id="mapa"></g>
+        <!-- corona -->
+        <g id="corona"><g id="cuerdas"></g><g id="espinas"></g></g>
+        <!-- salpicaduras -->
+        <g id="sangre"></g>
+        <!-- Jesús -->
+        <g mask="url(#mLetra)"><g filter="url(#pintado)">
+          <text x="735" y="880" text-anchor="middle" font-family="Satisfy, 'Kaushan Script', cursive" font-size="262" fill="url(#gRojo)" stroke="#6F0F25" stroke-width="2.4" stroke-linejoin="round">Jesús</text>
+        </g></g>
+        <text id="firma" x="1385" y="925" text-anchor="end" font-family="Caveat, cursive" font-size="27" fill="#2b2b31" opacity="0">Abita 3/2020</text>
+        <!-- pincel -->
+        <g id="pincel" opacity="0"><g transform="rotate(-38)">
+          <path d="M0 0 C14 -16 44 -18 66 -13 L66 13 C44 18 14 16 0 0Z" id="cerdas" fill="#D9A53F" stroke="#7a5a2c" stroke-width="2"/>
+          <rect x="66" y="-14" width="48" height="28" rx="3" fill="#B7B7BC" stroke="#6c6c72" stroke-width="2"/>
+          <rect x="114" y="-9" width="300" height="18" rx="9" fill="#5B3B2C"/>
+        </g></g>
+      </g>
+    </svg>
+    <div class="cap"><div class="n">02 / 04 · Obra</div><div class="t">Jesús</div></div>
+  </div>
+
+  <div class="rail" id="rail"><b id="railfill"></b></div>
+  <div class="dots"><s></s><s class="on"></s><s></s><s></s><small>2 / 4 · avanza al hacer scroll</small></div>
+  <div class="down" id="down">Seguí bajando<i></i></div>
+</section>
+</div>
+
+<script>
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const seg=(p,a,b)=>clamp((p-a)/(b-a));
+const eOut=t=>1-Math.pow(1-t,3);
+const eInOut=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const eBack=t=>{const c1=2.2,c3=c1+1;return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2)};
+const lerp=(a,b,t)=>a+(b-a)*t;
+const NS='http://www.w3.org/2000/svg';
+const $=id=>document.getElementById(id);
+const el=(n,a={},p)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const params=new URLSearchParams(location.search);
+const fixedP=params.has('p')?parseFloat(params.get('p')):null;
+const rnd=s=>{let x=Math.sin(s*127.1+311.7)*43758.5453;return x-Math.floor(x)};
+const inPoly=(x,y,P)=>{let c=false;for(let i=0,j=P.length-1;i<P.length;j=i++){const[xi,yi]=P[i],[xj,yj]=P[j];if(((yi>y)!=(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))c=!c}return c};
+
+/* ===== 1. continentes (espátula) ===== */
+const CONT=[
+ {n:'Norteamérica',a:.05,b:.12,poly:[[135,213],[185,165],[215,125],[300,122],[390,128],[430,150],[470,215],[440,262],[400,290],[388,340],[372,392],[335,405],[322,380],[285,370],[250,320],[225,270],[215,235],[160,225]]},
+ {n:'Groenlandia',a:.10,b:.14,poly:[[470,100],[520,85],[590,78],[640,92],[610,125],[560,142],[510,150],[472,132]]},
+ {n:'Sudamérica',a:.12,b:.19,poly:[[330,455],[360,420],[420,392],[480,405],[520,440],[555,465],[540,500],[500,540],[470,580],[440,640],[430,700],[435,742],[410,730],[385,690],[370,610],[345,520]]},
+ {n:'África',a:.17,b:.24,poly:[[600,330],[640,285],[700,275],[760,290],[810,305],[860,330],[890,350],[870,390],[845,430],[830,470],[800,520],[770,570],[745,612],[715,590],[700,520],[690,470],[650,430],[612,390]]},
+ {n:'Eurasia',a:.20,b:.30,poly:[[615,230],[640,185],[680,150],[740,135],[820,125],[900,115],[990,112],[1090,130],[1180,150],[1260,165],[1312,182],[1290,215],[1240,235],[1215,290],[1205,350],[1190,395],[1150,430],[1122,456],[1092,420],[1070,380],[1022,420],[988,472],[960,420],[945,380],[900,350],[850,335],[790,312],[740,300],[690,290],[655,262]]},
+ {n:'Islas',a:.27,b:.31,poly:[[1128,468],[1175,462],[1215,495],[1255,520],[1300,548],[1322,590],[1290,585],[1240,560],[1196,538],[1150,506]]},
+ {n:'Australia',a:.27,b:.32,poly:[[1115,610],[1150,575],[1210,570],[1260,590],[1310,620],[1340,650],[1352,690],[1322,730],[1272,742],[1210,727],[1150,702],[1120,662]]}
+];
+const COLS=[['#0A0A0C',.95],['#0A0A0C',.95],['#2B2D32',.9],['#2B2D32',.9],['#50545B',.9],['#50545B',.9],['#8A8E96',.9],['#C9CCD1',.92],['#EEF0F2',.95],['#B98A34',.9]];
+const gMapa=$('mapa');const defs=document.querySelector('defs');
+CONT.forEach((c,ci)=>{
+  const xs=c.poly.map(p=>p[0]),ys=c.poly.map(p=>p[1]);
+  c.x0=Math.min(...xs);c.x1=Math.max(...xs);c.y0=Math.min(...ys);c.y1=Math.max(...ys);
+  const d='M'+c.poly.map(p=>p.join(' ')).join(' L')+'Z';
+  const cp=el('clipPath',{id:'cc'+ci},defs);el('path',{d},cp);
+  const mk=el('mask',{id:'cm'+ci,maskUnits:'userSpaceOnUse',x:c.x0-60,y:c.y0-60,width:c.x1-c.x0+120,height:c.y1-c.y0+120},defs);
+  c.wipe=el('rect',{x:c.x0-60,y:c.y0-60,width:0,height:c.y1-c.y0+120,fill:'#fff',filter:'url(#rugoso)'},mk);
+  const g0=el('g',{filter:'url(#knife)'},gMapa);
+  const g=el('g',{'clip-path':`url(#cc${ci})`},g0);
+  el('rect',{x:c.x0-30,y:c.y0-30,width:c.x1-c.x0+60,height:c.y1-c.y0+60,fill:'#0E0E11',mask:`url(#cm${ci})`},g);
+  // marcas de espátula
+  c.marks=[];const area=(c.x1-c.x0)*(c.y1-c.y0)*.55;const N=Math.round(area/760);
+  let tries=0;
+  while(c.marks.length<N&&tries<N*12){tries++;
+    const x=lerp(c.x0,c.x1,rnd(ci*1000+tries*3+1)),y=lerp(c.y0,c.y1,rnd(ci*1000+tries*3+2));
+    if(!inPoly(x,y,c.poly))continue;
+    const k=c.marks.length,L=22+rnd(ci*77+k*5)*58,th=9+rnd(ci*31+k*7)*15,ang=(rnd(ci*13+k*3)-.5)*70-8;
+    const [col,op]=COLS[Math.floor(rnd(ci*53+k*11)*COLS.length)];
+    const r=el('rect',{x:0,y:-th/2,width:L,height:th,rx:th*.45,fill:col,opacity:op},g);
+    c.marks.push({r,x,y,ang,ta:c.a+.025+rnd(ci*91+k*17)*(c.b-c.a-.03)});
+  }
+});
+
+/* ===== 2. corona de espinas ===== */
+const RING=[[770,45],[830,52],[900,72],[960,112],[1005,175],[1028,260],[1034,350],[1028,440],[1015,520],[985,578],[935,638],[870,684],[790,702],[700,700],[620,684],[548,648],[488,596],[440,528],[408,455],[384,380],[378,310],[398,248],[435,180],[490,125],[560,88],[650,62],[720,50]];
+function catmull(P,n){const out=[];const m=P.length;for(let i=0;i<m;i++){const p0=P[(i-1+m)%m],p1=P[i],p2=P[(i+1)%m],p3=P[(i+2)%m];for(let s=0;s<n;s++){const t=s/n,t2=t*t,t3=t2*t;out.push([.5*((2*p1[0])+(-p0[0]+p2[0])*t+(2*p0[0]-5*p1[0]+4*p2[0]-p3[0])*t2+(-p0[0]+3*p1[0]-3*p2[0]+p3[0])*t3),.5*((2*p1[1])+(-p0[1]+p2[1])*t+(2*p0[1]-5*p1[1]+4*p2[1]-p3[1])*t2+(-p0[1]+3*p1[1]-3*p2[1]+p3[1])*t3)])}}out.push(out[0]);return out}
+const CL=catmull(RING,14);
+// normales
+const NRM=CL.map((p,i)=>{const a=CL[Math.max(0,i-1)],b=CL[Math.min(CL.length-1,i+1)];let tx=b[0]-a[0],ty=b[1]-a[1];const l=Math.hypot(tx,ty)||1;tx/=l;ty/=l;return{tx,ty,nx:ty,ny:-tx}});
+// el ring va en sentido horario en pantalla → normal hacia afuera = (ty,-tx)*(-1)? comprobamos con el centro
+const CEN=[705,385];NRM.forEach((n,i)=>{const p=CL[i];if((p[0]-CEN[0])*n.nx+(p[1]-CEN[1])*n.ny<0){n.nx*=-1;n.ny*=-1}});
+const gC=$('cuerdas'),gS=$('espinas');
+const CUERDAS=[];
+for(let s=0;s<3;s++){
+  const ph=s*Math.PI*2/3,A=9;
+  const pts=CL.map((p,i)=>{const n=NRM[i];const o=A*Math.sin(i/CL.length*Math.PI*2*34+ph);return[p[0]+n.nx*o,p[1]+n.ny*o]});
+  const d='M'+pts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L');
+  const sombra=el('path',{d,fill:'none',stroke:'#7B520F','stroke-width':16,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.9},gC);
+  const oro=el('path',{d,fill:'none',stroke:s==1?'#E3B447':'#D2A038','stroke-width':11,'stroke-linecap':'round','stroke-linejoin':'round'},gC);
+  const luz=el('path',{d,fill:'none',stroke:'#F6DA8E','stroke-width':2.6,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.7,transform:'translate(-1.5 -1.5)'},gC);
+  const L=oro.getTotalLength();[sombra,oro,luz].forEach(e=>{e.style.strokeDasharray=L;e.style.strokeDashoffset=L});
+  CUERDAS.push({e:[sombra,oro,luz],L,lead:s*.012});
+}
+// espinas
+const ESPINAS=[];const NE=78;
+for(let k=0;k<NE;k++){
+  const u=(k+rnd(k*9+1)*.7)/NE,i=Math.floor(u*(CL.length-1));const p=CL[i],n=NRM[i];
+  const out=rnd(k*5+2)<.78?1:-1;const len=28+rnd(k*3+4)*34;const lean=(rnd(k*7+5)-.5)*1.1;
+  const dx=n.nx*out*Math.cos(lean)+n.tx*Math.sin(lean),dy=n.ny*out*Math.cos(lean)+n.ty*Math.sin(lean);
+  const bw=5+rnd(k*11)*3;
+  const pts=[[n.tx*bw,n.ty*bw],[dx*len,dy*len],[-n.tx*bw,-n.ty*bw]].map(q=>q.join(',')).join(' ');
+  const g=el('g',{},gS);
+  el('polygon',{points:pts,fill:'#D6A23A',stroke:'#7B520F','stroke-width':1.4,'stroke-linejoin':'round'},g);
+  el('polygon',{points:[[n.tx*bw*.3,n.ty*bw*.3],[dx*len*.85,dy*len*.85],[0,0]].map(q=>q.join(',')).join(' '),fill:'#F1CE7E',opacity:.7},g);
+  ESPINAS.push({g,x:p[0],y:p[1],u:i/(CL.length-1)});
+}
+
+/* ===== 3. salpicaduras ===== */
+const gB=$('sangre');const GOTAS=[];
+function gota(x,y,r,t,k,elong){
+  const c=el('ellipse',{cx:0,cy:0,rx:r*(elong?1.8:1),ry:r,fill:k%5==0?'#8E0F2A':'#B3173A',opacity:.92},gB);
+  GOTAS.push({e:c,x,y,t,rot:elong?(rnd(k*3)-.5)*160:0,r});
+}
+for(let k=0;k<125;k++){
+  const reg=rnd(k*17+3);let x,y;
+  if(reg<.42){x=lerp(25,340,rnd(k*5+1));y=lerp(560,920,rnd(k*7+2))}
+  else if(reg<.78){x=lerp(800,1310,rnd(k*5+1));y=lerp(610,920,rnd(k*7+2))}
+  else{x=lerp(300,1250,rnd(k*5+1));y=lerp(50,560,rnd(k*7+2))}
+  const sz=rnd(k*13+9);const r=sz<.8?1.6+rnd(k+4)*2.2:sz<.95?4+rnd(k+8)*2.6:7+rnd(k+2)*4;
+  gota(x,y,r,.60+rnd(k*19+5)*.17,k,rnd(k*23)<.25);
+}
+// gotas grandes especiales
+[[127,676,10,.62,true],[975,652,9,.66,false],[996,670,6,.67,true],[1048,775,6,.7,true],[1105,858,8,.72,true],[340,855,5,.7,true],[1218,830,5,.74,false]].forEach(([x,y,r,t,el_],k)=>gota(x,y,r,t,k+200,el_));
+
+/* ===== render ===== */
+const FASES=[[0,'Scroll {p} % · el lienzo blanco queda listo'],[.05,'Scroll {p} % · el mapa se pinta con espátula'],[.30,'Scroll {p} % · la corona de espinas se dibuja'],[.60,'Scroll {p} % · caen las salpicaduras de sangre'],[.76,'Scroll {p} % · "Jesús" se escribe en rojo'],[.92,'Scroll {p} % · la obra queda quieta']];
+const pin=$('pincel'),cerdas=$('cerdas');
+function render(p,time){
+  let brush=null;
+  // continentes
+  CONT.forEach(c=>{
+    const q=eInOut(seg(p,c.a,c.a+.055));c.wipe.setAttribute('width',(c.x1-c.x0+120)*q*1.05);
+    c.marks.forEach(m=>{const t=eOut(seg(p,m.ta,m.ta+.018));m.r.setAttribute('transform',`translate(${m.x-(m.r.getAttribute('width')/2)*Math.cos(m.ang*Math.PI/180)*t} ${m.y-(m.r.getAttribute('width')/2)*Math.sin(m.ang*Math.PI/180)*t}) rotate(${m.ang}) scale(${t} 1)`);m.r.style.opacity=t>0?'':0});
+  });
+  // corona
+  const qc=eInOut(seg(p,.30,.60));
+  CUERDAS.forEach(o=>{const q=clamp(qc*1.05-o.lead*2);o.e.forEach(e=>e.style.strokeDashoffset=o.L*(1-q))});
+  ESPINAS.forEach(o=>{const t=eBack(seg(qc,o.u-.004,o.u+.03));o.g.setAttribute('transform',`translate(${o.x} ${o.y}) scale(${Math.max(0,t)})`)});
+  if(qc>0.005&&qc<.995){const i=Math.floor(qc*(CL.length-1)),pt=CL[i];brush={x:pt[0],y:pt[1],col:'#D9A53F'}}
+  // salpicaduras
+  GOTAS.forEach(g=>{const t=eBack(seg(p,g.t,g.t+.025));const s=Math.max(0,t);g.e.setAttribute('transform',`translate(${g.x} ${g.y}) rotate(${g.rot}) scale(${s})`)});
+  // manchas rosadas
+  $('mancha1').setAttribute('opacity',seg(p,.72,.8));$('mancha2').setAttribute('opacity',seg(p,.76,.84));
+  // Jesús
+  const ql=eInOut(seg(p,.76,.9));$('wLetra').setAttribute('width',680*ql);
+  if(ql>.005&&ql<.995){brush={x:420+680*ql,y:800+Math.sin(ql*40)*18+Math.sin(ql*9)*30,col:'#A31B3A'}}
+  // firma
+  $('firma').setAttribute('opacity',seg(p,.92,.97));
+  // pincel
+  if(brush){pin.setAttribute('transform',`translate(${brush.x} ${brush.y})`);cerdas.setAttribute('fill',brush.col);pin.setAttribute('opacity',1)}else pin.setAttribute('opacity',0);
+  // progreso (este tramo = 25–50 % del hero)
+  $('railfill').style.height=((.25+p*.25)*100)+'%';
+  let f=FASES[0][1];FASES.forEach(([a,t])=>{if(p>=a)f=t});$('fase').textContent=f.replace('{p}',Math.round(p*100));
+  $('down').style.opacity=1-seg(p,.93,1)*.8;
+}
+[0,25,50,75,100].forEach(v=>{const u=document.createElement('u');u.style.top=v+'%';const e=document.createElement('em');e.style.top=v+'%';e.textContent=v+'%';$('rail').append(u,e)});
+
+let target=0,shown=0,t0=performance.now();
+const progresoScroll=()=>clamp(scrollY/($('track').offsetHeight-innerHeight));
+function loop(now){
+  const time=(now-t0)/1000;
+  target=fixedP!==null?fixedP:(reduce?1:progresoScroll());
+  shown+=(target-shown)*(fixedP!==null||reduce?1:.14);
+  if(Math.abs(target-shown)<.0004)shown=target;
+  render(shown,time);
+  requestAnimationFrame(loop);
+}
+(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>requestAnimationFrame(loop));
+
+/* controles de la demo */
+let anim=null;
+const maxScroll=()=>$('track').offsetHeight-innerHeight;
+function parar(){if(anim){cancelAnimationFrame(anim);anim=null;$('play').textContent='▶ Ver sola'}}
+$('play').onclick=()=>{
+  if(anim){parar();return}
+  if(scrollY>=maxScroll()-4)scrollTo(0,0);
+  const from=scrollY,to=maxScroll(),dur=24000,s=performance.now();
+  $('play').textContent='❚❚ Pausar';
+  const step=n=>{const t=clamp((n-s)/dur);scrollTo(0,lerp(from,to,t));if(t<1)anim=requestAnimationFrame(step);else parar()};
+  anim=requestAnimationFrame(step);
+};
+$('reset').onclick=()=>{parar();scrollTo({top:0,behavior:'smooth'})};
+addEventListener('wheel',parar,{passive:true});addEventListener('touchstart',parar,{passive:true});
+</script>
+</body>
+</html>
