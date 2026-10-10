@@ -84,20 +84,31 @@ h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spac
 @media (prefers-reduced-motion:reduce){.js .ag-item{opacity:1;filter:none;transform:none;transition:none}}
 
 
+/* fondo unido: el lienzo continuo con los cuadros ya pintados colgados detrás de todas las secciones (la tienda lo tapa) */
+.mural{position:relative;overflow:clip;background-color:#fff;background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px)}
+.mural>section.s{z-index:1}
+.mural .lienzo{background:none}
+.fondo{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.fondo figure{position:absolute;left:var(--x);top:var(--y);width:clamp(96px,var(--w),440px);transform:rotate(var(--r,0deg));opacity:.3}
+.fondo .fr{background:linear-gradient(145deg,#2b2520,#161311 55%,#221d19);padding:clamp(5px,.8vw,11px);box-shadow:0 3px 5px rgba(0,0,0,.2),0 30px 40px -22px rgba(0,0,0,.5)}
+.fondo img{display:block;width:100%;height:auto;box-shadow:0 0 0 1px rgba(225,211,192,.3)}
+@media (max-width:700px){.fondo figure{opacity:.18}}
+
 /* carrusel de obras: copias de papel colgadas de una cuerda (port a JS simple del "Polaroid Line Carousel") */
-.pl-root{position:relative;width:100%;height:clamp(540px,56vw,680px);overflow:hidden;margin-top:34px;color:var(--tinta);user-select:none;-webkit-user-select:none;touch-action:pan-y;outline:none;cursor:grab;--pl-muted:rgba(22,19,17,.55);--pl-line:rgba(22,19,17,.18)}
+.pl-root{position:relative;width:calc(100% + 2*var(--gut));margin:34px calc(var(--gut) * -1) 0;height:clamp(560px,56vw,700px);overflow:hidden;color:var(--tinta);user-select:none;-webkit-user-select:none;touch-action:pan-y;outline:none;cursor:grab;--pl-muted:rgba(22,19,17,.55);--pl-line:rgba(22,19,17,.18)}
 .pl-root[data-drag='1']{cursor:grabbing}
 .pl-root:focus-visible{box-shadow:inset 0 0 0 2px var(--bordo-os)}
 .pl-string{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .pl-card{position:absolute;left:0;top:0;transform-origin:50% 0;will-change:transform;cursor:inherit}
-.pl-print{margin-top:10px;background:#fbfaf7;padding:10px 10px 0;box-shadow:0 1px 2px rgba(0,0,0,.12),0 18px 30px -16px rgba(0,0,0,.4);transition:transform .5s cubic-bezier(.2,.7,.2,1),filter .5s ease}
+/* cuadro: marco oscuro, filo claro adentro y la tela con sombra; cuelga de un alambre con una argolla */
+.pl-print{margin-top:28px;position:relative;background:linear-gradient(145deg,#2b2520,#161311 55%,#221d19);padding:12px;box-shadow:inset 0 0 0 1px rgba(225,211,192,.16),0 2px 3px rgba(0,0,0,.2),0 26px 34px -18px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.2,.7,.2,1),filter .5s ease}
 .pl-card[data-on='0'] .pl-print{transform:scale(.9);filter:saturate(.75) brightness(.97)}
-.pl-shot{position:relative;overflow:hidden;background:#e9e2d6}
+.pl-shot{position:relative;overflow:hidden;background:#e9e2d6;box-shadow:0 0 0 1px rgba(225,211,192,.35),inset 0 0 14px rgba(0,0,0,.35)}
 .pl-shot img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;display:block;pointer-events:none}
-.pl-note{height:44px;display:block;text-align:center;padding:0 6px;font:italic 400 clamp(12px,3.3vw,15px)/44px var(--serif);color:#3b3833;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pl-peg{position:absolute;left:50%;top:0;width:10px;height:26px;margin-left:-5px;border-radius:2px;background:linear-gradient(90deg,#c9a67a,#e3c9a1 45%,#b8915f);box-shadow:0 2px 3px rgba(0,0,0,.25)}
-.pl-peg::after{content:'';position:absolute;left:4px;top:8px;width:2px;height:7px;background:rgba(80,60,30,.45);border-radius:1px}
-.pl-bar{position:absolute;left:0;right:0;bottom:6px;display:flex;align-items:center;gap:clamp(12px,2vw,24px);cursor:default}
+.pl-wire{position:absolute;left:12%;top:2px;width:76%;height:30px;overflow:visible;pointer-events:none}
+.pl-wire path{fill:none;stroke:#8a7f72;stroke-width:1.2;vector-effect:non-scaling-stroke}
+.pl-ring{position:absolute;left:50%;top:-3px;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;border:2px solid #8a7f72;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.pl-bar{position:absolute;left:var(--gut);right:var(--gut);bottom:6px;display:flex;align-items:center;gap:clamp(12px,2vw,24px);cursor:default}
 .pl-cap{flex:1;min-width:0;overflow:hidden;padding-bottom:.15em}
 .pl-cap>*{display:block;animation:pl-in .55s cubic-bezier(.2,.8,.2,1) both}
 .pl-title{font:400 clamp(20px,2.4vw,28px)/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -219,15 +230,6 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 .mos .ph{height:100%}.mos .a{grid-row:1/3}
 .vp{position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px;border-radius:50%;background:rgba(255,255,255,.95);box-shadow:0 6px 16px rgba(0,0,0,.2);z-index:3}
 .vp::after{content:"";position:absolute;left:24px;top:19px;border-left:18px solid var(--bordo-os);border-top:12px solid transparent;border-bottom:12px solid transparent}
-.ob{padding-top:44px}
-.ob-h{display:flex;justify-content:space-between;align-items:baseline;gap:20px;flex-wrap:wrap}
-.ob-h h3{font:400 30px var(--serif);margin-top:2px}
-.row4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:22px;margin-top:16px;align-items:end}
-.row4 img{width:100%;height:210px;object-fit:contain;background:rgba(225,211,192,.38);border:1px solid rgba(120,98,66,.18)}
-.row4 figcaption{font:400 18px var(--serif);margin-top:8px}
-.ask{display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(22,19,17,.2);font-size:17px}
-.ask .wa{color:var(--bordo-os)}
-.ask a{font-weight:500;border-bottom:1.5px solid var(--bordo);text-decoration:none}
 
 /* tienda: próximamente */
 section.tienda{position:relative;overflow:hidden;min-height:clamp(620px,96vh,880px);padding:0;color:var(--arena);background-color:#14110F;background-image:radial-gradient(ellipse at 50% 40%,rgba(80,66,55,.35),rgba(0,0,0,0) 70%)}
@@ -313,6 +315,20 @@ section.tienda{position:relative;overflow:hidden;min-height:clamp(620px,96vh,880
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.200zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.700 6.700 0 0 1-3.300-2.900c-.2-.4.2-.4.700-1.300.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.200s.9 2.500 1 2.700c.1.2 1.800 2.800 4.400 3.900 1.600.7 2.200.7 3 .6.500-.1 1.500-.6 1.700-1.200.2-.6.2-1.100.2-1.200-.1-.1-.3-.2-.5-.3z" fill="currentColor"/></symbol></defs></svg>
 
+<div class="mural" id="mural">
+  <div class="fondo" aria-hidden="true">
+    <figure style="--x:-9vw;--y:0.5%;--w:14vw;--r:5deg"><div class="fr"><img src="obras/4-jeremias-18.jpg" alt="" width="664" height="1000" loading="lazy"></div></figure>
+    <figure style="--x:-12vw;--y:21.5%;--w:20vw;--r:-4deg"><div class="fr"><img src="obras/2-jesus.jpg" alt="" width="1000" height="668" loading="lazy"></div></figure>
+    <figure style="--x:91vw;--y:22%;--w:17vw;--r:3deg"><div class="fr"><img src="obras/1-corintios-13.jpg" alt="" width="834" height="1000" loading="lazy"></div></figure>
+    <figure style="--x:-8vw;--y:33%;--w:15vw;--r:-2deg"><div class="fr"><img src="obras/3-sadrac-mesac-y-abednego.jpg" alt="" width="749" height="1000" loading="lazy"></div></figure>
+    <figure style="--x:92vw;--y:43%;--w:16vw;--r:4deg"><div class="fr"><img src="obras/4-jeremias-18.jpg" alt="" width="664" height="1000" loading="lazy"></div></figure>
+    <figure style="--x:-12vw;--y:50%;--w:22vw;--r:3deg"><div class="fr"><img src="obras/2-jesus.jpg" alt="" width="1000" height="668" loading="lazy"></div></figure>
+    <figure style="--x:91vw;--y:82%;--w:15vw;--r:-3deg"><div class="fr"><img src="obras/1-corintios-13.jpg" alt="" width="834" height="1000" loading="lazy"></div></figure>
+    <figure style="--x:-6vw;--y:78%;--w:15vw;--r:2deg"><div class="fr"><img src="obras/3-sadrac-mesac-y-abednego.jpg" alt="" width="749" height="1000" loading="lazy"></div></figure>
+    <figure style="--x:90vw;--y:90%;--w:15vw;--r:3deg"><div class="fr"><img src="obras/4-jeremias-18.jpg" alt="" width="664" height="1000" loading="lazy"></div></figure>
+    <figure style="--x:-15vw;--y:96.5%;--w:21vw;--r:-3deg"><div class="fr"><img src="obras/2-jesus.jpg" alt="" width="1000" height="668" loading="lazy"></div></figure>
+  </div>
+
 <!-- OBRAS: carrusel infinito -->
 <section class="s lienzo" id="obras">
   <div class="hd">
@@ -372,16 +388,6 @@ section.tienda{position:relative;overflow:hidden;min-height:clamp(620px,96vh,880
       <p class="tx1">Texto en primera persona sobre por qué se hizo la muestra y qué querían mostrar. <i class="pend">Lo cuenta el cliente</i></p>
       <p class="tx2">Una línea sobre lo que pasó ese día y lo que significó. <i class="pend">Ejemplo</i></p></div>
     <div class="mos"><div class="ph a" style="--a:44deg"><span>Foto del montaje</span></div><div class="ph" style="--a:52deg"><span>Foto de la gente</span></div><div class="ph" style="--a:46deg"><span>Video</span><i class="vp"></i></div></div>
-  </div>
-  <div class="ob">
-    <div class="ob-h"><div><p class="eyebrow">Las obras que estuvieron</p><h3>Cuadros de la muestra</h3></div><a class="lnk" href="#obras">Ver las obras de la muestra →</a></div>
-    <div class="row4">
-      <figure><img src="obras/1-corintios-13.jpg" alt="1 Corintios 13" loading="lazy"><figcaption>1 Corintios 13</figcaption></figure>
-      <figure><img src="obras/2-jesus.jpg" alt="Jesús" loading="lazy"><figcaption>Jesús</figcaption></figure>
-      <figure><img src="obras/3-sadrac-mesac-y-abednego.jpg" alt="Sadrac, Mesac y Abednego" loading="lazy"><figcaption>Sadrac, Mesac y Abednego</figcaption></figure>
-      <figure><img src="obras/4-jeremias-18.jpg" alt="Jeremías 18" loading="lazy"><figcaption>Jeremías 18</figcaption></figure>
-    </div>
-    <p class="ask"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> <span>¿Viste una obra que te gustó? <a data-wa data-msg="Hola, vi una obra en la muestra y me gustó." href="#contacto">Escribinos por WhatsApp</a></span></p>
   </div>
 </section>
 
@@ -443,6 +449,7 @@ section.tienda{position:relative;overflow:hidden;min-height:clamp(620px,96vh,880
     </div>
   </div>
 </section>
+</div>
 
 <footer id="pie">
   <div class="fgrid">
@@ -527,7 +534,7 @@ document.querySelectorAll('.origin').forEach(b=>{
   b.addEventListener('blur',off);
 });
 
-/* carrusel de obras: copias colgadas de una cuerda que avanzan solas, lento y sin fin (se repiten las obras).
+/* carrusel de obras: cuadros colgados de una cuerda que avanzan solas, lento y sin fin (se repiten las obras).
    Con el mouse encima se frena; también se arrastra, se usan las flechas o el teclado. */
 (function(){
   const root=document.getElementById('carrusel');if(!root)return;
@@ -552,9 +559,8 @@ document.querySelectorAll('.origin').forEach(b=>{
   for(let r=0;r<R;r++){
     const sl=SLIDES[r%n],el=document.createElement('div');el.className='pl-card';el.dataset.r=r;el.dataset.on='0';
     if(r>=n)el.setAttribute('aria-hidden','true');
-    el.innerHTML='<div class="pl-print"><div class="pl-shot"><img alt="" draggable="false"></div><div class="pl-note"></div></div><div class="pl-peg"></div>';
+    el.innerHTML='<svg class="pl-wire" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0 L0 30 M50 0 L100 30"/></svg><i class="pl-ring"></i><div class="pl-print"><div class="pl-shot"><img alt="" draggable="false"></div></div>';
     const im=el.querySelector('img');im.src=sl.image;im.alt='Obra: '+sl.title;
-    el.querySelector('.pl-note').textContent=sl.title;
     root.appendChild(el);cards.push(el);
   }
   const bar=document.createElement('div');bar.className='pl-bar';
@@ -567,7 +573,7 @@ document.querySelectorAll('.origin').forEach(b=>{
   let size={w:1200,h:640,cw:CARD},off=0,drift=0,inert=0,prevOff=0,active=-1,drag=null,hovering=false,tween=null;
   const spacing=()=>size.cw*1.32,ring=()=>R*spacing();
   const widthOf=r=>size.cw*(SLIDES[r%n].w>SLIDES[r%n].h?1.3:1);
-  const layout=()=>{cards.forEach((el,r)=>{const sl=SLIDES[r%n],w=widthOf(r);el.style.width=w+'px';el.querySelector('.pl-shot').style.height=Math.round((w-20)*sl.h/sl.w)+'px'})};
+  const layout=()=>{cards.forEach((el,r)=>{const sl=SLIDES[r%n],w=widthOf(r);el.style.width=w+'px';el.querySelector('.pl-shot').style.height=Math.round((w-24)*sl.h/sl.w)+'px'})};
   const measure=()=>{const b=root.getBoundingClientRect();size={w:b.width,h:b.height,cw:Math.round(Math.max(150,Math.min(CARD,b.width*0.5,b.height*0.42)))};layout()};
   new ResizeObserver(measure).observe(root);measure();
   const setActive=k=>{active=k;const sl=SLIDES[k%n];
