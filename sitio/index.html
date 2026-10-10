@@ -224,10 +224,10 @@ section.tienda{position:relative;overflow:hidden;contain:layout paint;min-height
 .lapiz{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;pointer-events:none;user-select:none}
 .tienda .centro{position:relative;z-index:5;text-align:center;padding:clamp(70px,14vh,150px) var(--gut) 0}
 .tienda .eyebrow{color:var(--camel)}
-.tienda h2{font:400 clamp(52px,9vw,104px)/.95 var(--mano);text-transform:uppercase;letter-spacing:.05em;color:#F3E9D8;text-shadow:0 3px 18px rgba(0,0,0,.6);margin:30px 0 14px}
+.tienda h2{font:400 clamp(52px,9vw,104px)/.95 var(--mano);text-transform:uppercase;letter-spacing:.05em;color:#F3E9D8;text-shadow:0 2px 8px rgba(0,0,0,.55);margin:30px 0 14px}
 .tienda h2 em{font-style:normal;color:var(--bordo)}
 .tienda .lead{color:#CDBFAA;margin:0 auto;font-size:19px}
-.cinta{position:absolute;left:-10%;width:120%;height:64px;display:flex;align-items:center;white-space:nowrap;overflow:hidden;z-index:3;background:repeating-linear-gradient(-45deg,var(--camel) 0 30px,var(--tinta) 30px 60px);box-shadow:0 10px 24px rgba(0,0,0,.55)}
+.cinta{position:absolute;left:-10%;width:120%;height:64px;display:flex;align-items:center;white-space:nowrap;overflow:hidden;z-index:3;background:repeating-linear-gradient(-45deg,var(--camel) 0 30px,var(--tinta) 30px 60px);box-shadow:0 6px 12px rgba(0,0,0,.45)}
 .cinta span{flex:none;background:var(--camel);color:var(--tinta);font:800 clamp(16px,2.1vw,30px) var(--sans);letter-spacing:.22em;padding:6px 26px;margin-right:60px;text-transform:uppercase}
 .cinta{will-change:transform}
 .cinta.c1{top:62%;transform:rotate(-7deg)}
@@ -305,13 +305,48 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 
 /* el vástago: un tallo que crece por el margen izquierdo a medida que se baja; la tienda lo tapa y vuelve a asomar después */
 .brote{position:absolute;left:0;top:0;height:100%;z-index:0;pointer-events:none;overflow:visible}
-.brote .tallo{fill:none;stroke:var(--bordo-os);stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
-.brote .tallo2{fill:none;stroke:rgba(225,211,192,.55);stroke-width:.9;stroke-linecap:round;transform:translateX(-.9px)}
+.brote .tallo{fill:none;stroke:var(--bordo-os);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.brote .tallo2{fill:none;stroke:rgba(225,211,192,.5);stroke-width:.6;stroke-linecap:round;transform:translateX(-.9px)}
 .brote .hoja{transform-box:fill-box;transition:transform .7s cubic-bezier(.2,.8,.2,1);will-change:transform}
 .brote .hoja path.l{fill:var(--bordo)}
 .brote .hoja path.n{fill:none;stroke:rgba(255,255,255,.45);stroke-width:.8;stroke-linecap:round}
 .brote .yema path{fill:var(--bordo-os)}
+.brote .flor{transform-box:fill-box;transform-origin:center;transition:transform .9s cubic-bezier(.3,1.5,.4,1)}
 @media (prefers-reduced-motion:reduce){.brote .hoja{transition:none}}
+
+/* ======== identidad: títulos pintados, versículos a mano, boceto a color, botones y cintas ======== */
+:root{--brush:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 100%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M0 0H150L166.9 0L169.4 5L178.2 10L167.2 15L168.2 20L170.1 25L160.4 30L168.3 35L171.1 40L175.0 45L158.3 50L163.3 55L158.2 60L175.4 65L172.6 70L157.0 75L179.6 80L179.2 85L171.7 90L170.8 95L159.8 100L150 100H0ZM170 4h18.5v2.0h-18.5zM170 15h19.8v1.6h-19.8zM170 26h25.3v1.4h-25.3zM170 37h31.9v1.9h-31.9zM170 48h43.3v2.0h-43.3zM170 59h37.2v2.0h-37.2zM170 70h37.9v1.9h-37.9zM170 81h26.3v2.6h-26.3zM170 92h47.9v2.4h-47.9z%22/%3E%3C/svg%3E");--rect:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 40%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M2.5 6 C18 2 52 5.5 97 3 L99 8.5 L96.6 14 L99.2 21 L97 28 L98.6 34 L97 37.5 C60 39.4 28 36.2 3 38 L0.6 31 L2.6 25 L0.4 18 L2.4 11Z%22/%3E%3C/svg%3E")}
+.js .pt{width:fit-content;max-width:100%;-webkit-mask-image:var(--brush);mask-image:var(--brush);-webkit-mask-size:300% 100%;mask-size:300% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:100% 0;mask-position:100% 0;transition:-webkit-mask-position var(--dur,1.2s) cubic-bezier(.3,.55,.2,1),mask-position var(--dur,1.2s) cubic-bezier(.3,.55,.2,1)}
+.js .pt.in{-webkit-mask-position:0 0;mask-position:0 0}
+.js .pt.ok{-webkit-mask:none;mask:none}
+.tienda h2.pt{margin-left:auto;margin-right:auto}
+/* versículo escrito a mano entre secciones */
+.vers{position:relative;z-index:1;text-align:center;padding:clamp(20px,4vh,46px) var(--gut)}
+.vers span{display:block;margin:0 auto;font:400 clamp(30px,4.2vw,56px)/1.05 var(--mano);letter-spacing:.04em;color:var(--bordo-os)}
+.vers small{display:block;margin-top:8px;font:600 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(22,19,17,.55)}
+/* de boceto a color: el recuadro se dibuja a lápiz y después se rellena */
+.ph.lp .lb{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible}
+.ph.lp .lb path{fill:none;stroke:#5f574f;stroke-width:1.3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.7;transition:stroke-dashoffset 1s ease}
+.js .ph.lp{background-color:transparent;border-color:transparent;transition:background-color .8s ease .7s,border-color .8s ease .7s}
+.js .ph.lp::before,.js .ph.lp::after{opacity:0;transition:opacity .8s ease .7s}
+.js .ph.lp span{opacity:0;transition:opacity .6s ease 1s}
+.js .ph.lp.in{background-color:var(--camel);border-color:var(--bordo-os)}
+.js .ph.lp.in::before,.js .ph.lp.in::after,.js .ph.lp.in span{opacity:1}
+.ph.lp.in .lb path{stroke-dashoffset:0}
+.ph.lp.in .lb{opacity:0;transition:opacity .7s ease 1.4s}
+/* botones: una pincelada en lugar de un rectángulo */
+.bt{position:relative;isolation:isolate;background:none;border-radius:0;box-shadow:none}
+.bt:hover,.bt.claro,.bt.claro:hover{background:none}
+.bt::before{content:"";position:absolute;inset:-4px -8px;z-index:-1;background:var(--tinta);-webkit-mask:var(--rect) center/100% 100% no-repeat;mask:var(--rect) center/100% 100% no-repeat;transition:background .2s}
+.bt:hover::before{background:var(--bordo-os)}
+.bt.claro::before{background:var(--arena)}
+.bt.claro:hover::before{background:#fff}
+.bt.grande{box-shadow:none}
+.bt.grande::before{filter:drop-shadow(0 12px 14px rgba(22,19,17,.22))}
+/* lo pendiente se marca con cinta de pintor */
+.pend,.chips i{border:0;background:rgba(213,191,158,.88);color:var(--tinta);padding:3px 12px;transform:rotate(-1.2deg);clip-path:polygon(0 0,100% 0,98% 25%,100% 50%,98% 75%,100% 100%,0 100%,2% 75%,0 50%,2% 25%)}
+.chips i{background:rgba(225,211,192,.92)}
+@media (prefers-reduced-motion:reduce){.js .pt{-webkit-mask:none;mask:none}}
 
 </style>
 </head>
@@ -354,7 +389,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 <!-- OBRAS: carrusel infinito -->
 <section class="s lienzo" id="obras">
   <div class="hd">
-    <div><p class="eyebrow">Galería</p><h2>Obras</h2><p class="lead">Todas se pueden volver a pintar. Tamaño y precio, por WhatsApp.</p></div>
+    <div><p class="eyebrow">Galería</p><h2>Obras</h2><p class="lead">Las podemos volver a pintar para vos. Tamaño y precio, lo hablamos por WhatsApp.</p></div>
     <a class="lnk" href="#obras">Ver todas las obras →</a>
   </div>
   <div class="pl-root" id="carrusel" role="region" aria-roledescription="carrusel" aria-label="Obras de Vástago" tabindex="0"></div>
@@ -373,11 +408,13 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   </div>
 </section>
 
+<p class="vers"><span class="mano">Soy barro en manos del alfarero</span><small>Jeremías 18</small></p>
+
 <!-- TALLER -->
 <section class="s lienzo" id="taller">
   <p class="eyebrow">Taller</p>
   <h2>Aprendé con las manos</h2>
-  <p class="lead">Clases presenciales de pintura y de construcción de atriles, individuales o en grupo.</p>
+  <p class="lead">Te enseñamos a pintar y a construir tu propio atril, solos o en grupo, en nuestro taller.</p>
   <div class="dos">
     <article class="tc">
       <div class="ph" style="--a:56deg"><span>Foto del taller · pintura</span></div>
@@ -397,6 +434,8 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   <div class="tira"><div class="ph" style="--a:46deg"><span>Foto pendiente · el espacio</span></div><div class="ph" style="--a:38deg"><span>Foto pendiente · herramientas</span></div><div class="ph" style="--a:56deg"><span>Foto pendiente · una clase</span></div></div>
 </section>
 
+<p class="vers"><span class="mano">El amor es paciente, es bondadoso</span><small>1 Corintios 13</small></p>
+
 <!-- EXPOSICIÓN -->
 <section class="s lienzo" id="exposicion">
   <div class="portada"><div class="ph" style="--a:36deg"><span>Mejor foto de la muestra</span></div>
@@ -411,7 +450,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 
 <!-- TIENDA: próximamente -->
 <section class="s tienda" id="tienda" aria-label="Tienda, próximamente">
-  <img class="lapiz" src="lapiz-tienda.png" width="2880" height="1720" alt="" aria-hidden="true" decoding="async" loading="lazy">
+  <img class="lapiz" src="lapiz-tienda.png" width="1600" height="956" alt="" aria-hidden="true" decoding="async">
   <div class="centro"><p class="eyebrow">Tienda</p><h2 class="mano">Algo se está <em>pintando</em></h2><p class="lead">Estamos preparando algo para llevarte a casa.</p></div>
   <div class="cinta c1" aria-hidden="true"><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span></div>
   <div class="cinta c2" aria-hidden="true"><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span></div>
@@ -433,6 +472,8 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
     </div>
   </div>
 </section>
+
+<p class="vers"><span class="mano">Él lo habita con nosotros</span><small>Sadrac, Mesac y Abednego</small></p>
 
 <!-- CONTACTO -->
 <section class="s lienzo" id="contacto">
@@ -492,19 +533,28 @@ addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
 const FILES=['corintios13','jesus','sadrac','jeremias'];
 const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
 const track=document.getElementById('track'),stage=document.getElementById('stage');
-const frames=FILES.map((f,i)=>{const fr=document.createElement('iframe');fr.src='animaciones/'+f+'.html?embed=1&p=0';fr.setAttribute('scrolling','no');fr.setAttribute('aria-hidden','true');fr.tabIndex=-1;fr.style.zIndex=10-i;stage.appendChild(fr);return fr});
+let frames=[];
+const lastP=new Array(FILES.length).fill(-1);
+function buildFrames(){
+  frames=FILES.map((f,i)=>{const fr=document.createElement('iframe');fr.src='animaciones/'+f+'.html?embed=1&p=0';fr.setAttribute('scrolling','no');fr.setAttribute('aria-hidden','true');fr.tabIndex=-1;fr.style.zIndex=10-i;fr.style.visibility='hidden';fr.addEventListener('load',()=>{lastP[i]=-1});stage.appendChild(fr);return fr});
+  lastP.fill(-1);
+}
+function destroyFrames(){frames.forEach(fr=>fr.remove());frames=[]}
+buildFrames();
 const total=()=>track.offsetHeight-innerHeight;
 /* cada obra: se pinta (0–70 %), queda quieta (70–88 %) y recién ahí se disuelve hacia la siguiente */
 const PINTA=.70,PAUSA=.88;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let shown=0,idle=false;
-const lastP=new Array(frames.length).fill(-1);
 function loop(){
   /* con el hero fuera de pantalla no se hace nada: las animaciones son pesadas y comparten hilo con el scroll */
   if(scrollY>track.offsetHeight+50){
     if(!idle){idle=true;frames.forEach(fr=>{fr.style.visibility='hidden'});document.getElementById('skip').style.opacity=0}
+    if(frames.length&&scrollY>track.offsetHeight+innerHeight*1.3)destroyFrames();
+    else if(!frames.length&&scrollY<track.offsetHeight+innerHeight*.9)buildFrames();
     requestAnimationFrame(loop);return;
   }
+  if(!frames.length)buildFrames();
   if(idle){idle=false;lastP.fill(-1)}
   const g=clamp(scrollY/total());
   shown+=(g-shown)*((reduce||lenis)?1:.14);if(Math.abs(g-shown)<.0003)shown=g;
@@ -651,9 +701,9 @@ document.querySelectorAll('.origin').forEach(b=>{
   const NS='http://www.w3.org/2000/svg',reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','brote');svg.setAttribute('aria-hidden','true');
   mural.insertBefore(svg,mural.querySelector('.fondo').nextSibling);
-  let H=0,x0=0,A=0,leaves=[],tip=null,lastY=-1;
+  let H=0,x0=0,A=0,leaves=[],tip=null,flor=null,lastY=-1;
   const xAt=y=>x0+A*Math.sin(y/170)+.5*A*Math.sin(y/61+1);
-  const LEAF='M0 0 C9 -12 30 -13 46 0 C30 12 9 12 0 0Z',NERV='M4 0 L36 0';
+  const LEAF='M0 0 C6 -8 20 -9 31 0 C20 8 6 8 0 0Z',NERV='M3 0 L24 0';
   const mk=(tag,at)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);return e};
   function build(){
     const gut=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gut'))||60;
@@ -686,10 +736,17 @@ document.querySelectorAll('.origin').forEach(b=>{
     });
     /* yema: la punta que va creciendo */
     tip=mk('g',{class:'yema'});
-    tip.appendChild(mk('path',{d:'M0 0 C-6 8 -5 19 0 27 C5 19 6 8 0 0Z'}));
-    tip.appendChild(mk('path',{d:'M0 4 C-11 9 -15 19 -11 25 C-4 23 0 14 0 4Z',opacity:'.85'}));
-    tip.appendChild(mk('path',{d:'M0 4 C11 9 15 19 11 25 C4 23 0 14 0 4Z',opacity:'.85'}));
+    tip.appendChild(mk('path',{d:'M0 0 C-4 6 -3.5 14 0 19 C3.5 14 4 6 0 0Z'}));
+    tip.appendChild(mk('path',{d:'M0 3 C-8 6 -11 13 -8 18 C-3 16 0 10 0 3Z',opacity:'.85'}));
+    tip.appendChild(mk('path',{d:'M0 3 C8 6 11 13 8 18 C3 16 0 10 0 3Z',opacity:'.85'}));
     svg.appendChild(tip);
+    /* florcita: aparece cuando el tallo llega al final del lienzo */
+    flor=mk('g',{class:'flor'});
+    const fy=H-30,fx=xAt(fy);
+    flor.style.transform='translate('+fx.toFixed(1)+'px,'+fy+'px) scale(0)';flor.dataset.b='translate('+fx.toFixed(1)+'px,'+fy+'px) ';
+    for(let i=0;i<5;i++){const p=mk('ellipse',{cx:0,cy:-8,rx:3.8,ry:7.5,fill:i%2?'#AA6766':'#8E4F4E',transform:'rotate('+(i*72)+')'});flor.appendChild(p)}
+    flor.appendChild(mk('circle',{r:3.2,fill:'#D5BF9E'}));flor.appendChild(mk('circle',{r:1.3,fill:'#8E4F4E'}));
+    svg.appendChild(flor);
     lastY=-1;update();
   }
   function update(){
@@ -699,7 +756,9 @@ document.querySelectorAll('.origin').forEach(b=>{
     if(Math.abs(ty-lastY)<1)return;lastY=ty;
     svg.style.clipPath='inset(0 0 '+Math.max(0,H-ty-(ty>=H?0:0))+'px 0)';
     leaves.forEach(l=>{const on=+l.dataset.y<ty-6;l.style.transform=l.dataset.b+'scale('+(on?l.dataset.s:0)+')'});
-    const show=ty>8&&ty<H-4&&!reduce;
+    const done=ty>=H-34;
+    if(flor)flor.style.transform=flor.dataset.b+'scale('+(done?1:0)+')';
+    const show=ty>8&&ty<H-34&&!reduce;
     tip.setAttribute('visibility',show?'visible':'hidden');
     if(show)tip.setAttribute('transform','translate('+xAt(ty).toFixed(1)+' '+ty.toFixed(1)+')');
   }
@@ -712,6 +771,33 @@ document.querySelectorAll('.origin').forEach(b=>{
   addEventListener('load',()=>setTimeout(build,100));
   build();
 })();
+
+/* identidad: los títulos y los versículos se pintan al entrar; los recuadros de foto se dibujan a lápiz y se rellenan */
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const els=[];
+  document.querySelectorAll('#obras h2,#taller h2,.portada h2,.hmano,.sdatos h2,.cont h2,.tienda h2,.banda h3').forEach(e=>{e.classList.add('pt');els.push(e)});
+  document.querySelectorAll('.vers span').forEach(e=>{e.classList.add('pt');e.style.setProperty('--dur','2.2s');els.push(e)});
+  const NS='http://www.w3.org/2000/svg';
+  document.querySelectorAll('.ph').forEach(e=>{
+    if(e.closest('.pl-root'))return;
+    const w=e.offsetWidth,h=e.offsetHeight;if(w<40||h<40)return;
+    const r=(a,b)=>+(a+Math.random()*(b-a)).toFixed(1);
+    const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','lb');svg.setAttribute('viewBox','0 0 '+w+' '+h);svg.setAttribute('aria-hidden','true');
+    [['M'+r(3,7)+' '+r(3,7)+' L'+(w+r(-2,6))+' '+r(2,6)+' L'+(w-r(2,6))+' '+(h-r(2,6))+' L'+r(1,5)+' '+(h+r(-3,3))+' L'+r(2,6)+' '+r(-2,4)],
+     ['M'+(w-r(4,9))+' '+r(5,9)+' L'+r(4,9)+' '+(h-r(4,8))]].forEach(([d])=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('pathLength','1');svg.appendChild(p)});
+    e.appendChild(svg);e.classList.add('lp');els.push(e);
+  });
+  const io=new IntersectionObserver(es=>es.forEach(en=>{
+    if(!en.isIntersecting)return;const e=en.target;io.unobserve(e);
+    requestAnimationFrame(()=>{e.classList.add('in');if(e.classList.contains('pt'))setTimeout(()=>e.classList.add('ok'),(parseFloat(e.style.getPropertyValue('--dur'))||1.2)*1000+250)});
+  }),{threshold:.35,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(e=>io.observe(e));
+})();
+
+/* tienda: se decodifica el dibujo antes de llegar para que no haya tirón al pasar */
+(function(){const im=document.querySelector('.tienda .lapiz');if(!im)return;
+  new IntersectionObserver((es,o)=>{if(es.some(e=>e.isIntersecting)){o.disconnect();(im.decode?im.decode():Promise.resolve()).catch(()=>{})}},{rootMargin:'2200px 0px'}).observe(document.getElementById('tienda'))})();
 
 /* WhatsApp: cuando esté el número, se completa acá y todos los botones pasan a abrir el chat */
 const WA_NUMBER='';   /* pendiente: número con código de país, solo dígitos (ej. 5491100000000) */
