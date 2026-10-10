@@ -230,8 +230,8 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 .vp::after{content:"";position:absolute;left:24px;top:19px;border-left:18px solid var(--bordo-os);border-top:12px solid transparent;border-bottom:12px solid transparent}
 
 /* tienda: próximamente */
-section.tienda{position:relative;overflow:hidden;min-height:clamp(620px,96vh,880px);padding:0;color:var(--arena);background-color:#14110F;background-image:radial-gradient(ellipse at 50% 40%,rgba(80,66,55,.35),rgba(0,0,0,0) 70%)}
-.lapiz{position:absolute;inset:0;width:100%;height:100%}
+section.tienda{position:relative;overflow:hidden;contain:layout paint;min-height:clamp(620px,96vh,880px);padding:0;color:var(--arena);background-color:#14110F;background-image:radial-gradient(ellipse at 50% 40%,rgba(80,66,55,.35),rgba(0,0,0,0) 70%)}
+.lapiz{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;pointer-events:none;user-select:none}
 .tienda .centro{position:relative;z-index:5;text-align:center;padding:clamp(70px,14vh,150px) var(--gut) 0}
 .tienda .eyebrow{color:var(--camel)}
 .tienda h2{font:400 clamp(52px,9vw,104px)/.95 var(--mano);text-transform:uppercase;letter-spacing:.05em;color:#F3E9D8;text-shadow:0 3px 18px rgba(0,0,0,.6);margin:30px 0 14px}
@@ -239,6 +239,7 @@ section.tienda{position:relative;overflow:hidden;min-height:clamp(620px,96vh,880
 .tienda .lead{color:#CDBFAA;margin:0 auto;font-size:19px}
 .cinta{position:absolute;left:-10%;width:120%;height:64px;display:flex;align-items:center;white-space:nowrap;overflow:hidden;z-index:3;background:repeating-linear-gradient(-45deg,var(--camel) 0 30px,var(--tinta) 30px 60px);box-shadow:0 10px 24px rgba(0,0,0,.55)}
 .cinta span{flex:none;background:var(--camel);color:var(--tinta);font:800 clamp(16px,2.1vw,30px) var(--sans);letter-spacing:.22em;padding:6px 26px;margin-right:60px;text-transform:uppercase}
+.cinta{will-change:transform}
 .cinta.c1{top:62%;transform:rotate(-7deg)}
 .cinta.c2{top:70%;transform:rotate(5deg)}
 .tienda .acc{position:absolute;left:0;right:0;bottom:clamp(22px,4vh,48px);display:flex;flex-direction:column;align-items:center;gap:10px;z-index:6}
@@ -386,23 +387,7 @@ section.tienda{position:relative;overflow:hidden;min-height:clamp(620px,96vh,880
 
 <!-- TIENDA: próximamente -->
 <section class="s tienda" id="tienda" aria-label="Tienda, próximamente">
-  <svg class="lapiz" viewBox="0 0 1440 860" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs><filter id="lapiz"><feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="5" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.5"/></filter>
-      <clipPath id="h1"><rect x="150" y="190" width="170" height="190"/></clipPath><clipPath id="h2"><rect x="40" y="690" width="260" height="110"/></clipPath><clipPath id="h3"><rect x="1180" y="680" width="200" height="130"/></clipPath><clipPath id="h4"><rect x="560" y="150" width="120" height="60"/></clipPath></defs>
-    <g filter="url(#lapiz)" fill="none" stroke="#D9CDBA" stroke-linecap="round">
-      <path d="M120 170 L520 140 L540 520 L140 560 Z" stroke-width="1.6" opacity=".7"/><path d="M132 182 L508 154 L526 508 L150 546 Z" stroke-width="1" opacity=".45"/>
-      <path d="M120 170 L40 120 M520 140 L600 100 M540 520 L640 560 M140 560 L60 620" stroke-width="1" opacity=".4"/>
-      <path d="M0 400 L1440 330 M0 700 L1440 640" stroke-width=".9" opacity=".18"/>
-      <path d="M300 560 L230 860 M330 556 L400 860 M420 520 L500 860 M180 610 L470 590" stroke-width="1.5" opacity=".55"/>
-      <ellipse cx="1120" cy="300" rx="110" ry="140" transform="rotate(-8 1120 300)" stroke-width="1.3" opacity=".5"/><ellipse cx="1120" cy="300" rx="100" ry="128" transform="rotate(-6 1120 300)" stroke-width="1.3" opacity=".5"/>
-      <ellipse cx="1250" cy="560" rx="70" ry="90" transform="rotate(10 1250 560)" stroke-width="1.3" opacity=".5"/><circle cx="1010" cy="640" r="60" stroke-width="1.3" opacity=".5"/>
-      <path d="M1180 640 C1180 540 1176 470 1186 400" stroke-width="1.8" opacity=".6"/><path d="M1186 440 C1130 420 1090 370 1100 320 C1150 330 1186 380 1186 440 Z" stroke-width="1.5" opacity=".6"/><path d="M1184 410 C1240 392 1280 340 1262 296 C1214 306 1184 350 1184 410 Z" stroke-width="1.5" opacity=".6"/>
-      <g clip-path="url(#h1)" stroke-width="1" opacity=".3"><path d="M150 190 l-110 190 M162 190 l-110 190 M174 190 l-110 190 M186 190 l-110 190 M198 190 l-110 190 M210 190 l-110 190 M222 190 l-110 190 M234 190 l-110 190 M246 190 l-110 190 M258 190 l-110 190 M270 190 l-110 190 M282 190 l-110 190 M294 190 l-110 190 M306 190 l-110 190 M318 190 l-110 190 M330 190 l-110 190 M342 190 l-110 190 M354 190 l-110 190 M366 190 l-110 190 M378 190 l-110 190"/></g>
-      <g clip-path="url(#h2)" stroke-width="1" opacity=".3"><path d="M40 690 l-70 110 M54 690 l-70 110 M68 690 l-70 110 M82 690 l-70 110 M96 690 l-70 110 M110 690 l-70 110 M124 690 l-70 110 M138 690 l-70 110 M152 690 l-70 110 M166 690 l-70 110 M180 690 l-70 110 M194 690 l-70 110 M208 690 l-70 110 M222 690 l-70 110 M236 690 l-70 110 M250 690 l-70 110 M264 690 l-70 110 M278 690 l-70 110 M292 690 l-70 110 M306 690 l-70 110 M320 690 l-70 110 M334 690 l-70 110 M348 690 l-70 110"/></g>
-      <g clip-path="url(#h3)" stroke-width="1" opacity=".3"><path d="M1180 680 l-80 130 M1194 680 l-80 130 M1208 680 l-80 130 M1222 680 l-80 130 M1236 680 l-80 130 M1250 680 l-80 130 M1264 680 l-80 130 M1278 680 l-80 130 M1292 680 l-80 130 M1306 680 l-80 130 M1320 680 l-80 130 M1334 680 l-80 130 M1348 680 l-80 130 M1362 680 l-80 130 M1376 680 l-80 130 M1390 680 l-80 130"/></g>
-      <path d="M90 300 q20 -8 50 2 M980 700 q30 -10 60 4 M700 760 q40 -12 80 0 M1300 200 q25 -6 50 3 M430 800 q30 -8 60 2" stroke-width="1.3" opacity=".3"/>
-    </g>
-  </svg>
+  <img class="lapiz" src="lapiz-tienda.png" width="2880" height="1720" alt="" aria-hidden="true" decoding="async" loading="lazy">
   <div class="centro"><p class="eyebrow">Tienda</p><h2 class="mano">Algo se está <em>pintando</em></h2><p class="lead">Estamos preparando algo para llevarte a casa.</p></div>
   <div class="cinta c1" aria-hidden="true"><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span></div>
   <div class="cinta c2" aria-hidden="true"><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span><span>Próximamente</span></div>
@@ -484,8 +469,15 @@ const total=()=>track.offsetHeight-innerHeight;
 /* cada obra: se pinta (0–70 %), queda quieta (70–88 %) y recién ahí se disuelve hacia la siguiente */
 const PINTA=.70,PAUSA=.88;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-let shown=0;
+let shown=0,idle=false;
+const lastP=new Array(frames.length).fill(-1);
 function loop(){
+  /* con el hero fuera de pantalla no se hace nada: las animaciones son pesadas y comparten hilo con el scroll */
+  if(scrollY>track.offsetHeight+50){
+    if(!idle){idle=true;frames.forEach(fr=>{fr.style.visibility='hidden'});document.getElementById('skip').style.opacity=0}
+    requestAnimationFrame(loop);return;
+  }
+  if(idle){idle=false;lastP.fill(-1)}
   const g=clamp(scrollY/total());
   shown+=(g-shown)*((reduce||lenis)?1:.14);if(Math.abs(g-shown)<.0003)shown=g;
   const x=shown*4,idx=Math.min(3,Math.floor(x)),local=x-idx>=1?1:x-idx;
@@ -496,7 +488,7 @@ function loop(){
     else if(i===idx){p=clamp(lp/PINTA);op=1;if(i<3)op=1-clamp((lp-PAUSA)/(1-PAUSA))}
     else if(i===idx+1){p=0;op=1}
     fr.style.opacity=op;fr.style.visibility=op>0?'visible':'hidden';
-    if(op>0&&fr.contentWindow)fr.contentWindow.postMessage({p},'*');
+    if(op>0&&fr.contentWindow&&Math.abs(p-lastP[i])>.0004){lastP[i]=p;fr.contentWindow.postMessage({p},'*')}
   });
   document.getElementById('skip').style.opacity=scrollY>total()+innerHeight*.3?0:1;
   requestAnimationFrame(loop)
