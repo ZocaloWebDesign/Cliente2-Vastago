@@ -366,6 +366,12 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .regalo b{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;display:block;color:var(--arena);margin-bottom:2px}
 @media (max-width:900px){.ta{grid-template-columns:1fr}.ta>.ph{min-height:300px;height:300px}}
 
+/* retrato de Abigail, Matías y Juana: pintado al óleo, con el borde irregular de una pincelada sobre el lienzo */
+:root{--marco:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 108%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M1.40 0.60 L3.83 1.54 L6.26 1.44 L8.69 1.16 L11.12 0.69 L13.55 1.73 L15.98 1.75 L18.41 1.22 L20.84 1.21 L23.27 0.72 L25.70 0.31 L28.13 0.97 L30.56 1.35 L32.99 0.42 L35.42 1.73 L37.85 0.72 L40.28 0.72 L42.71 0.38 L45.14 2.10 L47.57 1.63 L50.00 1.88 L52.43 1.41 L54.86 0.36 L57.29 0.89 L59.72 1.20 L62.15 0.51 L64.58 2.01 L67.01 0.96 L69.44 0.58 L71.87 1.77 L74.30 0.52 L76.73 1.97 L79.16 1.12 L81.59 1.29 L84.02 0.92 L86.45 1.17 L88.88 0.64 L91.31 0.37 L93.74 1.86 L96.17 0.72 L99.05 1.20 L98.13 3.60 L99.35 6.00 L99.23 8.40 L99.01 10.80 L99.02 13.20 L98.73 15.60 L98.97 18.00 L98.00 20.40 L98.56 22.80 L99.12 25.20 L98.12 27.60 L99.28 30.00 L99.22 32.40 L98.46 34.80 L98.38 37.20 L98.52 39.60 L98.42 42.00 L99.39 44.40 L98.42 46.80 L97.84 49.20 L97.95 51.60 L98.95 54.00 L99.39 56.40 L98.59 58.80 L98.59 61.20 L98.68 63.60 L99.00 66.00 L98.16 68.40 L98.77 70.80 L98.69 73.20 L98.80 75.60 L98.09 78.00 L98.07 80.40 L98.36 82.80 L99.28 85.20 L98.35 87.60 L98.76 90.00 L98.29 92.40 L97.97 94.80 L97.91 97.20 L99.10 99.60 L99.04 102.00 L98.40 104.40 L98.60 107.13 L96.17 107.12 L93.74 107.52 L91.31 107.62 L88.88 106.63 L86.45 107.68 L84.02 107.63 L81.59 106.96 L79.16 107.49 L76.73 106.78 L74.30 106.58 L71.87 106.34 L69.44 107.48 L67.01 106.19 L64.58 106.02 L62.15 107.35 L59.72 107.29 L57.29 106.77 L54.86 107.41 L52.43 105.99 L50.00 106.36 L47.57 106.42 L45.14 106.66 L42.71 106.21 L40.28 106.03 L37.85 106.51 L35.42 107.52 L32.99 107.67 L30.56 107.24 L28.13 106.76 L25.70 106.35 L23.27 107.63 L20.84 106.85 L18.41 107.21 L15.98 105.95 L13.55 106.28 L11.12 107.41 L8.69 107.33 L6.26 107.49 L3.83 106.98 L1.28 106.80 L1.53 104.40 L1.96 102.00 L1.09 99.60 L1.45 97.20 L1.04 94.80 L1.83 92.40 L0.62 90.00 L1.70 87.60 L2.13 85.20 L0.64 82.80 L1.55 80.40 L1.63 78.00 L1.96 75.60 L1.53 73.20 L1.01 70.80 L1.25 68.40 L2.13 66.00 L2.05 63.60 L0.81 61.20 L0.75 58.80 L0.75 56.40 L0.64 54.00 L1.31 51.60 L0.83 49.20 L1.99 46.80 L1.65 44.40 L0.80 42.00 L1.46 39.60 L1.12 37.20 L1.39 34.80 L0.95 32.40 L0.87 30.00 L0.89 27.60 L1.20 25.20 L1.74 22.80 L1.48 20.40 L0.67 18.00 L1.74 15.60 L2.00 13.20 L1.84 10.80 L1.87 8.40 L0.61 6.00 L1.34 3.60Z%22/%3E%3C/svg%3E")}
+.retrato{position:relative;margin:0;aspect-ratio:1000/1083;filter:drop-shadow(0 18px 26px rgba(40,25,15,.28))}
+.retrato img{display:block;width:100%;height:100%;object-fit:cover;-webkit-mask:var(--marco) center/100% 100% no-repeat;mask:var(--marco) center/100% 100% no-repeat}
+.js .retrato.pt{width:100%;max-width:100%;-webkit-mask-size:300% 100%;mask-size:300% 100%}
+
 </style>
 </head>
 <body>
@@ -478,7 +484,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 <!-- SOBRE VÁSTAGO -->
 <section class="s lienzo" id="sobre">
   <div class="sobre">
-    <div class="sfoto"><div class="ph" style="--a:58deg"><span>Foto de Abigail y Matías</span></div><p class="lema"><span class="eyebrow">El lema</span><b class="mano">Fe en obra</b></p></div>
+    <div class="sfoto"><figure class="retrato"><img src="sobre-abigail-matias.webp" width="1000" height="1083" alt="Abigail y Matías con Juana en brazos, pintados al óleo" loading="lazy" decoding="async"></figure><p class="lema"><span class="eyebrow">El lema</span><b class="mano">Fe en obra</b></p></div>
     <div class="sdatos">
       <div class="stop"><div><p class="eyebrow">Sobre Vástago</p><h2 class="mano">El brote que nace de una <em>raíz</em></h2><i class="sprout"></i></div><img class="slogo" src="logos/logo-negro.png" alt="Vástago · Fe en obra"></div>
       <p class="nm">Abigail y Matías</p>
@@ -835,6 +841,7 @@ document.querySelectorAll('.origin').forEach(b=>{
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const els=[];
   document.querySelectorAll('#obras h2,#taller h2,.portada h2,.hmano,.sdatos h2,.cont h2,.tienda h2,.banda h3').forEach(e=>{e.classList.add('pt');els.push(e)});
+  document.querySelectorAll('.retrato').forEach(e=>{e.classList.add('pt');e.style.setProperty('--dur','1.8s');els.push(e)});
   document.querySelectorAll('.vers span').forEach(e=>{e.classList.add('pt');e.style.setProperty('--dur','2.2s');els.push(e)});
   const NS='http://www.w3.org/2000/svg';
   document.querySelectorAll('.ph').forEach(e=>{
