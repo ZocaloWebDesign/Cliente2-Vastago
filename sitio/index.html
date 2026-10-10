@@ -311,6 +311,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .brote .hoja path.l{fill:var(--bordo)}
 .brote .hoja path.n{fill:none;stroke:rgba(255,255,255,.45);stroke-width:.8;stroke-linecap:round}
 .brote .yema path{fill:var(--bordo-os)}
+.esc .brote-f{height:auto;z-index:3}
 .brote .flor{transform-box:fill-box;transform-origin:center;transition:transform .9s cubic-bezier(.3,1.5,.4,1)}
 @media (prefers-reduced-motion:reduce){.brote .hoja{transition:none}}
 
@@ -701,7 +702,7 @@ document.querySelectorAll('.origin').forEach(b=>{
   const NS='http://www.w3.org/2000/svg',reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','brote');svg.setAttribute('aria-hidden','true');
   mural.insertBefore(svg,mural.querySelector('.fondo').nextSibling);
-  let H=0,x0=0,A=0,leaves=[],tip=null,flor=null,lastY=-1;
+  let H=0,x0=0,A=0,EXT=0,leaves=[],tip=null,ftip=null,fsvg=null,flor=null,lastY=-1;
   const xAt=y=>x0+A*Math.sin(y/170)+.5*A*Math.sin(y/61+1);
   const LEAF='M0 0 C6 -8 20 -9 31 0 C20 8 6 8 0 0Z',NERV='M3 0 L24 0';
   const mk=(tag,at)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);return e};
@@ -740,27 +741,49 @@ document.querySelectorAll('.origin').forEach(b=>{
     tip.appendChild(mk('path',{d:'M0 3 C-8 6 -11 13 -8 18 C-3 16 0 10 0 3Z',opacity:'.85'}));
     tip.appendChild(mk('path',{d:'M0 3 C8 6 11 13 8 18 C3 16 0 10 0 3Z',opacity:'.85'}));
     svg.appendChild(tip);
-    /* florcita: aparece cuando el tallo llega al final del lienzo */
-    flor=mk('g',{class:'flor'});
-    const fy=H-30,fx=xAt(fy);
-    flor.style.transform='translate('+fx.toFixed(1)+'px,'+fy+'px) scale(0)';flor.dataset.b='translate('+fx.toFixed(1)+'px,'+fy+'px) ';
-    for(let i=0;i<5;i++){const p=mk('ellipse',{cx:0,cy:-8,rx:3.8,ry:7.5,fill:i%2?'#AA6766':'#8E4F4E',transform:'rotate('+(i*72)+')'});flor.appendChild(p)}
-    flor.appendChild(mk('circle',{r:3.2,fill:'#D5BF9E'}));flor.appendChild(mk('circle',{r:1.3,fill:'#8E4F4E'}));
-    svg.appendChild(flor);
+    /* el tallo sale del lienzo y sigue por la pared, junto al atril: ahí se abre la flor */
+    if(fsvg)fsvg.remove();
+    const esc=document.querySelector('#pie .esc');
+    EXT=innerWidth>1000?150:26;
+    if(esc){
+      fsvg=document.createElementNS(NS,'svg');fsvg.setAttribute('class','brote brote-f');fsvg.setAttribute('aria-hidden','true');
+      const fw=Math.round(x0*2+70);
+      fsvg.setAttribute('width',fw);fsvg.setAttribute('height',EXT+40);fsvg.setAttribute('viewBox','0 0 '+fw+' '+(EXT+40));
+      fsvg.style.width=fw+'px';fsvg.style.height=(EXT+40)+'px';
+      let fd='M'+xAt(H).toFixed(1)+' -2';for(let y=12;y<=EXT;y+=12)fd+=' L'+xAt(H+y).toFixed(1)+' '+y;
+      fsvg.appendChild(mk('path',{class:'tallo',d:fd}));fsvg.appendChild(mk('path',{class:'tallo2',d:fd}));
+      [[EXT*.4,1,.8],[EXT*.7,-1,.62]].forEach(([y,side,s0])=>{
+        const gEl=mk('g',{class:'hoja'});gEl.style.transformOrigin='0 50%';
+        const base='translate('+xAt(H+y).toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+(side>0?42:138)+'deg) ';
+        gEl.dataset.b=base;gEl.dataset.s=s0;gEl.dataset.y=H+y;
+        gEl.appendChild(mk('path',{class:'l',d:LEAF}));gEl.appendChild(mk('path',{class:'n',d:NERV}));
+        gEl.style.transform=base+'scale(0)';fsvg.appendChild(gEl);leaves.push(gEl);
+      });
+      ftip=tip.cloneNode(true);ftip.setAttribute('visibility','hidden');fsvg.appendChild(ftip);
+      flor=mk('g',{class:'flor'});
+      const fx=xAt(H+EXT);
+      flor.style.transform='translate('+fx.toFixed(1)+'px,'+EXT+'px) scale(0)';flor.dataset.b='translate('+fx.toFixed(1)+'px,'+EXT+'px) ';
+      for(let i=0;i<6;i++)flor.appendChild(mk('ellipse',{cx:0,cy:-9,rx:4.4,ry:8.6,fill:i%2?'#AA6766':'#8E4F4E',transform:'rotate('+(i*60)+')'}));
+      for(let i=0;i<6;i++)flor.appendChild(mk('ellipse',{cx:0,cy:-5.5,rx:2,ry:4.4,fill:'rgba(255,255,255,.18)',transform:'rotate('+(i*60+30)+')'}));
+      flor.appendChild(mk('circle',{r:4,fill:'#D5BF9E'}));flor.appendChild(mk('circle',{r:1.6,fill:'#8E4F4E'}));
+      fsvg.appendChild(flor);
+      esc.appendChild(fsvg);
+    }
     lastY=-1;update();
   }
   function update(){
     if(!H)return;
-    const mt=mural.getBoundingClientRect().top+scrollY;
-    let ty=reduce?H:Math.min(H,Math.max(0,scrollY+innerHeight*.72-mt));
+    const mt=mural.getBoundingClientRect().top+scrollY,L=H+EXT;
+    let ty=reduce?L:Math.min(L,Math.max(0,scrollY+innerHeight*.72-mt));
     if(Math.abs(ty-lastY)<1)return;lastY=ty;
-    svg.style.clipPath='inset(0 0 '+Math.max(0,H-ty-(ty>=H?0:0))+'px 0)';
+    svg.style.clipPath='inset(0 0 '+Math.max(0,H-Math.min(ty,H))+'px 0)';
+    if(fsvg)fsvg.style.clipPath='inset(0 0 '+Math.max(0,(EXT+40)-Math.max(0,ty-H))+'px 0)';
     leaves.forEach(l=>{const on=+l.dataset.y<ty-6;l.style.transform=l.dataset.b+'scale('+(on?l.dataset.s:0)+')'});
-    const done=ty>=H-34;
-    if(flor)flor.style.transform=flor.dataset.b+'scale('+(done?1:0)+')';
-    const show=ty>8&&ty<H-34&&!reduce;
-    tip.setAttribute('visibility',show?'visible':'hidden');
-    if(show)tip.setAttribute('transform','translate('+xAt(ty).toFixed(1)+' '+ty.toFixed(1)+')');
+    if(flor)flor.style.transform=flor.dataset.b+'scale('+(ty>=L-4?1.35:0)+')';
+    const inM=ty>8&&ty<H&&!reduce,inF=ty>=H&&ty<L-4&&!reduce;
+    tip.setAttribute('visibility',inM?'visible':'hidden');
+    if(inM)tip.setAttribute('transform','translate('+xAt(ty).toFixed(1)+' '+ty.toFixed(1)+')');
+    if(ftip){ftip.setAttribute('visibility',inF?'visible':'hidden');if(inF)ftip.setAttribute('transform','translate('+xAt(ty).toFixed(1)+' '+(ty-H).toFixed(1)+')')}
   }
   let tick=0;const sched=()=>{if(tick)return;tick=requestAnimationFrame(()=>{tick=0;update()})};
   addEventListener('scroll',sched,{passive:true});
