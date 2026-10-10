@@ -349,6 +349,11 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .chips i{background:rgba(225,211,192,.92)}
 @media (prefers-reduced-motion:reduce){.js .pt{-webkit-mask:none;mask:none}}
 
+/* fotos reales dentro de los recuadros */
+.ph.foto{border:0;background:var(--arena);padding:0}
+.ph.foto::before,.ph.foto::after{display:none}
+.ph.foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
 </style>
 </head>
 <body>
@@ -418,21 +423,21 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   <p class="lead">Te enseñamos a pintar y a construir tu propio atril, solos o en grupo, en nuestro taller.</p>
   <div class="dos">
     <article class="tc">
-      <div class="ph" style="--a:56deg"><span>Foto del taller · pintura</span></div>
+      <div class="ph foto"><img src="taller-pintura.jpg" alt="Un lienzo con el Salmo 1 sobre un atril del taller" loading="lazy" decoding="async"></div>
       <p class="num">01 · Pintura</p><h3>Pintura</h3><p class="ln">Te acompañamos a llevar una idea al lienzo, paso a paso, a tu ritmo.</p>
       <dl class="fx"><div><dt>Modalidad</dt><dd>Individual o en grupo</dd></div><div><dt>Frecuencia</dt><dd>Una clase, por semana o por mes</dd></div><div><dt>Dónde</dt><dd>Presencial · calle Paraguay</dd></div></dl>
       <p class="nota">Días, cupos y precio: consultalos por WhatsApp.</p>
       <a class="bt" data-wa data-msg="Hola, quiero consultar por las clases de pintura." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Consultar por pintura</a>
     </article>
     <article class="tc">
-      <div class="ph" style="--a:44deg"><span>Foto del taller · atriles</span></div>
+      <div class="ph foto"><img src="taller-atriles.jpg" alt="Un atril de madera con un lienzo en proceso" loading="lazy" decoding="async"></div>
       <p class="num">02 · Atriles</p><h3>Atriles</h3><p class="ln">Aprendé a trabajar la madera y construí un atril para tu casa o tu taller.</p>
       <dl class="fx"><div><dt>Modalidad</dt><dd>Individual o en grupo</dd></div><div><dt>Frecuencia</dt><dd>Una clase, por semana o por mes</dd></div><div><dt>Dónde</dt><dd>Presencial · calle Paraguay</dd></div></dl>
       <p class="nota">Días, cupos y precio: consultalos por WhatsApp.</p>
       <a class="bt" data-wa data-msg="Hola, quiero consultar por las clases de atriles." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Consultar por atriles</a>
     </article>
   </div>
-  <div class="tira"><div class="ph" style="--a:46deg"><span>Foto pendiente · el espacio</span></div><div class="ph" style="--a:38deg"><span>Foto pendiente · herramientas</span></div><div class="ph" style="--a:56deg"><span>Foto pendiente · una clase</span></div></div>
+  <div class="tira"><div class="ph foto"><img src="taller-espacio.jpg" alt="Bastidores de madera y lienzos del taller" loading="lazy" decoding="async"></div><div class="ph foto"><img src="taller-herramientas.jpg" alt="Un tablero con las herramientas del taller" loading="lazy" decoding="async" style="object-position:50% 25%"></div><div class="ph" style="--a:56deg"><span>Foto pendiente · una clase</span></div></div>
 </section>
 
 <p class="vers"><span class="mano">El amor es paciente, es bondadoso</span><small>1 Corintios 13</small></p>
@@ -606,9 +611,16 @@ document.querySelectorAll('.origin').forEach(b=>{
     {image:'obras/1-corintios-13.jpg',title:'1 Corintios 13',caption:'El amor es paciente, es bondadoso',w:834,h:1000},
     {image:'obras/2-jesus.jpg',title:'Jesús',caption:'',w:1000,h:668},
     {image:'obras/3-sadrac-mesac-y-abednego.jpg',title:'Sadrac, Mesac y Abednego',caption:'Nosotros evitamos el problema. Él lo habita con nosotros.',w:749,h:1000},
-    {image:'obras/4-jeremias-18.jpg',title:'Jeremías 18',caption:'Soy barro en manos del alfarero',w:664,h:1000}
+    {image:'obras/4-jeremias-18.jpg',title:'Jeremías 18',caption:'Soy barro en manos del alfarero',w:664,h:1000},
+    {image:'obras/5-la-novia.jpg',title:'La novia',caption:'Cristo amó a la iglesia y se entregó por ella',w:934,h:1200},
+    {image:'obras/6-de-tumbas-a-jardines.jpg',title:'De tumbas a jardines',caption:'La luz resplandece en las tinieblas',w:900,h:746},
+    {image:'obras/7-isaias-58-muros-caidos.jpg',title:'Isaías 58 · Muros caídos',caption:'Reconstructor de casas en ruinas',w:1200,h:890},
+    {image:'obras/10-la-fuente.jpg',title:'La fuente',caption:'Jesús es la fuente de vida',w:918,h:1200},
+    {image:'obras/8-isaias-58-manantial.jpg',title:'Isaías 58 · Manantial',caption:'Como manantial cuyas aguas no se agotan',w:764,h:1200},
+    {image:'obras/11-salmo-1.jpg',title:'Salmo 1',caption:'Son como árboles plantados junto al río',w:941,h:1200},
+    {image:'obras/9-isaias-53.jpg',title:'Isaías 53',caption:'Como vástago tierno',w:950,h:1200}
   ];
-  const SPEED=24,SAG=46,SWING=1,CARD=300,REPS=3;   /* SPEED = píxeles por segundo (lento) */
+  const SPEED=24,SAG=46,SWING=1,CARD=300,REPS=Math.max(1,Math.ceil(14/SLIDES.length));   /* SPEED = píxeles por segundo (lento) */
   const n=SLIDES.length,R=n*REPS;
   const clampv=(v,a,b)=>Math.min(b,Math.max(a,v));
   const pad2=k=>k<10?'0'+k:String(k);
@@ -624,7 +636,7 @@ document.querySelectorAll('.origin').forEach(b=>{
     const sl=SLIDES[r%n],el=document.createElement('div');el.className='pl-card';el.dataset.r=r;el.dataset.on='0';
     if(r>=n)el.setAttribute('aria-hidden','true');
     el.innerHTML='<svg class="pl-wire" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0 L0 30 M50 0 L100 30"/></svg><i class="pl-ring"></i><div class="pl-print"><div class="pl-shot"><img alt="" draggable="false"></div></div>';
-    const im=el.querySelector('img');im.src=sl.image;im.alt='Obra: '+sl.title;
+    const im=el.querySelector('img');im.loading='lazy';im.decoding='async';im.src=sl.image;im.alt='Obra: '+sl.title;
     root.appendChild(el);cards.push(el);
   }
   const bar=document.createElement('div');bar.className='pl-bar';
@@ -803,7 +815,7 @@ document.querySelectorAll('.origin').forEach(b=>{
   document.querySelectorAll('.vers span').forEach(e=>{e.classList.add('pt');e.style.setProperty('--dur','2.2s');els.push(e)});
   const NS='http://www.w3.org/2000/svg';
   document.querySelectorAll('.ph').forEach(e=>{
-    if(e.closest('.pl-root'))return;
+    if(e.closest('.pl-root')||e.classList.contains('foto'))return;
     const w=e.offsetWidth,h=e.offsetHeight;if(w<40||h<40)return;
     const r=(a,b)=>+(a+Math.random()*(b-a)).toFixed(1);
     const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','lb');svg.setAttribute('viewBox','0 0 '+w+' '+h);svg.setAttribute('aria-hidden','true');
