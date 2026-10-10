@@ -183,13 +183,18 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 .fab svg{width:30px;height:30px;color:#fff}
 
 /* encargos: banda */
-.banda{border:1.5px solid var(--tinta);background:rgba(255,255,255,.8);padding:clamp(24px,4vw,40px) clamp(22px,4vw,44px);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.5fr) auto;gap:clamp(20px,3vw,40px);align-items:center}
-.banda h3{font:400 clamp(26px,3vw,36px)/1.1 var(--serif);margin-top:6px}
-.stp{list-style:none;display:flex;gap:24px;padding:0}
-.stp li{flex:1;border-top:2px solid var(--tinta);padding-top:10px;display:flex;flex-direction:column}
-.stp b{font-size:40px;line-height:.9;color:var(--bordo-os)}
-.stp span{font:400 19px var(--serif);margin:4px 0 2px}
-.stp small{font-size:13.5px;color:#3a322c;line-height:1.4}
+.banda{position:relative;max-width:1040px;margin:0 auto;padding:clamp(22px,3.2vw,34px) clamp(26px,4vw,48px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr) auto;gap:clamp(16px,2.4vw,30px);align-items:center}
+/* el recuadro no es una línea de CSS: es un marco pintado a pincel sobre el lienzo */
+.banda .pint{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.banda .pint path{fill:none;stroke:var(--tinta);stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.banda>*:not(.pint){position:relative}
+.banda h3{font:400 clamp(21px,2.3vw,28px)/1.12 var(--serif);margin-top:4px}
+.stp{list-style:none;display:flex;gap:18px;padding:0}
+.stp li{flex:1;display:flex;flex-direction:column}
+.stp b{font-size:30px;line-height:.9;color:var(--bordo-os)}
+.stp span{font:400 16px var(--serif);margin:3px 0 1px}
+.stp small{font-size:12.5px;color:#3a322c;line-height:1.35}
+.banda .bt{padding:11px 18px;font-size:14px}
 
 /* taller */
 .dos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:32px;margin-top:34px}
@@ -274,7 +279,7 @@ section.tienda{position:relative;overflow:hidden;min-height:clamp(620px,96vh,880
 .it .d{font-size:15px;color:#5a4f46;margin-top:2px}
 
 @media (max-width:900px){
-  .banda{grid-template-columns:1fr}
+  .banda{grid-template-columns:1fr;padding:34px 30px}
   .stp{flex-direction:column;gap:14px}
   .mid,.sobre,.cont{grid-template-columns:1fr}
     .col{border-left:0;padding-left:0}
@@ -331,8 +336,8 @@ section.tienda{position:relative;overflow:hidden;min-height:clamp(620px,96vh,880
 </section>
 
 <!-- ENCARGOS: banda -->
-<section class="s lienzo" id="encargos" style="padding-top:0">
-  <div class="banda">
+<section class="s lienzo" id="encargos" style="padding-top:0;padding-bottom:clamp(36px,6vh,70px)">
+  <div class="banda"><svg class="pint" viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true"><defs><filter id="pincel" x="-5%" y="-20%" width="110%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".012 .035" numOctaves="3" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="6"/></filter></defs><g filter="url(#pincel)"><path d="M16 14 C260 6 650 18 984 9" stroke-width="7" opacity=".9"/><path d="M60 21 C320 15 700 24 940 17" stroke-width="2" opacity=".3"/><path d="M988 8 C997 70 983 132 992 195" stroke-width="6.5" opacity=".88"/><path d="M994 189 C700 199 330 186 10 195" stroke-width="7" opacity=".9"/><path d="M930 183 C650 190 330 180 70 187" stroke-width="2" opacity=".3"/><path d="M7 197 C15 130 2 70 12 8" stroke-width="6.5" opacity=".88"/></g></svg>
     <div><p class="eyebrow">Por encargo</p><h3>¿No encontrás la que buscás? La pintamos para vos.</h3></div>
     <ol class="stp">
       <li><b class="mano">1</b><span>Tu idea</span><small>Un versículo, una historia.</small></li>
