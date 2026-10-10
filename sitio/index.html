@@ -92,7 +92,6 @@ h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spac
 .fondo{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .fondo figure{position:absolute;left:var(--x);top:var(--y);width:var(--w);transform:rotate(var(--r,0deg));opacity:1}
 .fondo img{display:block;width:100%;height:auto}
-.fondo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:clamp(120px,22vw,320px);background:linear-gradient(to bottom,rgba(205,178,138,0),#CDB28A)}
 @media (max-width:700px){.fondo figure{opacity:.45}}
 
 /* carrusel de obras: copias de papel colgadas de una cuerda (port a JS simple del "Polaroid Line Carousel") */
@@ -284,67 +283,6 @@ section.tienda{position:relative;overflow:hidden;contain:layout paint;min-height
 footer#pie{position:relative;background:#CDB28A;color:var(--tinta)}
 .esc{position:relative;container-type:inline-size;overflow:hidden}
 .foto img{display:block;width:100%;height:auto;max-width:none;user-select:none}
-/* madera del atril: veta, luz desde arriba a la izquierda y desgaste, encima de la imagen y debajo de los textos */
-.esc .foto{--gh:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='190'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .11' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .22 0 0 0 0 .08 0 0 0 0 .06 1.9 0 0 0 -.78'/%3E%3C/filter%3E%3Crect width='640' height='190' filter='url(%23n)'/%3E%3C/svg%3E");--gv:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='640'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.11 .004' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .22 0 0 0 0 .08 0 0 0 0 .06 1.9 0 0 0 -.78'/%3E%3C/filter%3E%3Crect width='190' height='640' filter='url(%23n)'/%3E%3C/svg%3E")}
-.mad{position:absolute;pointer-events:none}
-.mad.bar{left:4.85%;top:5.1%;width:90.35%;height:18.9%;border-radius:.3%;
-  background:
-   radial-gradient(ellipse 1.1% 10% at 1.7% 23%,rgba(35,15,10,.38),transparent 80%),
-   radial-gradient(ellipse 1.1% 10% at 98.1% 23%,rgba(35,15,10,.38),transparent 80%),
-   radial-gradient(ellipse 1.1% 10% at 1.7% 82.6%,rgba(35,15,10,.38),transparent 80%),
-   radial-gradient(ellipse 1.1% 10% at 11.5% 81.5%,rgba(35,15,10,.34),transparent 80%),
-   radial-gradient(ellipse 1.1% 10% at 88.3% 81.5%,rgba(35,15,10,.34),transparent 80%),
-   radial-gradient(ellipse 1.1% 10% at 98.1% 82.6%,rgba(35,15,10,.38),transparent 80%),
-   radial-gradient(ellipse .55% 3.4% at 6.2% 94%,rgba(236,206,170,.62),transparent 78%),
-   radial-gradient(ellipse .9% 3% at 23.4% 5%,rgba(236,206,170,.5),transparent 78%),
-   radial-gradient(ellipse .6% 3.2% at 47.6% 95%,rgba(236,206,170,.55),transparent 78%),
-   radial-gradient(ellipse .8% 3% at 71.9% 5.5%,rgba(236,206,170,.5),transparent 78%),
-   radial-gradient(ellipse .5% 3% at 93.2% 94%,rgba(236,206,170,.55),transparent 78%),
-   linear-gradient(to bottom,rgba(255,238,214,.34) 0,rgba(255,238,214,.05) 5%,transparent 14%,transparent 84%,rgba(34,14,12,.14) 93%,rgba(30,12,10,.36) 100%),
-   linear-gradient(to right,rgba(255,236,214,.10),transparent 38%,rgba(34,14,12,.14) 100%),
-   var(--gh)}
-.mad.leg{top:24.06%;height:65.2%;
-  background:
-   radial-gradient(ellipse 40% 1.8% at 28% 31%,rgba(236,206,170,.55),transparent 78%),
-   radial-gradient(ellipse 34% 1.4% at 70% 58%,rgba(236,206,170,.5),transparent 78%),
-   radial-gradient(ellipse 36% 1.6% at 34% 84%,rgba(236,206,170,.5),transparent 78%),
-   linear-gradient(to bottom,rgba(40,16,12,.30),transparent 9%,transparent 80%,rgba(34,14,10,.26) 100%),
-   linear-gradient(to right,rgba(255,232,208,.26),rgba(255,232,208,.05) 24%,transparent 45%,rgba(30,12,10,.34) 100%),
-   var(--gv)}
-.mad.l1{left:9.85%;width:5.7%;transform:skewX(-8.67deg)}
-.mad.l2{left:83.55%;width:4.9%;transform:skewX(6.5deg)}
-.mad.trav{left:10.4%;top:62.2%;width:79.1%;height:7.3%;
-  background:
-   radial-gradient(ellipse .9% 14% at 2.6% 50%,rgba(40,24,16,.38),transparent 80%),
-   radial-gradient(ellipse .9% 14% at 97.3% 50%,rgba(40,24,16,.38),transparent 80%),
-   radial-gradient(ellipse 1.1% 9% at 31% 8%,rgba(236,206,170,.5),transparent 78%),
-   radial-gradient(ellipse .8% 9% at 64% 92%,rgba(236,206,170,.45),transparent 78%),
-   linear-gradient(to bottom,rgba(255,240,216,.30),transparent 18%,transparent 78%,rgba(40,24,16,.30) 100%),
-   linear-gradient(to right,rgba(255,240,216,.10),transparent 40%,rgba(40,24,16,.14) 100%),
-   var(--gh)}
-.mad.bar{opacity:.8}.mad.trav{opacity:.5}.mad.leg{opacity:.85}
-.mad.l2{height:33%;-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent)}
-/* vaso de vidrio: reflejos, agua con tinte, borde grueso y sombra rosada en el piso */
-.mad.vaso{left:88.9%;top:56.28%;width:10.1%;height:39.64%;clip-path:polygon(2.2% 5.3%,97% 5.3%,90.4% 96.6%,72.8% 98.8%,49.5% 99.4%,25.7% 98.8%,14.2% 96.6%);
-  background:
-   radial-gradient(ellipse 41.5% 2.6% at 49.5% 40.6%,transparent 84%,rgba(255,255,255,.5) 93%,transparent 100%),
-   radial-gradient(ellipse 38% 2.8% at 49.5% 97%,rgba(255,255,255,.3),transparent 80%),
-   linear-gradient(to bottom,transparent 39%,rgba(255,236,240,.3) 41%,rgba(210,112,134,.14) 47%,rgba(190,90,116,.24) 72%,rgba(150,60,86,.34) 97%,transparent 100%),
-   linear-gradient(to right,transparent 62%,rgba(40,20,20,.12))}
-.mad.vsom{left:84%;top:92.5%;width:16%;height:6%;background:radial-gradient(ellipse 50% 42% at 55% 50%,rgba(214,108,132,.32),rgba(120,60,50,.16) 55%,transparent 78%)}
-/* realismo del atril: luz desde arriba a la izquierda, sombras de contacto y un grano muy leve, todo por encima de la imagen */
-.esc .foto{position:relative}
-.esc .foto::before,.esc .foto::after{content:"";position:absolute;inset:0;pointer-events:none}
-.esc .foto::before{background:
-  radial-gradient(ellipse 16% 5% at 14% 91%,rgba(48,28,16,.42),transparent 72%),
-  radial-gradient(ellipse 14% 4.5% at 86% 90.5%,rgba(48,28,16,.4),transparent 72%),
-  radial-gradient(ellipse 12% 3.6% at 94% 95.5%,rgba(40,24,14,.42),transparent 74%),
-  radial-gradient(ellipse 6% 2.4% at 51.5% 80.5%,rgba(48,28,16,.28),transparent 74%),
-  linear-gradient(to bottom,rgba(60,38,24,.30) 23.5%,rgba(60,38,24,.10) 29%,transparent 36%),
-  linear-gradient(to right,transparent 6%,rgba(255,244,222,.07) 8%,transparent 13%,transparent 85%,rgba(40,24,12,.07) 88%,transparent 95%),
-  radial-gradient(ellipse 85% 75% at 28% 4%,rgba(255,246,226,.30),transparent 62%),
-  radial-gradient(ellipse 120% 105% at 45% 42%,transparent 55%,rgba(52,32,18,.26) 100%)}
-.esc .foto::after{opacity:.2;background-size:240px 240px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .22 0 0 0 0 .14 0 0 0 0 .08 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E")}
 .cts{position:absolute;inset:0;pointer-events:none}
 .ct{position:absolute;top:37.5%;pointer-events:auto}
 .ct .k{display:block;font:600 max(10px,.764cqw)/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bordo-os)}
@@ -577,7 +515,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 <footer id="pie">
   <h2 class="sr">Tu fe también puede ser una obra</h2>
   <div class="esc">
-    <div class="foto"><img src="atril-escena.jpg" width="2160" height="1032" alt="Final del lienzo: un atril de madera pintada con un tubo de pintura, un pincel y un vaso con brochas" loading="lazy" decoding="async"><i class="mad bar"></i><i class="mad leg l1"></i><i class="mad leg l2"></i><i class="mad trav"></i><i class="mad vsom"></i><i class="mad vaso"></i></div>
+    <div class="foto"><img src="atril-escena.jpg" width="2160" height="1032" alt="Final del lienzo: un atril de madera pintada con un tubo de pintura, un pincel y un vaso con brochas" loading="lazy" decoding="async"></div>
     <div class="cts">
       <div class="ct" style="left:22.9%"><span class="k">Instagram</span><a class="v" href="https://www.instagram.com/vastago.obras" target="_blank" rel="noopener">@vastago.obras</a></div>
       <div class="ct" style="left:36.1%"><span class="k">WhatsApp</span><a class="v" data-wa data-msg="Hola, quiero consultar." href="#contacto">Escribinos</a></div>
