@@ -85,15 +85,15 @@ h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spac
 @media (prefers-reduced-motion:reduce){.js .ag-item{opacity:1;filter:none;transform:none;transition:none}}
 
 
-/* fondo unido: el lienzo continuo con los cuadros ya pintados colgados detrás de todas las secciones (la tienda lo tapa) */
+/* fondo unido: el lienzo continuo con elementos de las obras pintados directo sobre la tela, sin marco, desde las obras hasta el atril (la tienda lo tapa) */
 .mural{position:relative;overflow:clip;background-color:#fff;background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px)}
 .mural>section.s{z-index:1}
 .mural .lienzo{background:none}
-.fondo{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.fondo figure{position:absolute;left:var(--x);top:var(--y);width:clamp(96px,var(--w),440px);transform:rotate(var(--r,0deg));opacity:.3}
-.fondo .fr{background:linear-gradient(145deg,#2b2520,#161311 55%,#221d19);padding:clamp(5px,.8vw,11px);box-shadow:0 3px 5px rgba(0,0,0,.2),0 30px 40px -22px rgba(0,0,0,.5)}
-.fondo img{display:block;width:100%;height:auto;box-shadow:0 0 0 1px rgba(225,211,192,.3)}
-@media (max-width:700px){.fondo figure{opacity:.18}}
+.fondo{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.fondo figure{position:absolute;left:var(--x);top:var(--y);width:var(--w);transform:rotate(var(--r,0deg));opacity:1}
+.fondo img{display:block;width:100%;height:auto}
+.fondo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:clamp(120px,22vw,320px);background:linear-gradient(to bottom,rgba(205,178,138,0),#CDB28A)}
+@media (max-width:700px){.fondo figure{opacity:.45}}
 
 /* carrusel de obras: copias de papel colgadas de una cuerda (port a JS simple del "Polaroid Line Carousel") */
 .pl-root{position:relative;width:calc(100% + 2*var(--gut));margin:34px calc(var(--gut) * -1) 0;height:clamp(560px,56vw,700px);overflow:hidden;color:var(--tinta);user-select:none;-webkit-user-select:none;touch-action:pan-y;outline:none;cursor:grab;--pl-muted:rgba(22,19,17,.55);--pl-line:rgba(22,19,17,.18)}
@@ -102,7 +102,7 @@ h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spac
 .pl-string{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .pl-card{position:absolute;left:0;top:0;transform-origin:50% 0;will-change:transform;cursor:inherit}
 /* cuadro: marco oscuro, filo claro adentro y la tela con sombra; cuelga de un alambre con una argolla */
-.pl-print{margin-top:28px;position:relative;background:linear-gradient(145deg,#2b2520,#161311 55%,#221d19);padding:12px;box-shadow:inset 0 0 0 1px rgba(225,211,192,.16),0 2px 3px rgba(0,0,0,.2),0 26px 34px -18px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.2,.7,.2,1),filter .5s ease}
+.pl-print{margin-top:28px;position:relative;transform-origin:50% 0;background:linear-gradient(145deg,#2b2520,#161311 55%,#221d19);padding:12px;box-shadow:inset 0 0 0 1px rgba(225,211,192,.16),0 2px 3px rgba(0,0,0,.2),0 26px 34px -18px rgba(0,0,0,.5);transition:transform .5s cubic-bezier(.2,.7,.2,1),filter .5s ease}
 .pl-card[data-on='0'] .pl-print{transform:scale(.9);filter:saturate(.75) brightness(.97)}
 .pl-shot{position:relative;overflow:hidden;background:#e9e2d6;box-shadow:0 0 0 1px rgba(225,211,192,.35),inset 0 0 14px rgba(0,0,0,.35)}
 .pl-shot img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;display:block;pointer-events:none}
@@ -284,6 +284,67 @@ section.tienda{position:relative;overflow:hidden;contain:layout paint;min-height
 footer#pie{position:relative;background:#CDB28A;color:var(--tinta)}
 .esc{position:relative;container-type:inline-size;overflow:hidden}
 .foto img{display:block;width:100%;height:auto;max-width:none;user-select:none}
+/* madera del atril: veta, luz desde arriba a la izquierda y desgaste, encima de la imagen y debajo de los textos */
+.esc .foto{--gh:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='190'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .11' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .22 0 0 0 0 .08 0 0 0 0 .06 1.9 0 0 0 -.78'/%3E%3C/filter%3E%3Crect width='640' height='190' filter='url(%23n)'/%3E%3C/svg%3E");--gv:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='640'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.11 .004' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .22 0 0 0 0 .08 0 0 0 0 .06 1.9 0 0 0 -.78'/%3E%3C/filter%3E%3Crect width='190' height='640' filter='url(%23n)'/%3E%3C/svg%3E")}
+.mad{position:absolute;pointer-events:none}
+.mad.bar{left:4.85%;top:5.1%;width:90.35%;height:18.9%;border-radius:.3%;
+  background:
+   radial-gradient(ellipse 1.1% 10% at 1.7% 23%,rgba(35,15,10,.38),transparent 80%),
+   radial-gradient(ellipse 1.1% 10% at 98.1% 23%,rgba(35,15,10,.38),transparent 80%),
+   radial-gradient(ellipse 1.1% 10% at 1.7% 82.6%,rgba(35,15,10,.38),transparent 80%),
+   radial-gradient(ellipse 1.1% 10% at 11.5% 81.5%,rgba(35,15,10,.34),transparent 80%),
+   radial-gradient(ellipse 1.1% 10% at 88.3% 81.5%,rgba(35,15,10,.34),transparent 80%),
+   radial-gradient(ellipse 1.1% 10% at 98.1% 82.6%,rgba(35,15,10,.38),transparent 80%),
+   radial-gradient(ellipse .55% 3.4% at 6.2% 94%,rgba(236,206,170,.62),transparent 78%),
+   radial-gradient(ellipse .9% 3% at 23.4% 5%,rgba(236,206,170,.5),transparent 78%),
+   radial-gradient(ellipse .6% 3.2% at 47.6% 95%,rgba(236,206,170,.55),transparent 78%),
+   radial-gradient(ellipse .8% 3% at 71.9% 5.5%,rgba(236,206,170,.5),transparent 78%),
+   radial-gradient(ellipse .5% 3% at 93.2% 94%,rgba(236,206,170,.55),transparent 78%),
+   linear-gradient(to bottom,rgba(255,238,214,.34) 0,rgba(255,238,214,.05) 5%,transparent 14%,transparent 84%,rgba(34,14,12,.14) 93%,rgba(30,12,10,.36) 100%),
+   linear-gradient(to right,rgba(255,236,214,.10),transparent 38%,rgba(34,14,12,.14) 100%),
+   var(--gh)}
+.mad.leg{top:24.06%;height:65.2%;
+  background:
+   radial-gradient(ellipse 40% 1.8% at 28% 31%,rgba(236,206,170,.55),transparent 78%),
+   radial-gradient(ellipse 34% 1.4% at 70% 58%,rgba(236,206,170,.5),transparent 78%),
+   radial-gradient(ellipse 36% 1.6% at 34% 84%,rgba(236,206,170,.5),transparent 78%),
+   linear-gradient(to bottom,rgba(40,16,12,.30),transparent 9%,transparent 80%,rgba(34,14,10,.26) 100%),
+   linear-gradient(to right,rgba(255,232,208,.26),rgba(255,232,208,.05) 24%,transparent 45%,rgba(30,12,10,.34) 100%),
+   var(--gv)}
+.mad.l1{left:9.85%;width:5.7%;transform:skewX(-8.67deg)}
+.mad.l2{left:83.55%;width:4.9%;transform:skewX(6.5deg)}
+.mad.trav{left:10.4%;top:62.2%;width:79.1%;height:7.3%;
+  background:
+   radial-gradient(ellipse .9% 14% at 2.6% 50%,rgba(40,24,16,.38),transparent 80%),
+   radial-gradient(ellipse .9% 14% at 97.3% 50%,rgba(40,24,16,.38),transparent 80%),
+   radial-gradient(ellipse 1.1% 9% at 31% 8%,rgba(236,206,170,.5),transparent 78%),
+   radial-gradient(ellipse .8% 9% at 64% 92%,rgba(236,206,170,.45),transparent 78%),
+   linear-gradient(to bottom,rgba(255,240,216,.30),transparent 18%,transparent 78%,rgba(40,24,16,.30) 100%),
+   linear-gradient(to right,rgba(255,240,216,.10),transparent 40%,rgba(40,24,16,.14) 100%),
+   var(--gh)}
+.mad.bar{opacity:.8}.mad.trav{opacity:.5}.mad.leg{opacity:.85}
+.mad.l2{height:33%;-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent)}
+/* vaso de vidrio: reflejos, agua con tinte, borde grueso y sombra rosada en el piso */
+.mad.vaso{left:88.9%;top:56.28%;width:10.1%;height:39.64%;clip-path:polygon(2.2% 5.3%,97% 5.3%,90.4% 96.6%,72.8% 98.8%,49.5% 99.4%,25.7% 98.8%,14.2% 96.6%);
+  background:
+   radial-gradient(ellipse 41.5% 2.6% at 49.5% 40.6%,transparent 84%,rgba(255,255,255,.5) 93%,transparent 100%),
+   radial-gradient(ellipse 38% 2.8% at 49.5% 97%,rgba(255,255,255,.3),transparent 80%),
+   linear-gradient(to bottom,transparent 39%,rgba(255,236,240,.3) 41%,rgba(210,112,134,.14) 47%,rgba(190,90,116,.24) 72%,rgba(150,60,86,.34) 97%,transparent 100%),
+   linear-gradient(to right,transparent 62%,rgba(40,20,20,.12))}
+.mad.vsom{left:84%;top:92.5%;width:16%;height:6%;background:radial-gradient(ellipse 50% 42% at 55% 50%,rgba(214,108,132,.32),rgba(120,60,50,.16) 55%,transparent 78%)}
+/* realismo del atril: luz desde arriba a la izquierda, sombras de contacto y un grano muy leve, todo por encima de la imagen */
+.esc .foto{position:relative}
+.esc .foto::before,.esc .foto::after{content:"";position:absolute;inset:0;pointer-events:none}
+.esc .foto::before{background:
+  radial-gradient(ellipse 16% 5% at 14% 91%,rgba(48,28,16,.42),transparent 72%),
+  radial-gradient(ellipse 14% 4.5% at 86% 90.5%,rgba(48,28,16,.4),transparent 72%),
+  radial-gradient(ellipse 12% 3.6% at 94% 95.5%,rgba(40,24,14,.42),transparent 74%),
+  radial-gradient(ellipse 6% 2.4% at 51.5% 80.5%,rgba(48,28,16,.28),transparent 74%),
+  linear-gradient(to bottom,rgba(60,38,24,.30) 23.5%,rgba(60,38,24,.10) 29%,transparent 36%),
+  linear-gradient(to right,transparent 6%,rgba(255,244,222,.07) 8%,transparent 13%,transparent 85%,rgba(40,24,12,.07) 88%,transparent 95%),
+  radial-gradient(ellipse 85% 75% at 28% 4%,rgba(255,246,226,.30),transparent 62%),
+  radial-gradient(ellipse 120% 105% at 45% 42%,transparent 55%,rgba(52,32,18,.26) 100%)}
+.esc .foto::after{opacity:.2;background-size:240px 240px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .22 0 0 0 0 .14 0 0 0 0 .08 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E")}
 .cts{position:absolute;inset:0;pointer-events:none}
 .ct{position:absolute;top:37.5%;pointer-events:auto}
 .ct .k{display:block;font:600 max(10px,.764cqw)/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bordo-os)}
@@ -312,6 +373,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .brote .hoja path.n{fill:none;stroke:rgba(255,255,255,.45);stroke-width:.8;stroke-linecap:round}
 .brote .yema path{fill:var(--bordo-os)}
 .esc .brote-f{height:auto;z-index:3}
+.brote .charco{transform-box:fill-box;transform-origin:center;transition:transform .45s cubic-bezier(.3,1.6,.4,1)}
 .brote .flor{transform-box:fill-box;transform-origin:center;transition:transform .9s cubic-bezier(.3,1.5,.4,1)}
 @media (prefers-reduced-motion:reduce){.brote .hoja{transition:none}}
 
@@ -392,16 +454,16 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 
 <div class="mural" id="mural">
   <div class="fondo" aria-hidden="true">
-    <figure style="--x:-9vw;--y:0.5%;--w:14vw;--r:5deg"><div class="fr"><img src="obras/4-jeremias-18.jpg" alt="" width="664" height="1000" loading="lazy"></div></figure>
-    <figure style="--x:-12vw;--y:21.5%;--w:20vw;--r:-4deg"><div class="fr"><img src="obras/2-jesus.jpg" alt="" width="1000" height="668" loading="lazy"></div></figure>
-    <figure style="--x:91vw;--y:22%;--w:17vw;--r:3deg"><div class="fr"><img src="obras/1-corintios-13.jpg" alt="" width="834" height="1000" loading="lazy"></div></figure>
-    <figure style="--x:-8vw;--y:33%;--w:15vw;--r:-2deg"><div class="fr"><img src="obras/3-sadrac-mesac-y-abednego.jpg" alt="" width="749" height="1000" loading="lazy"></div></figure>
-    <figure style="--x:92vw;--y:43%;--w:16vw;--r:4deg"><div class="fr"><img src="obras/4-jeremias-18.jpg" alt="" width="664" height="1000" loading="lazy"></div></figure>
-    <figure style="--x:-12vw;--y:50%;--w:22vw;--r:3deg"><div class="fr"><img src="obras/2-jesus.jpg" alt="" width="1000" height="668" loading="lazy"></div></figure>
-    <figure style="--x:91vw;--y:82%;--w:15vw;--r:-3deg"><div class="fr"><img src="obras/1-corintios-13.jpg" alt="" width="834" height="1000" loading="lazy"></div></figure>
-    <figure style="--x:-6vw;--y:78%;--w:15vw;--r:2deg"><div class="fr"><img src="obras/3-sadrac-mesac-y-abednego.jpg" alt="" width="749" height="1000" loading="lazy"></div></figure>
-    <figure style="--x:90vw;--y:90%;--w:15vw;--r:3deg"><div class="fr"><img src="obras/4-jeremias-18.jpg" alt="" width="664" height="1000" loading="lazy"></div></figure>
-    <figure style="--x:-15vw;--y:96.5%;--w:21vw;--r:-3deg"><div class="fr"><img src="obras/2-jesus.jpg" alt="" width="1000" height="668" loading="lazy"></div></figure>
+    <figure style="--x:65.2vw;--y:81.16%;--w:60.96vw;--r:-22.8deg"><img src="fondo/arbol-salmo1.webp" alt="" width="700" height="520" loading="lazy" decoding="async"></figure>
+    <figure style="--x:20.4vw;--y:58.9%;--w:17.47vw;--r:49.0deg"><img src="fondo/jarron-manos.webp" alt="" width="512" height="655" loading="lazy" decoding="async"></figure>
+    <figure style="--x:-2.9vw;--y:42.25%;--w:18.15vw;--r:32deg"><img src="fondo/fuente.webp" alt="" width="355" height="570" loading="lazy" decoding="async"></figure>
+    <figure style="--x:-1.12vw;--y:21.02%;--w:18.84vw;--r:16.1deg"><img src="fondo/letra-amor.webp" alt="" width="314" height="187" loading="lazy" decoding="async"></figure>
+    <figure style="--x:40.58vw;--y:28.13%;--w:17.12vw;--r:-17.3deg"><img src="fondo/letra-alegria.webp" alt="" width="306" height="160" loading="lazy" decoding="async"></figure>
+    <figure style="--x:87.4vw;--y:42.4%;--w:13.36vw;--r:-12.9deg"><img src="fondo/letra-paz.webp" alt="" width="249" height="175" loading="lazy" decoding="async"></figure>
+    <figure style="--x:86.19vw;--y:21.67%;--w:10.96vw;--r:25.9deg"><img src="fondo/corazon.webp" alt="" width="172" height="238" loading="lazy" decoding="async"></figure>
+    <figure style="--x:-0.54vw;--y:88.25%;--w:4.79vw;--r:123.6deg"><img src="fondo/flor-amarilla.webp" alt="" width="42" height="64" loading="lazy" decoding="async"></figure>
+    <figure style="--x:5.07vw;--y:88.3%;--w:2.74vw;--r:56.0deg"><img src="fondo/flor-roja.webp" alt="" width="27" height="28" loading="lazy" decoding="async"></figure>
+    <figure style="--x:96.86vw;--y:45.3%;--w:2.74vw;--r:-163.3deg"><img src="fondo/flor-rosa.webp" alt="" width="27" height="33" loading="lazy" decoding="async"></figure>
   </div>
 
 <!-- OBRAS: carrusel infinito -->
@@ -515,7 +577,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 <footer id="pie">
   <h2 class="sr">Tu fe también puede ser una obra</h2>
   <div class="esc">
-    <div class="foto"><img src="atril-escena.jpg" width="2160" height="1032" alt="Final del lienzo: un atril de madera pintada con un tubo de pintura, un pincel y un vaso con brochas" loading="lazy" decoding="async"></div>
+    <div class="foto"><img src="atril-escena.jpg" width="2160" height="1032" alt="Final del lienzo: un atril de madera pintada con un tubo de pintura, un pincel y un vaso con brochas" loading="lazy" decoding="async"><i class="mad bar"></i><i class="mad leg l1"></i><i class="mad leg l2"></i><i class="mad trav"></i><i class="mad vsom"></i><i class="mad vaso"></i></div>
     <div class="cts">
       <div class="ct" style="left:22.9%"><span class="k">Instagram</span><a class="v" href="https://www.instagram.com/vastago.obras" target="_blank" rel="noopener">@vastago.obras</a></div>
       <div class="ct" style="left:36.1%"><span class="k">WhatsApp</span><a class="v" data-wa data-msg="Hola, quiero consultar." href="#contacto">Escribinos</a></div>
@@ -726,18 +788,18 @@ document.querySelectorAll('.origin').forEach(b=>{
   const NS='http://www.w3.org/2000/svg',reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','brote');svg.setAttribute('aria-hidden','true');
   mural.insertBefore(svg,mural.querySelector('.fondo').nextSibling);
-  let H=0,x0=0,A=0,EXT=0,leaves=[],tip=null,ftip=null,fsvg=null,flor=null,lastY=-1;
+  let H=0,Hs=0,Fh=0,x0=0,A=0,leaves=[],tip=null,fsvg=null,flor=null,gota=null,charco=null,lastY=-1;
   const xAt=y=>x0+A*Math.sin(y/170)+.5*A*Math.sin(y/61+1);
   const LEAF='M0 0 C6 -8 20 -9 31 0 C20 8 6 8 0 0Z',NERV='M3 0 L24 0';
   const mk=(tag,at)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);return e};
   function build(){
     const gut=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gut'))||60;
     const w=innerWidth;const g=Math.min(88,Math.max(20,w*.06));
-    H=mural.offsetHeight;x0=Math.max(11,g*.5);A=Math.min(6,x0*.35);
+    H=mural.offsetHeight;Hs=H-26;x0=Math.max(11,g*.5);A=Math.min(6,x0*.35);
     svg.setAttribute('width',Math.round(x0*2+70));svg.setAttribute('height',H);svg.setAttribute('viewBox','0 0 '+Math.round(x0*2+70)+' '+H);
     svg.style.width=Math.round(x0*2+70)+'px';
     svg.textContent='';leaves=[];
-    let d='M'+xAt(0).toFixed(1)+' 0';for(let y=14;y<=H;y+=14)d+=' L'+xAt(y).toFixed(1)+' '+y;
+    let d='M'+xAt(0).toFixed(1)+' 0';for(let y=14;y<Hs;y+=14)d+=' L'+xAt(y).toFixed(1)+' '+y;d+=' L'+xAt(Hs).toFixed(1)+' '+Hs;
     svg.appendChild(mk('path',{class:'tallo',d}));svg.appendChild(mk('path',{class:'tallo2',d}));
     const ys=[];
     const mt=mural.getBoundingClientRect().top+scrollY;
@@ -749,7 +811,7 @@ document.querySelectorAll('.origin').forEach(b=>{
     pts.sort((a,b)=>a[0]-b[0]);
     const sc=Math.min(1,Math.max(.6,innerWidth/900));
     pts.forEach(([y,side,s0])=>{
-      if(y<30||y>H-20)return;
+      if(y<30||y>Hs-14)return;
       const px=xAt(y),ang=side>0?42:138,sz=s0*sc*(side>0?1:.85);
       const gEl=mk('g',{class:'hoja'});
       gEl.style.transformOrigin='0 50%';
@@ -765,55 +827,66 @@ document.querySelectorAll('.origin').forEach(b=>{
     tip.appendChild(mk('path',{d:'M0 3 C-8 6 -11 13 -8 18 C-3 16 0 10 0 3Z',opacity:'.85'}));
     tip.appendChild(mk('path',{d:'M0 3 C8 6 11 13 8 18 C3 16 0 10 0 3Z',opacity:'.85'}));
     svg.appendChild(tip);
-    /* el tallo sale del lienzo y sigue por la pared, junto al atril: ahí se abre la flor */
+    /* la flor se abre al final del tallo, sobre el lienzo; al seguir bajando se vuelve una gota de pintura que cae hasta el piso del atril */
+    if(flor)flor.remove();
+    flor=mk('g',{class:'flor'});
+    const fx=xAt(Hs);
+    flor.dataset.b='translate('+fx.toFixed(1)+'px,'+Hs+'px) ';flor.style.transform=flor.dataset.b+'scale(0)';
+    for(let i=0;i<6;i++)flor.appendChild(mk('ellipse',{cx:0,cy:-9,rx:4.4,ry:8.6,fill:i%2?'#AA6766':'#8E4F4E',transform:'rotate('+(i*60)+')'}));
+    for(let i=0;i<6;i++)flor.appendChild(mk('ellipse',{cx:0,cy:-5.5,rx:2,ry:4.4,fill:'rgba(255,255,255,.18)',transform:'rotate('+(i*60+30)+')'}));
+    flor.appendChild(mk('circle',{r:4,fill:'#D5BF9E'}));flor.appendChild(mk('circle',{r:1.6,fill:'#8E4F4E'}));
+    svg.appendChild(flor);
     if(fsvg)fsvg.remove();
     const esc=document.querySelector('#pie .esc');
-    EXT=innerWidth>1000?150:26;
     if(esc){
+      Fh=Math.round((esc.querySelector('.foto')||esc).offsetHeight);
       fsvg=document.createElementNS(NS,'svg');fsvg.setAttribute('class','brote brote-f');fsvg.setAttribute('aria-hidden','true');
       const fw=Math.round(x0*2+70);
-      fsvg.setAttribute('width',fw);fsvg.setAttribute('height',EXT+40);fsvg.setAttribute('viewBox','0 0 '+fw+' '+(EXT+40));
-      fsvg.style.width=fw+'px';fsvg.style.height=(EXT+40)+'px';
-      let fd='M'+xAt(H).toFixed(1)+' -2';for(let y=12;y<=EXT;y+=12)fd+=' L'+xAt(H+y).toFixed(1)+' '+y;
-      fsvg.appendChild(mk('path',{class:'tallo',d:fd}));fsvg.appendChild(mk('path',{class:'tallo2',d:fd}));
-      [[EXT*.4,1,.8],[EXT*.7,-1,.62]].forEach(([y,side,s0])=>{
-        const gEl=mk('g',{class:'hoja'});gEl.style.transformOrigin='0 50%';
-        const base='translate('+xAt(H+y).toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+(side>0?42:138)+'deg) ';
-        gEl.dataset.b=base;gEl.dataset.s=s0;gEl.dataset.y=H+y;
-        gEl.appendChild(mk('path',{class:'l',d:LEAF}));gEl.appendChild(mk('path',{class:'n',d:NERV}));
-        gEl.style.transform=base+'scale(0)';fsvg.appendChild(gEl);leaves.push(gEl);
-      });
-      ftip=tip.cloneNode(true);ftip.setAttribute('visibility','hidden');fsvg.appendChild(ftip);
-      flor=mk('g',{class:'flor'});
-      const fx=xAt(H+EXT);
-      flor.style.transform='translate('+fx.toFixed(1)+'px,'+EXT+'px) scale(0)';flor.dataset.b='translate('+fx.toFixed(1)+'px,'+EXT+'px) ';
-      for(let i=0;i<6;i++)flor.appendChild(mk('ellipse',{cx:0,cy:-9,rx:4.4,ry:8.6,fill:i%2?'#AA6766':'#8E4F4E',transform:'rotate('+(i*60)+')'}));
-      for(let i=0;i<6;i++)flor.appendChild(mk('ellipse',{cx:0,cy:-5.5,rx:2,ry:4.4,fill:'rgba(255,255,255,.18)',transform:'rotate('+(i*60+30)+')'}));
-      flor.appendChild(mk('circle',{r:4,fill:'#D5BF9E'}));flor.appendChild(mk('circle',{r:1.6,fill:'#8E4F4E'}));
-      fsvg.appendChild(flor);
+      fsvg.setAttribute('width',fw);fsvg.setAttribute('height',Fh);fsvg.setAttribute('viewBox','0 0 '+fw+' '+Fh);
+      fsvg.style.width=fw+'px';fsvg.style.height=Fh+'px';
+      gota=mk('g',{class:'gota',visibility:'hidden'});
+      gota.appendChild(mk('path',{d:'M0 -12 C3.5 -5 8 0 8 5 A8 8 0 0 1 -8 5 C-8 0 -3.5 -5 0 -12Z',fill:'#8E4F4E'}));
+      gota.appendChild(mk('ellipse',{cx:-2.6,cy:4,rx:1.6,ry:3,fill:'rgba(255,255,255,.35)',transform:'rotate(18 -2.6 4)'}));
+      fsvg.appendChild(gota);
+      charco=mk('g',{class:'charco'});
+      const yl=Math.round(Fh*.885);
+      charco.dataset.b='translate('+fx.toFixed(1)+'px,'+yl+'px) ';charco.style.transform=charco.dataset.b+'scale(0)';
+      charco.appendChild(mk('ellipse',{cx:0,cy:0,rx:16,ry:4.4,fill:'#8E4F4E'}));
+      charco.appendChild(mk('ellipse',{cx:-4,cy:-1,rx:6,ry:1.4,fill:'rgba(255,255,255,.28)'}));
+      [[-24,1.5,3,1.3],[22,2,3.4,1.4],[30,-.5,1.8,.9],[-31,.5,1.6,.8]].forEach(([dx,dy,rx,ry])=>charco.appendChild(mk('ellipse',{cx:dx,cy:dy,rx,ry,fill:'#8E4F4E'})));
+      fsvg.appendChild(charco);
       esc.appendChild(fsvg);
     }
     lastY=-1;update();
   }
   function update(){
     if(!H)return;
-    const mt=mural.getBoundingClientRect().top+scrollY,L=H+EXT;
-    let ty=reduce?L:Math.min(L,Math.max(0,scrollY+innerHeight*.72-mt));
+    const mt=mural.getBoundingClientRect().top+scrollY;
+    const tyMax=Math.max(Hs+120,document.documentElement.scrollHeight-innerHeight+innerHeight*.72-mt);
+    let ty=reduce?tyMax:Math.min(tyMax,Math.max(0,scrollY+innerHeight*.72-mt));
     if(Math.abs(ty-lastY)<1)return;lastY=ty;
-    svg.style.clipPath='inset(0 0 '+Math.max(0,H-Math.min(ty,H))+'px 0)';
-    if(fsvg)fsvg.style.clipPath='inset(0 0 '+Math.max(0,(EXT+40)-Math.max(0,ty-H))+'px 0)';
+    svg.style.clipPath=ty>=Hs?'none':'inset(0 0 '+Math.max(0,H-ty)+'px 0)';
     leaves.forEach(l=>{const on=+l.dataset.y<ty-6;l.style.transform=l.dataset.b+'scale('+(on?l.dataset.s:0)+')'});
-    if(flor)flor.style.transform=flor.dataset.b+'scale('+(ty>=L-4?1.35:0)+')';
-    const inM=ty>8&&ty<H&&!reduce,inF=ty>=H&&ty<L-4&&!reduce;
+    const inM=ty>8&&ty<Hs&&!reduce;
     tip.setAttribute('visibility',inM?'visible':'hidden');
     if(inM)tip.setAttribute('transform','translate('+xAt(ty).toFixed(1)+' '+ty.toFixed(1)+')');
-    if(ftip){ftip.setAttribute('visibility',inF?'visible':'hidden');if(inF)ftip.setAttribute('transform','translate('+xAt(ty).toFixed(1)+' '+(ty-H).toFixed(1)+')')}
+    /* flor al llegar al final del tallo; después se achica y nace la gota */
+    const t0=Hs+150,p=reduce?0:Math.min(1,Math.max(0,(ty-t0)/(tyMax-t0)));
+    const open=ty>=Hs-4,melt=Math.min(1,p/.07);
+    if(flor)flor.style.transform=flor.dataset.b+'scale('+(open?1.2:0)+')';
+    if(gota){
+      const fall=p>0&&p<.985,yl=Fh*.885,y=10+(yl-10)*Math.pow(p,1.7),sy=1+.55*Math.min(1,p*1.6);
+      gota.setAttribute('visibility',fall?'visible':'hidden');
+      if(fall)gota.setAttribute('transform','translate('+xAt(Hs).toFixed(1)+' '+y.toFixed(1)+') scale('+(.15+.85*melt).toFixed(2)+' '+((.15+.85*melt)*sy).toFixed(2)+')');
+      charco.style.transform=charco.dataset.b+'scale('+(p>=.985?1:0)+')';
+    }
   }
   let tick=0;const sched=()=>{if(tick)return;tick=requestAnimationFrame(()=>{tick=0;update()})};
   addEventListener('scroll',sched,{passive:true});
   let rt=0;const rebuild=()=>{clearTimeout(rt);rt=setTimeout(build,150)};
   addEventListener('resize',rebuild);
   new ResizeObserver(rebuild).observe(mural);
+  {const e=document.querySelector('#pie .esc');if(e)new ResizeObserver(rebuild).observe(e)}
   (document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>setTimeout(build,50));
   addEventListener('load',()=>setTimeout(build,100));
   build();
