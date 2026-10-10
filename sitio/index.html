@@ -354,6 +354,18 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .ph.foto::before,.ph.foto::after{display:none}
 .ph.foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
+/* taller de arte: foto a la izquierda, datos a la derecha */
+.ta{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(22px,3.5vw,48px);margin-top:34px;align-items:stretch}
+.ta>.ph{min-height:420px;height:100%}
+.ta .tc{justify-content:center}
+.disc{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px 10px;margin:0 0 4px}
+.disc li{font:400 clamp(22px,2.4vw,30px)/1 var(--mano);letter-spacing:.05em;text-transform:uppercase;color:var(--bordo-os);padding:5px 14px 3px;background:rgba(213,191,158,.45);transform:rotate(-1deg);clip-path:polygon(0 0,100% 0,98% 30%,100% 55%,98% 80%,100% 100%,0 100%,2% 78%,0 52%,2% 28%)}
+.disc li:nth-child(even){transform:rotate(1deg)}
+.regalo{position:relative;isolation:isolate;margin:16px 0 4px;padding:12px 22px;font:500 16px/1.35 var(--sans);color:#fff;transform:rotate(-1.2deg)}
+.regalo::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--bordo-os);-webkit-mask:var(--rect) center/100% 100% no-repeat;mask:var(--rect) center/100% 100% no-repeat}
+.regalo b{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;display:block;color:var(--arena);margin-bottom:2px}
+@media (max-width:900px){.ta{grid-template-columns:1fr}.ta>.ph{min-height:300px;height:300px}}
+
 </style>
 </head>
 <body>
@@ -419,22 +431,22 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 <!-- TALLER -->
 <section class="s lienzo" id="taller">
   <p class="eyebrow">Taller</p>
-  <h2>Aprendé con las manos</h2>
-  <p class="lead">Te enseñamos a pintar y a construir tu propio atril, solos o en grupo, en nuestro taller.</p>
-  <div class="dos">
+  <h2>Taller de arte</h2>
+  <p class="lead">Dibujo, pintura, escultura y animación en un mismo taller. Los materiales están incluidos.</p>
+  <div class="ta">
+    <div class="ph foto"><img src="taller-pintura.jpg" alt="Un lienzo con el Salmo 1 sobre un atril del taller" loading="lazy" decoding="async"></div>
     <article class="tc">
-      <div class="ph foto"><img src="taller-pintura.jpg" alt="Un lienzo con el Salmo 1 sobre un atril del taller" loading="lazy" decoding="async"></div>
-      <p class="num">01 · Pintura</p><h3>Pintura</h3><p class="ln">Te acompañamos a llevar una idea al lienzo, paso a paso, a tu ritmo.</p>
-      <dl class="fx"><div><dt>Modalidad</dt><dd>Individual o en grupo</dd></div><div><dt>Frecuencia</dt><dd>Una clase, por semana o por mes</dd></div><div><dt>Dónde</dt><dd>Presencial · calle Paraguay</dd></div></dl>
-      <p class="nota">Días, cupos y precio: consultalos por WhatsApp.</p>
-      <a class="bt" data-wa data-msg="Hola, quiero consultar por las clases de pintura." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Consultar por pintura</a>
-    </article>
-    <article class="tc">
-      <div class="ph foto"><img src="taller-atriles.jpg" alt="Un atril de madera con un lienzo en proceso" loading="lazy" decoding="async"></div>
-      <p class="num">02 · Atriles</p><h3>Atriles</h3><p class="ln">Aprendé a trabajar la madera y construí un atril para tu casa o tu taller.</p>
-      <dl class="fx"><div><dt>Modalidad</dt><dd>Individual o en grupo</dd></div><div><dt>Frecuencia</dt><dd>Una clase, por semana o por mes</dd></div><div><dt>Dónde</dt><dd>Presencial · calle Paraguay</dd></div></dl>
-      <p class="nota">Días, cupos y precio: consultalos por WhatsApp.</p>
-      <a class="bt" data-wa data-msg="Hola, quiero consultar por las clases de atriles." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Consultar por atriles</a>
+      <ul class="disc" aria-label="Qué se hace en el taller"><li>Dibujo</li><li>Pintura</li><li>Escultura</li><li>Animación</li></ul>
+      <p class="regalo"><b>Mes de la inauguración:</b> te regalamos un bastidor.</p>
+      <dl class="fx">
+        <div><dt>Días</dt><dd>Lunes y jueves</dd></div>
+        <div><dt>Turno mañana</dt><dd>10 a 11:30</dd></div>
+        <div><dt>Turno tarde</dt><dd>18 a 19:30</dd></div>
+        <div><dt>Materiales</dt><dd>Incluidos</dd></div>
+        <div><dt>Dónde</dt><dd>Presencial · calle Paraguay</dd></div>
+      </dl>
+      <p class="nota">Cupos y precio: consultalos por WhatsApp.</p>
+      <a class="bt" data-wa data-msg="Hola, quiero consultar por el taller de arte." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Consultar por el taller</a>
     </article>
   </div>
   <div class="tira"><div class="ph foto"><img src="taller-espacio.jpg" alt="Bastidores de madera y lienzos del taller" loading="lazy" decoding="async"></div><div class="ph foto"><img src="taller-herramientas.jpg" alt="Un tablero con las herramientas del taller" loading="lazy" decoding="async" style="object-position:50% 25%"></div><div class="ph" style="--a:56deg"><span>Foto pendiente · una clase</span></div></div>
