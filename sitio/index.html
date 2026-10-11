@@ -221,14 +221,24 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 /* tienda: el lienzo es toda la página; Matías y Abigail cuelgan de arneses y pintan el boceto de las prendas */
 section.tienda{position:relative;padding:0;overflow:hidden;background-color:#fff;background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px)}
 .esc-t{position:relative;container-type:inline-size}
-.esc-t picture,.esc-t img{display:block;width:100%;height:auto;user-select:none}
+.esc-t picture,.esc-t picture img{display:block;width:100%;height:auto;user-select:none}
+.esc-t .fg{position:absolute;inset:0;pointer-events:none}.esc-t .fg-m{display:none}
+.esc-t .fig{position:absolute;transform-origin:var(--ox) var(--oy);will-change:transform;animation:t-bal 5.8s ease-in-out infinite alternate}
+.esc-t .fig img{position:absolute;display:block;max-width:none;user-select:none}
+.esc-t .fig .br{transform-origin:var(--sx) var(--sy);will-change:transform;animation:t-pinta 2.1s ease-in-out infinite alternate}
+.esc-t .f2{animation-duration:6.9s;animation-delay:-2.6s}.esc-t .f2 .br{animation-duration:1.7s;animation-name:t-dibuja}
+@keyframes t-bal{from{transform:rotate(-1.7deg)}to{transform:rotate(1.7deg)}}
+@keyframes t-pinta{from{transform:rotate(-5deg)}to{transform:rotate(6deg)}}
+@keyframes t-dibuja{from{transform:rotate(-3deg) translateY(-1px)}to{transform:rotate(3.5deg) translateY(1px)}}
+.esc-t:not(.vis) .fig,.esc-t:not(.vis) .fig .br{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.esc-t .fig,.esc-t .fig .br{animation:none}}
 .esc-t .tt{position:absolute;left:0;right:0;top:3.4cqw;text-align:center;padding:0 var(--gut);pointer-events:none}
 .tienda h2{font:400 max(28px,3.6cqw)/1.05 var(--mano);text-transform:uppercase;letter-spacing:.05em;margin:10px auto 0;color:var(--tinta)}
 .tienda h2 em{font-style:normal;color:var(--bordo-os)}
 .esc-t .ac{position:absolute;left:0;right:0;bottom:3cqw;display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap;padding:0 var(--gut)}
 .esc-t .ac p{font-size:14px;color:#5a4f46}
 .esc-t .ac p a{color:var(--tinta);font-weight:500;border-bottom:1.5px solid var(--bordo);text-decoration:none}
-@media (max-width:760px){.esc-t .tt{top:3.5%}.esc-t .tt .eyebrow{font-size:10px;letter-spacing:.1em}.esc-t .ac{position:static;flex-direction:column;gap:16px;padding:6px var(--gut) 44px}}
+@media (max-width:760px){.esc-t .fg-d{display:none}.esc-t .fg-m{display:block}.esc-t .tt{top:3.5%}.esc-t .tt .eyebrow{font-size:10px;letter-spacing:.1em}.esc-t .ac{position:static;flex-direction:column;gap:16px;padding:6px var(--gut) 44px}}
 
 /* sobre vástago */
 .sobre{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:clamp(32px,6vw,72px);align-items:start}
@@ -471,8 +481,10 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   <div class="esc-t">
     <picture>
       <source media="(max-width:760px)" srcset="tienda-escena-m.webp" width="900" height="1785">
-      <img src="tienda-escena.webp" width="2160" height="1350" alt="Matías y Abigail, colgados de arneses, dibujan y pintan sobre el lienzo el boceto de una remera, un buzo y un delantal, y el logo de Vástago, con dos cintas de clausura cruzadas en X que dicen Clausurado temporalmente" loading="lazy" decoding="async">
+      <img src="tienda-escena.webp" width="2160" height="1500" alt="Matías y Abigail, colgados de arneses, dibujan y pintan sobre el lienzo el boceto de una remera, un buzo y un delantal, y el logo de Vástago, con dos cintas de clausura cruzadas en X que dicen Clausurado temporalmente" loading="lazy" decoding="async">
     </picture>
+    <div class="fg fg-d" aria-hidden="true"><div class="fig f1" style="left:12.87%;top:2.6%;width:17.546%;height:56.4%;--ox:22.032%;--oy:0.962%"><img src="tienda-mati-cuerpo-d.webp" alt="" style="left:0%;top:0%;width:64.644%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-mati-brazo-d.webp" alt="" style="left:23.219%;top:32.742%;width:76.781%;height:25.414%;--sx:7.216%;--sy:90.233%" loading="lazy" decoding="async"></div><div class="fig f2" style="left:74.444%;top:2.533%;width:14.167%;height:79.467%;--ox:91.176%;--oy:0.649%"><img src="tienda-abi-cuerpo-d.webp" alt="" style="left:31.373%;top:0%;width:68.627%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-abi-brazo-d.webp" alt="" style="left:0%;top:69.966%;width:75.49%;height:5.117%;--sx:92.208%;--sy:45.902%" loading="lazy" decoding="async"></div></div>
+    <div class="fg fg-m" aria-hidden="true"><div class="fig f1" style="left:3.222%;top:1.345%;width:42.111%;height:53.277%;--ox:22.032%;--oy:0.847%"><img src="tienda-mati-cuerpo-m.webp" alt="" style="left:0%;top:0%;width:64.644%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-mati-brazo-m.webp" alt="" style="left:23.219%;top:40.168%;width:76.781%;height:22.608%;--sx:7.216%;--sy:90.233%" loading="lazy" decoding="async"></div><div class="fig f2" style="left:59.333%;top:1.345%;width:33.889%;height:92.773%;--ox:91.475%;--oy:0.449%"><img src="tienda-abi-cuerpo-m.webp" alt="" style="left:31.475%;top:0%;width:68.525%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-abi-brazo-m.webp" alt="" style="left:0%;top:78.382%;width:75.738%;height:3.684%;--sx:92.208%;--sy:45.902%" loading="lazy" decoding="async"></div></div>
     <div class="tt"><p class="eyebrow">Tienda · clausurada temporalmente</p><h2 class="mano">Estamos pintando <em>la tienda</em></h2></div>
     <div class="ac"><a class="bt" data-wa data-msg="Hola, avisame cuando la tienda esté lista." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Avisame cuando esté lista</a><p>o seguinos en <a href="https://www.instagram.com/vastago.obras" target="_blank" rel="noopener">@vastago.obras</a></p></div>
   </div>
@@ -869,6 +881,11 @@ document.querySelectorAll('a[data-wa]').forEach(a=>{
 (function(){var t=document.getElementById('tienda'),m=document.getElementById('mural');if(!t||!m)return;
   function al(){var y=t.getBoundingClientRect().top-m.getBoundingClientRect().top,o=((-y%4)+4)%4;t.style.backgroundPosition='0 '+o+'px,0 '+o+'px'}
   al();addEventListener('resize',al);if(window.ResizeObserver)new ResizeObserver(al).observe(m)})();
+</script>
+<script>
+/* Matías y Abigail se balancean en los arneses y mueven el brazo; solo mientras la sección se ve */
+(function(){var e=document.querySelector('.esc-t');if(!e||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(en){e.classList.toggle('vis',en[0].isIntersecting)},{rootMargin:'80px'}).observe(e)})();
 </script>
 </body>
 </html>
