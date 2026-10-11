@@ -470,7 +470,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 <section class="s tienda" id="tienda" aria-label="Tienda, clausurada temporalmente">
   <div class="esc-t">
     <picture>
-      <source media="(max-width:760px)" srcset="tienda-escena-m.webp" width="900" height="1905">
+      <source media="(max-width:760px)" srcset="tienda-escena-m.webp" width="900" height="1785">
       <img src="tienda-escena.webp" width="2160" height="1350" alt="Matías y Abigail, colgados de arneses, dibujan y pintan sobre el lienzo el boceto de una remera, un buzo y un delantal, y el logo de Vástago, con un sello que dice Clausurado temporalmente" loading="lazy" decoding="async">
     </picture>
     <div class="tt"><p class="eyebrow">Tienda · clausurada temporalmente</p><h2 class="mano">Estamos pintando <em>la tienda</em></h2></div>
@@ -863,6 +863,12 @@ document.querySelectorAll('a[data-wa]').forEach(a=>{
   if(!WA_NUMBER)return;
   a.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(a.dataset.msg||'');a.target='_blank';a.rel='noopener';
 });
+</script>
+<script>
+/* la trama de la Tienda queda alineada con la del resto del lienzo (mismo tejido, sin salto en el borde) */
+(function(){var t=document.getElementById('tienda'),m=document.getElementById('mural');if(!t||!m)return;
+  function al(){var y=t.getBoundingClientRect().top-m.getBoundingClientRect().top,o=((-y%4)+4)%4;t.style.backgroundPosition='0 '+o+'px,0 '+o+'px'}
+  al();addEventListener('resize',al);if(window.ResizeObserver)new ResizeObserver(al).observe(m)})();
 </script>
 </body>
 </html>
