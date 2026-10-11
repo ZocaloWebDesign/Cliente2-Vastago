@@ -5,13 +5,24 @@
 <!-- v2026-10-10b -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vástago · Fe en obra</title>
-<meta name="description" content="Obras de arte con pasajes bíblicos pintados a mano. Cuadros, encargos, talleres y esculturas.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:site_name" content="Vástago">
+<meta property="og:title" content="Vástago · Fe en obra">
+<meta property="og:description" content="Obras de arte con pasajes bíblicos pintados a mano. Cuadros, encargos y taller de arte en San Francisco, Córdoba.">
+<meta property="og:image" content="https://vastago-sitio.vercel.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Obras de arte con pasajes bíblicos pintados a mano. Cuadros, encargos, talleres y esculturas. San Francisco, Córdoba.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&family=Just+Another+Hand&display=swap" rel="stylesheet">
 <style>
 :root{
-  --arena:#E1D3C0; --camel:#D5BF9E; --bordo:#AA6766; --bordo-os:#8E4F4E; --tinta:#161311; --blanco:#fff;
+  --arena:#E1D3C0; --camel:#D5BF9E; --bordo:#AA6766; --bordo-os:#8E4F4E; --tinta:#161311; --blanco:#fff; --bordo-tx:#6E3837; --bordo-hov:#7C4342; --texto-2:#5a4f46;
   --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif; --mano:'Just Another Hand','Patrick Hand',cursive;
   --gut:clamp(20px,6vw,88px);
 }
@@ -19,11 +30,11 @@
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 .lenis.lenis-stopped{overflow:hidden}
-body{background:#fff;color:var(--tinta);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body{background:var(--blanco);color:var(--tinta);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit}
 /* lienzo: trama sutil de tela sobre blanco */
-.lienzo{background-color:#fff;background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px)}
+.lienzo{background-color:var(--blanco);background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px)}
 
 /* ---------- navegación ---------- */
 .nav-btn{position:fixed;top:2.2vh;right:4.4vw;z-index:60;font:500 15px var(--sans);display:flex;gap:10px;align-items:center;background:none;border:0;cursor:pointer;color:var(--tinta);padding:10px 4px;min-height:44px}
@@ -38,10 +49,10 @@ a{color:inherit}
 
 /* ---------- hero con scroll (4 obras) ---------- */
 .track{height:calc(100vh + 800vh);position:relative}
-.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:#fff}
-.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff;pointer-events:none}
+.stage{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--blanco)}
+.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:var(--blanco);pointer-events:none}
 .skip{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:50;font:500 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;background:var(--tinta);color:var(--arena);border-radius:40px;padding:11px 18px;transition:opacity .3s}
-.skip:hover{background:var(--bordo-os)}
+.skip:hover{background:var(--bordo-hov)}
 
 /* ---------- secciones ---------- */
 section.s{position:relative;padding:clamp(72px,12vh,140px) var(--gut)}
@@ -49,16 +60,16 @@ section.s{position:relative;padding:clamp(72px,12vh,140px) var(--gut)}
 h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spacing:-.01em}
 .lead{color:#4a4039;max-width:54ch}
 .tablon{display:block;width:100%;max-width:220px;height:6px;margin:22px 0 0;background:var(--bordo);clip-path:polygon(0 40%,12% 20%,30% 55%,52% 25%,74% 60%,100% 30%,100% 70%,70% 100%,46% 70%,22% 95%,0 75%)}
-.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 24px;border-radius:40px;font:600 14px var(--sans);text-decoration:none;background:var(--tinta);color:#fff;border:0;cursor:pointer;transition:background .2s}
-.btn:hover{background:var(--bordo-os)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 24px;border-radius:40px;font:600 14px var(--sans);text-decoration:none;background:var(--tinta);color:var(--blanco);border:0;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--bordo-hov)}
 .btn.o{background:none;color:var(--tinta);box-shadow:inset 0 0 0 1.5px var(--tinta)}
-.btn.o:hover{background:var(--tinta);color:#fff}
+.btn.o:hover{background:var(--tinta);color:var(--blanco)}
 /* botón "origin": el relleno nace desde donde entra el puntero */
 .btn.origin{position:relative;overflow:hidden;transition:color .3s cubic-bezier(.16,1,.3,1),transform .2s cubic-bezier(.16,1,.3,1)}
 .btn.origin:hover{background:none}
-.btn.origin.filled{color:#fff}
+.btn.origin.filled{color:var(--blanco)}
 .btn.origin:not(.o):hover{background:var(--tinta)}
-.btn.origin:not(.o) .of{background:var(--bordo-os)}
+.btn.origin:not(.o) .of{background:var(--bordo-hov)}
 .btn.origin:active{transform:scale(.985)}
 .btn.origin .of{position:absolute;border-radius:50%;background:var(--tinta);pointer-events:none;transform:translate(-50%,-50%) scale(0);transition:transform .5s cubic-bezier(.16,1,.3,1)}
 .btn.origin.filled .of{transform:translate(-50%,-50%) scale(1)}
@@ -73,9 +84,9 @@ h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spac
 /* subgrid: foto, título, técnica y precio quedan alineados entre cards aunque un título ocupe dos líneas */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));column-gap:28px;row-gap:0;margin-top:44px}
 .card{display:grid;grid-template-rows:subgrid;grid-row:span 4;align-content:start;margin-bottom:44px}
-.card .ph{aspect-ratio:3/4;background:var(--camel);display:grid;place-items:center;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-os);box-shadow:0 2px 6px rgba(40,30,20,.12),0 18px 36px rgba(40,30,20,.12)}
+.card .ph{aspect-ratio:3/4;background:var(--camel);display:grid;place-items:center;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-tx);box-shadow:0 2px 6px rgba(40,30,20,.12),0 18px 36px rgba(40,30,20,.12)}
 .card h3{font:400 22px/1.2 var(--serif);margin-top:18px}
-.card p{font-size:13.5px;color:#5a4f46}
+.card p{font-size:13.5px;color:var(--texto-2)}
 .card .pr{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:14px;font-weight:500}
 .card .pr a{font-size:13px;color:var(--bordo-os);font-weight:600}
 
@@ -86,7 +97,7 @@ h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spac
 
 
 /* fondo unido: el lienzo continuo con elementos de las obras pintados directo sobre la tela, sin marco, desde las obras hasta el atril (la tienda lo tapa) */
-.mural{position:relative;overflow:clip;background-color:#fff;background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px)}
+.mural{position:relative;overflow:clip;background-color:var(--blanco);background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px)}
 .mural>section.s{z-index:1}
 .mural .lienzo{background:none}
 .fondo{position:absolute;inset:0;pointer-events:none;overflow:hidden}
@@ -114,7 +125,7 @@ h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spac
 .pl-title{font:400 clamp(20px,2.4vw,28px)/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pl-sub{margin-top:4px;font:400 14px/1.4 var(--sans);color:var(--pl-muted)}
 .pl-btn{appearance:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--pl-line);background:transparent;color:inherit;display:grid;place-items:center;cursor:pointer;transition:background .2s ease,color .2s ease}
-.pl-btn:hover{background:var(--tinta);color:#fff}
+.pl-btn:hover{background:var(--tinta);color:var(--blanco)}
 .pl-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @keyframes pl-in{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.pl-cap>*{animation:none}.pl-print{transition:none}}
@@ -132,13 +143,13 @@ h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spac
 /* taller */
 .dos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-top:40px}
 .tcard{background:rgba(255,255,255,.7);padding:18px 18px 26px;box-shadow:0 2px 6px rgba(40,30,20,.08),0 14px 30px rgba(40,30,20,.08)}
-.tcard .ph{aspect-ratio:16/10;background:var(--camel);display:grid;place-items:center;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-os)}
+.tcard .ph{aspect-ratio:16/10;background:var(--camel);display:grid;place-items:center;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-tx)}
 .tcard h3{font:400 28px var(--serif);margin:20px 0 6px}
 .tcard p{color:#4a4039;margin-bottom:14px}
 .tcard a{font-weight:600;font-size:14px;color:var(--bordo-os)}
 
 /* expo */
-.photo{aspect-ratio:4/3;background:var(--camel);display:grid;place-items:center;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-os);box-shadow:0 18px 40px rgba(40,30,20,.14)}
+.photo{aspect-ratio:4/3;background:var(--camel);display:grid;place-items:center;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-tx);box-shadow:0 18px 40px rgba(40,30,20,.14)}
 
 /* tienda */
 .prox{text-align:center}
@@ -155,21 +166,21 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 .hd h2{margin-bottom:8px}
 .lnk{font:500 15px var(--sans);border-bottom:1.5px solid var(--bordo);padding-bottom:2px;text-decoration:none;white-space:nowrap;color:var(--tinta)}
 .lnk:hover{color:var(--bordo-os)}
-.bt{display:inline-flex;gap:10px;align-items:center;justify-content:center;padding:14px 22px;font:500 15px var(--sans);border-radius:2px;background:var(--tinta);color:#fff;text-decoration:none;transition:background .2s,color .2s;white-space:nowrap}
-.bt:hover{background:var(--bordo-os)}
-.bt.claro{background:var(--arena);color:var(--tinta)}.bt.claro:hover{background:#fff}
+.bt{display:inline-flex;gap:10px;align-items:center;justify-content:center;padding:14px 22px;font:500 15px var(--sans);border-radius:2px;background:var(--tinta);color:var(--blanco);text-decoration:none;transition:background .2s,color .2s;white-space:nowrap}
+.bt:hover{background:var(--bordo-hov)}
+.bt.claro{background:var(--arena);color:var(--tinta)}.bt.claro:hover{background:var(--blanco)}
 .bt.grande{padding:20px 32px;font-size:19px;box-shadow:0 14px 28px rgba(22,19,17,.22)}
 .wa{width:19px;height:19px;flex:none}
-.ph{position:relative;background:var(--camel);border:1.5px dashed var(--bordo-os);display:flex;align-items:center;justify-content:center;color:var(--bordo-os);overflow:hidden}
+.ph{position:relative;background:var(--camel);border:1.5px dashed var(--bordo-os);display:flex;align-items:center;justify-content:center;color:var(--bordo-tx);overflow:hidden}
 .ph::before,.ph::after{content:"";position:absolute;width:170%;height:1px;background:rgba(142,79,78,.3);left:0;top:0;transform-origin:0 0;transform:rotate(var(--a,50deg))}
 .ph::after{top:100%;transform:rotate(calc(var(--a,50deg) * -1))}
 .ph span{position:relative;z-index:1;background:var(--camel);padding:2px 10px;font:500 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;text-align:center}
-.pend{display:inline-block;font:600 10px var(--sans);letter-spacing:.1em;text-transform:uppercase;border:1.5px dashed var(--bordo);color:var(--bordo-os);padding:2px 8px;font-style:normal;vertical-align:middle}
+.pend{display:inline-block;font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;border:1.5px dashed var(--bordo);color:var(--bordo-os);padding:2px 8px;font-style:normal;vertical-align:middle}
 .sprout{display:block;width:200px;height:4px;background:var(--bordo);position:relative;margin-top:16px;border-radius:3px}
 .sprout::after{content:"";position:absolute;right:-6px;top:-8px;width:20px;height:20px;border-radius:0 100% 0 100%;background:var(--bordo-os);transform:rotate(-20deg)}
 .fab{position:fixed;right:20px;bottom:20px;width:60px;height:60px;border-radius:50%;background:var(--bordo-os);display:grid;place-items:center;box-shadow:0 10px 24px rgba(40,30,20,.35);z-index:55;transition:background .2s,transform .2s}
 .fab:hover{background:var(--tinta);transform:scale(1.05)}
-.fab svg{width:30px;height:30px;color:#fff}
+.fab svg{width:30px;height:30px;color:var(--blanco)}
 
 /* encargos: banda */
 .banda{position:relative;max-width:1040px;margin:0 auto;padding:clamp(22px,3.2vw,34px) clamp(26px,4vw,48px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr) auto;gap:clamp(16px,2.4vw,30px);align-items:center}
@@ -194,8 +205,8 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 .tc .ln{font-size:16.5px;color:#3a322c;max-width:46ch}
 .fx{margin:14px 0 0;border-top:1px solid rgba(22,19,17,.2);width:100%}
 .fx div{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid rgba(22,19,17,.2);font-size:14.5px}
-.fx dt{color:#5a4f46}.fx dd{font-weight:500;text-align:right}
-.tc .nota{font-size:14px;color:#5a4f46;margin:10px 0 0}
+.fx dt{color:var(--texto-2)}.fx dd{font-weight:500;text-align:right}
+.tc .nota{font-size:14px;color:var(--texto-2);margin:10px 0 0}
 .tc .bt{margin-top:16px}
 .tira{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px;margin-top:32px}
 .tira .ph{height:200px}
@@ -206,9 +217,9 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 .portada .ph span{position:absolute;left:50%;top:34%;transform:translateX(-50%)}
 .portada .tx{position:absolute;left:0;right:0;bottom:0;padding:70px clamp(20px,3vw,44px) 26px;background:linear-gradient(transparent,rgba(22,19,17,.72));z-index:3}
 .portada .eyebrow{color:var(--arena)}
-.portada h2{color:#fff;margin:4px 0 8px;font-size:clamp(32px,4.4vw,58px)}
+.portada h2{color:var(--blanco);margin:4px 0 8px;font-size:clamp(32px,4.4vw,58px)}
 .chips{display:flex;gap:12px;flex-wrap:wrap}
-.chips i{font:600 10px var(--sans);letter-spacing:.1em;text-transform:uppercase;font-style:normal;border:1.5px dashed #E8C9C8;color:#F3E2E0;padding:3px 9px;background:rgba(22,19,17,.35)}
+.chips i{font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;font-style:normal;border:1.5px dashed #E8C9C8;color:#F3E2E0;padding:3px 9px;background:rgba(22,19,17,.35)}
 .mid{display:grid;grid-template-columns:minmax(0,480px) 1fr;gap:clamp(28px,5vw,56px);padding-top:46px;align-items:center}
 .hmano{font:400 clamp(44px,5vw,62px)/.95 var(--mano);text-transform:uppercase;letter-spacing:.04em;color:var(--bordo-os);margin:8px 0 14px}
 .mid .tx1{font-size:19px;line-height:1.5;color:#2a231e;max-width:38ch}
@@ -219,26 +230,26 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 .vp::after{content:"";position:absolute;left:24px;top:19px;border-left:18px solid var(--bordo-os);border-top:12px solid transparent;border-bottom:12px solid transparent}
 
 /* tienda: el lienzo es toda la página; Matías y Abigail cuelgan de arneses y pintan el boceto de las prendas */
-section.tienda{position:relative;padding:0;overflow:hidden;background-color:#fff;background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px)}
+section.tienda{position:relative;padding:0;overflow:hidden;background-color:var(--blanco);background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px)}
 .esc-t{position:relative;container-type:inline-size}
 .esc-t picture,.esc-t picture img{display:block;width:100%;height:auto;user-select:none}
 .esc-t .fg{position:absolute;inset:0;pointer-events:none}.esc-t .fg-m{display:none}
-.esc-t .fig{position:absolute;transform-origin:var(--ox) var(--oy);will-change:transform;animation:t-bal 5.8s ease-in-out infinite alternate}
+.esc-t .fig{position:absolute;transform-origin:var(--ox) var(--oy);animation:t-bal 5.8s ease-in-out infinite alternate}
 .esc-t .fig img{position:absolute;display:block;max-width:none;user-select:none}
-.esc-t .fig .br{transform-origin:var(--sx) var(--sy);will-change:transform;animation:t-pinta 2.1s ease-in-out infinite alternate}
+.esc-t .fig .br{transform-origin:var(--sx) var(--sy);animation:t-pinta 2.1s ease-in-out infinite alternate}
 .esc-t .f2{animation-duration:6.9s;animation-delay:-2.6s}.esc-t .f2 .br{animation-duration:1.7s;animation-name:t-dibuja}
 @keyframes t-bal{from{transform:rotate(-1.7deg)}to{transform:rotate(1.7deg)}}
 @keyframes t-pinta{from{transform:rotate(-5deg)}to{transform:rotate(6deg)}}
 @keyframes t-dibuja{from{transform:rotate(-3deg) translateY(-1px)}to{transform:rotate(3.5deg) translateY(1px)}}
-.esc-t:not(.vis) .fig,.esc-t:not(.vis) .fig .br{animation-play-state:paused}
+.esc-t:not(.vis) .fig,.esc-t:not(.vis) .fig .br{animation-play-state:paused}.esc-t.vis .fig,.esc-t.vis .fig .br{will-change:transform}
 @media (prefers-reduced-motion:reduce){.esc-t .fig,.esc-t .fig .br{animation:none}}
 .esc-t .tt{position:absolute;left:0;right:0;top:3.4cqw;text-align:center;padding:0 var(--gut);pointer-events:none}
 .tienda h2{font:400 max(28px,3.6cqw)/1.05 var(--mano);text-transform:uppercase;letter-spacing:.05em;margin:10px auto 0;color:var(--tinta)}
 .tienda h2 em{font-style:normal;color:var(--bordo-os)}
 .esc-t .ac{position:absolute;left:0;right:0;bottom:3cqw;display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap;padding:0 var(--gut)}
-.esc-t .ac p{font-size:14px;color:#5a4f46}
+.esc-t .ac p{font-size:14px;color:var(--texto-2)}
 .esc-t .ac p a{color:var(--tinta);font-weight:500;border-bottom:1.5px solid var(--bordo);text-decoration:none}
-@media (max-width:760px){.esc-t .fg-d{display:none}.esc-t .fg-m{display:block}.esc-t .tt{top:3.5%}.esc-t .tt .eyebrow{font-size:10px;letter-spacing:.1em}.esc-t .ac{position:static;flex-direction:column;gap:16px;padding:6px var(--gut) 44px}}
+@media (max-width:760px){.esc-t .fg-d{display:none}.esc-t .fg-m{display:block}.esc-t .tt{top:3.5%}.esc-t .tt .eyebrow{font-size:11px;letter-spacing:.1em}.esc-t .ac{position:static;flex-direction:column;gap:16px;padding:6px var(--gut) 44px}}
 
 /* sobre vástago */
 .sobre{display:grid;grid-template-columns:minmax(0,440px) 1fr;gap:clamp(32px,6vw,72px);align-items:start}
@@ -255,7 +266,7 @@ section.tienda{position:relative;padding:0;overflow:hidden;background-color:#fff
 .sdatos hr{border:0;border-top:1px solid rgba(22,19,17,.22);margin:34px 0 26px}
 .frase{font-size:clamp(28px,3vw,36px);line-height:1.05;text-transform:uppercase;letter-spacing:.04em}
 .sacc{display:flex;align-items:center;gap:22px;margin-top:18px;flex-wrap:wrap}
-.sacc span{font-size:14px;color:#5a4f46}
+.sacc span{font-size:14px;color:var(--texto-2)}
 .sacc span a{color:var(--tinta);font-weight:500;border-bottom:1.5px solid var(--bordo);text-decoration:none}
 
 /* contacto */
@@ -264,14 +275,14 @@ section.tienda{position:relative;padding:0;overflow:hidden;background-color:#fff
 .cont .sprout{width:280px}
 .lead2{font-size:22px;color:#2a231e;max-width:34ch;margin:26px 0 0;line-height:1.45}
 .cont .bt.grande{margin-top:34px}
-.resp{font-size:14.5px;color:#5a4f46;margin-top:12px}
+.resp{font-size:14.5px;color:var(--texto-2);margin-top:12px}
 .col{border-left:1px solid rgba(22,19,17,.2);padding-left:clamp(24px,4vw,48px)}
 .it{padding:22px 0;border-bottom:1px solid rgba(22,19,17,.2)}
 .it:first-child{padding-top:0}
 .it .k{font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-os)}
 .it .v{display:block;font:400 clamp(26px,2.6vw,34px)/1.15 var(--serif);margin-top:4px;color:var(--tinta);text-decoration:none}
 .it a.v{border-bottom:1.5px solid var(--bordo);width:max-content;max-width:100%}
-.it .d{font-size:15px;color:#5a4f46;margin-top:2px}
+.it .d{font-size:15px;color:var(--texto-2);margin-top:2px}
 
 @media (max-width:900px){
   .banda{grid-template-columns:1fr;padding:34px 30px}
@@ -289,7 +300,7 @@ footer#pie{position:relative;background:#CDB28A;color:var(--tinta)}
 .foto img{display:block;width:100%;height:auto;max-width:none;user-select:none}
 .cts{position:absolute;inset:0;pointer-events:none}
 .ct{position:absolute;top:37.5%;pointer-events:auto}
-.ct .k{display:block;font:600 max(10px,.764cqw)/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bordo-os)}
+.ct .k{display:block;font:600 max(11px,.764cqw)/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--bordo-os)}
 .ct .v{display:block;margin-top:.3cqw;font:400 max(15px,1.39cqw)/1.15 var(--serif);color:var(--tinta);text-decoration:none;white-space:nowrap}
 a.v:hover{color:var(--bordo-os)}
 a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
@@ -302,7 +313,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   .ct{position:static}
   .ct .k{color:var(--camel);font-size:11px}
   .ct .v{color:var(--arena);font-size:19px;white-space:normal}
-  a.v:hover{color:#fff}
+  a.v:hover{color:var(--blanco)}
   .cp{position:static;grid-column:1/-1;color:var(--arena);font-size:12px;margin-top:4px;opacity:.6}
 }
 
@@ -343,9 +354,9 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .bt{position:relative;isolation:isolate;background:none;border-radius:0;box-shadow:none}
 .bt:hover,.bt.claro,.bt.claro:hover{background:none}
 .bt::before{content:"";position:absolute;inset:-4px -8px;z-index:-1;background:var(--tinta);-webkit-mask:var(--rect) center/100% 100% no-repeat;mask:var(--rect) center/100% 100% no-repeat;transition:background .2s}
-.bt:hover::before{background:var(--bordo-os)}
+.bt:hover::before{background:var(--bordo-hov)}
 .bt.claro::before{background:var(--arena)}
-.bt.claro:hover::before{background:#fff}
+.bt.claro:hover::before{background:var(--blanco)}
 .bt.grande{box-shadow:none}
 .bt.grande::before{filter:drop-shadow(0 12px 14px rgba(22,19,17,.22))}
 /* lo pendiente se marca con cinta de pintor */
@@ -365,7 +376,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .disc{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px 10px;margin:0 0 4px}
 .disc li{font:400 clamp(22px,2.4vw,30px)/1 var(--mano);letter-spacing:.05em;text-transform:uppercase;color:var(--bordo-os);padding:5px 14px 3px;background:rgba(213,191,158,.45);transform:rotate(-1deg);clip-path:polygon(0 0,100% 0,98% 30%,100% 55%,98% 80%,100% 100%,0 100%,2% 78%,0 52%,2% 28%)}
 .disc li:nth-child(even){transform:rotate(1deg)}
-.regalo{position:relative;isolation:isolate;margin:16px 0 4px;padding:12px 22px;font:500 16px/1.35 var(--sans);color:#fff;transform:rotate(-1.2deg)}
+.regalo{position:relative;isolation:isolate;margin:16px 0 4px;padding:12px 22px;font:500 16px/1.35 var(--sans);color:var(--blanco);transform:rotate(-1.2deg)}
 .regalo::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--bordo-os);-webkit-mask:var(--rect) center/100% 100% no-repeat;mask:var(--rect) center/100% 100% no-repeat}
 .regalo b{font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;display:block;color:var(--arena);margin-bottom:2px}
 @media (max-width:900px){.ta{grid-template-columns:1fr}.ta>.ph{min-height:300px;height:300px}}
@@ -376,6 +387,12 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .retrato img{display:block;width:100%;height:100%;object-fit:cover;-webkit-mask:var(--marco) center/100% 100% no-repeat;mask:var(--marco) center/100% 100% no-repeat}
 .js .retrato.pt{width:100%;max-width:100%;-webkit-mask-size:300% 100%;mask-size:300% 100%}
 
+/* áreas de toque de 44 px en pantallas táctiles y celulares, sin cambiar el aspecto */
+@media (pointer:coarse),(max-width:760px){
+  .lnk,.it a.v,.esc-t .ac p a,.cts a.v,a[href*="instagram.com"]{display:inline-flex;align-items:center;min-height:44px}
+  .esc-t .ac p a{padding:0 2px}
+  .bt{min-height:44px}
+}
 </style>
 </head>
 <body>
@@ -392,8 +409,11 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   <small>Fe en obra</small>
 </nav>
 
+<main id="contenido">
+<h1 class="sr">Vástago · Fe en obra: obras de arte con pasajes bíblicos pintados a mano</h1>
 <!-- HERO: la pantalla queda fija y el scroll pinta las 4 obras -->
 <div class="track" id="track">
+  <p class="sr">Al bajar por la página se van pintando cuatro obras de Vástago: 1 Corintios 13, Jesús, Sadrac, Mesac y Abednego, y Jeremías 18.</p>
   <div class="stage" id="stage"></div>
 </div>
 <a class="skip" id="skip" href="#obras">Saltar a la galería ↓</a>
@@ -444,7 +464,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   <h2>Taller de arte</h2>
   <p class="lead">Dibujo, pintura, escultura y animación en un mismo taller. Los materiales están incluidos.</p>
   <div class="ta">
-    <div class="ph foto"><img src="taller-pintura.jpg" alt="Un lienzo con el Salmo 1 sobre un atril del taller" loading="lazy" decoding="async"></div>
+    <div class="ph foto"><img src="taller-pintura.webp" width="755" height="1100" alt="Un lienzo con el Salmo 1 sobre un atril del taller" loading="lazy" decoding="async"></div>
     <article class="tc">
       <ul class="disc" aria-label="Qué se hace en el taller"><li>Dibujo</li><li>Pintura</li><li>Escultura</li><li>Animación</li></ul>
       <p class="regalo"><b>Mes de la inauguración:</b> te regalamos un bastidor.</p>
@@ -459,7 +479,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
       <a class="bt" data-wa data-msg="Hola, quiero consultar por el taller de arte." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Consultar por el taller</a>
     </article>
   </div>
-  <div class="tira"><div class="ph foto"><img src="taller-espacio.jpg" alt="Bastidores de madera y lienzos del taller" loading="lazy" decoding="async"></div><div class="ph foto"><img src="taller-herramientas.jpg" alt="Un tablero con las herramientas del taller" loading="lazy" decoding="async" style="object-position:50% 25%"></div><div class="ph" style="--a:56deg"><span>Foto pendiente · una clase</span></div></div>
+  <div class="tira"><div class="ph foto"><img src="taller-espacio.webp" width="1400" height="646" alt="Bastidores de madera y lienzos del taller" loading="lazy" decoding="async"></div><div class="ph foto"><img src="taller-herramientas.webp" width="666" height="1000" alt="Un tablero con las herramientas del taller" loading="lazy" decoding="async" style="object-position:50% 25%"></div><div class="ph" style="--a:56deg"><span>Foto pendiente · una clase</span></div></div>
 </section>
 
 <p class="vers"><span class="mano">El amor es paciente, es bondadoso</span><small>1 Corintios 13</small></p>
@@ -483,8 +503,8 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
       <source media="(max-width:760px)" srcset="tienda-escena-m.webp" width="900" height="1785">
       <img src="tienda-escena.webp" width="2160" height="1500" alt="Matías y Abigail, colgados de arneses, dibujan y pintan sobre el lienzo el boceto de una remera, un buzo y un delantal, y el logo de Vástago, con dos cintas de clausura cruzadas en X que dicen Clausurado temporalmente" loading="lazy" decoding="async">
     </picture>
-    <div class="fg fg-d" aria-hidden="true"><div class="fig f1" style="left:12.87%;top:2.6%;width:17.546%;height:56.4%;--ox:22.032%;--oy:0.962%"><img src="tienda-mati-cuerpo-d.webp" alt="" style="left:0%;top:0%;width:64.644%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-mati-brazo-d.webp" alt="" style="left:23.219%;top:32.742%;width:76.781%;height:25.414%;--sx:7.216%;--sy:90.233%" loading="lazy" decoding="async"></div><div class="fig f2" style="left:74.444%;top:2.533%;width:14.167%;height:79.467%;--ox:91.176%;--oy:0.649%"><img src="tienda-abi-cuerpo-d.webp" alt="" style="left:31.373%;top:0%;width:68.627%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-abi-brazo-d.webp" alt="" style="left:0%;top:69.966%;width:75.49%;height:5.117%;--sx:92.208%;--sy:45.902%" loading="lazy" decoding="async"></div></div>
-    <div class="fg fg-m" aria-hidden="true"><div class="fig f1" style="left:3.222%;top:1.345%;width:42.111%;height:53.277%;--ox:22.032%;--oy:0.847%"><img src="tienda-mati-cuerpo-m.webp" alt="" style="left:0%;top:0%;width:64.644%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-mati-brazo-m.webp" alt="" style="left:23.219%;top:40.168%;width:76.781%;height:22.608%;--sx:7.216%;--sy:90.233%" loading="lazy" decoding="async"></div><div class="fig f2" style="left:59.333%;top:1.345%;width:33.889%;height:92.773%;--ox:91.475%;--oy:0.449%"><img src="tienda-abi-cuerpo-m.webp" alt="" style="left:31.475%;top:0%;width:68.525%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-abi-brazo-m.webp" alt="" style="left:0%;top:78.382%;width:75.738%;height:3.684%;--sx:92.208%;--sy:45.902%" loading="lazy" decoding="async"></div></div>
+    <div class="fg fg-d" aria-hidden="true"><div class="fig f1" style="left:12.87%;top:2.6%;width:17.546%;height:56.4%;--ox:22.032%;--oy:0.962%"><img src="tienda-mati-cuerpo-d.webp" width="245" height="846" alt="" style="left:0%;top:0%;width:64.644%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-mati-brazo-d.webp" width="291" height="215" alt="" style="left:23.219%;top:32.742%;width:76.781%;height:25.414%;--sx:7.216%;--sy:90.233%" loading="lazy" decoding="async"></div><div class="fig f2" style="left:74.444%;top:2.533%;width:14.167%;height:79.467%;--ox:91.176%;--oy:0.649%"><img src="tienda-abi-cuerpo-d.webp" width="210" height="1192" alt="" style="left:31.373%;top:0%;width:68.627%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-abi-brazo-d.webp" width="231" height="61" alt="" style="left:0%;top:69.966%;width:75.49%;height:5.117%;--sx:92.208%;--sy:45.902%" loading="lazy" decoding="async"></div></div>
+    <div class="fg fg-m" aria-hidden="true"><div class="fig f1" style="left:3.222%;top:1.345%;width:42.111%;height:53.277%;--ox:22.032%;--oy:0.847%"><img src="tienda-mati-cuerpo-m.webp" width="245" height="951" alt="" style="left:0%;top:0%;width:64.644%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-mati-brazo-m.webp" width="291" height="215" alt="" style="left:23.219%;top:40.168%;width:76.781%;height:22.608%;--sx:7.216%;--sy:90.233%" loading="lazy" decoding="async"></div><div class="fig f2" style="left:59.333%;top:1.345%;width:33.889%;height:92.773%;--ox:91.475%;--oy:0.449%"><img src="tienda-abi-cuerpo-m.webp" width="209" height="1656" alt="" style="left:31.475%;top:0%;width:68.525%;height:100%" loading="lazy" decoding="async"><img class="br" src="tienda-abi-brazo-m.webp" width="231" height="61" alt="" style="left:0%;top:78.382%;width:75.738%;height:3.684%;--sx:92.208%;--sy:45.902%" loading="lazy" decoding="async"></div></div>
     <div class="tt"><p class="eyebrow">Tienda · clausurada temporalmente</p><h2 class="mano">Estamos pintando <em>la tienda</em></h2></div>
     <div class="ac"><a class="bt" data-wa data-msg="Hola, avisame cuando la tienda esté lista." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Avisame cuando esté lista</a><p>o seguinos en <a href="https://www.instagram.com/vastago.obras" target="_blank" rel="noopener">@vastago.obras</a></p></div>
   </div>
@@ -495,7 +515,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   <div class="sobre">
     <div class="sfoto"><figure class="retrato"><img src="sobre-abigail-matias.webp" width="1000" height="1083" alt="Abigail y Matías con Juana en brazos, pintados al óleo" loading="lazy" decoding="async"></figure><p class="lema"><span class="eyebrow">El lema</span><b class="mano">Fe en obra</b></p></div>
     <div class="sdatos">
-      <div class="stop"><div><p class="eyebrow">Sobre Vástago</p><h2 class="mano">El brote que nace de una <em>raíz</em></h2><i class="sprout"></i></div><img class="slogo" src="logos/logo-negro.png" alt="Vástago · Fe en obra"></div>
+      <div class="stop"><div><p class="eyebrow">Sobre Vástago</p><h2 class="mano">El brote que nace de una <em>raíz</em></h2><i class="sprout"></i></div><img class="slogo" width="900" height="410" src="logos/logo-negro.png" alt="Vástago · Fe en obra"></div>
       <p class="nm">Abigail y Matías</p>
       <p class="tx1">Un texto corto, escrito por ellos, en primera persona.</p>
       <p class="juana mano">Y Juana, que nos acompaña.</p>
@@ -526,11 +546,12 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   </div>
 </section>
 </div>
+</main>
 
 <footer id="pie">
   <h2 class="sr">Tu fe también puede ser una obra</h2>
   <div class="esc">
-    <div class="foto"><img src="atril-escena.jpg" width="2160" height="1032" alt="Final del lienzo: un atril de madera pintada con un tubo de pintura, un pincel y un vaso con brochas" loading="lazy" decoding="async"></div>
+    <div class="foto"><img src="atril-escena.webp" width="2160" height="1032" alt="Final del lienzo: un atril de madera pintada con un tubo de pintura, un pincel y un vaso con brochas" loading="lazy" decoding="async"></div>
     <div class="cts">
       <div class="ct" style="left:22.9%"><span class="k">Instagram</span><a class="v" href="https://www.instagram.com/vastago.obras" target="_blank" rel="noopener">@vastago.obras</a></div>
       <div class="ct" style="left:36.1%"><span class="k">WhatsApp</span><a class="v" data-wa data-msg="Hola, quiero consultar." href="#contacto">Escribinos</a></div>
@@ -635,17 +656,17 @@ document.querySelectorAll('.origin').forEach(b=>{
 (function(){
   const root=document.getElementById('carrusel');if(!root)return;
   const SLIDES=[
-    {image:'obras/1-corintios-13.jpg',title:'1 Corintios 13',caption:'El amor es paciente, es bondadoso',w:834,h:1000},
-    {image:'obras/2-jesus.jpg',title:'Jesús',caption:'',w:1000,h:668},
-    {image:'obras/3-sadrac-mesac-y-abednego.jpg',title:'Sadrac, Mesac y Abednego',caption:'Nosotros evitamos el problema. Él lo habita con nosotros.',w:749,h:1000},
-    {image:'obras/4-jeremias-18.jpg',title:'Jeremías 18',caption:'Soy barro en manos del alfarero',w:664,h:1000},
-    {image:'obras/5-la-novia.jpg',title:'La novia',caption:'Cristo amó a la iglesia y se entregó por ella',w:934,h:1200},
-    {image:'obras/6-de-tumbas-a-jardines.jpg',title:'De tumbas a jardines',caption:'La luz resplandece en las tinieblas',w:900,h:746},
-    {image:'obras/7-isaias-58-muros-caidos.jpg',title:'Isaías 58 · Muros caídos',caption:'Reconstructor de casas en ruinas',w:1200,h:890},
-    {image:'obras/10-la-fuente.jpg',title:'La fuente',caption:'Jesús es la fuente de vida',w:918,h:1200},
-    {image:'obras/8-isaias-58-manantial.jpg',title:'Isaías 58 · Manantial',caption:'Como manantial cuyas aguas no se agotan',w:764,h:1200},
-    {image:'obras/11-salmo-1.jpg',title:'Salmo 1',caption:'Son como árboles plantados junto al río',w:941,h:1200},
-    {image:'obras/9-isaias-53.jpg',title:'Isaías 53',caption:'Como vástago tierno',w:950,h:1200}
+    {image:'obras/1-corintios-13.webp',title:'1 Corintios 13',caption:'El amor es paciente, es bondadoso',w:834,h:1000},
+    {image:'obras/2-jesus.webp',title:'Jesús',caption:'',w:1000,h:668},
+    {image:'obras/3-sadrac-mesac-y-abednego.webp',title:'Sadrac, Mesac y Abednego',caption:'Nosotros evitamos el problema. Él lo habita con nosotros.',w:749,h:1000},
+    {image:'obras/4-jeremias-18.webp',title:'Jeremías 18',caption:'Soy barro en manos del alfarero',w:664,h:1000},
+    {image:'obras/5-la-novia.webp',title:'La novia',caption:'Cristo amó a la iglesia y se entregó por ella',w:934,h:1200},
+    {image:'obras/6-de-tumbas-a-jardines.webp',title:'De tumbas a jardines',caption:'La luz resplandece en las tinieblas',w:900,h:746},
+    {image:'obras/7-isaias-58-muros-caidos.webp',title:'Isaías 58 · Muros caídos',caption:'Reconstructor de casas en ruinas',w:1200,h:890},
+    {image:'obras/10-la-fuente.webp',title:'La fuente',caption:'Jesús es la fuente de vida',w:918,h:1200},
+    {image:'obras/8-isaias-58-manantial.webp',title:'Isaías 58 · Manantial',caption:'Como manantial cuyas aguas no se agotan',w:764,h:1200},
+    {image:'obras/11-salmo-1.webp',title:'Salmo 1',caption:'Son como árboles plantados junto al río',w:941,h:1200},
+    {image:'obras/9-isaias-53.webp',title:'Isaías 53',caption:'Como vástago tierno',w:950,h:1200}
   ];
   const SPEED=24,SAG=46,SWING=1,CARD=300,REPS=Math.max(1,Math.ceil(14/SLIDES.length));   /* SPEED = píxeles por segundo (lento) */
   const n=SLIDES.length,R=n*REPS;
@@ -663,7 +684,7 @@ document.querySelectorAll('.origin').forEach(b=>{
     const sl=SLIDES[r%n],el=document.createElement('div');el.className='pl-card';el.dataset.r=r;el.dataset.on='0';
     if(r>=n)el.setAttribute('aria-hidden','true');
     el.innerHTML='<svg class="pl-wire" viewBox="0 0 100 30" preserveAspectRatio="none" aria-hidden="true"><path d="M50 0 L0 30 M50 0 L100 30"/></svg><i class="pl-ring"></i><div class="pl-print"><div class="pl-shot"><img alt="" draggable="false"></div></div>';
-    const im=el.querySelector('img');im.loading='lazy';im.decoding='async';im.src=sl.image;im.alt='Obra: '+sl.title;
+    const im=el.querySelector('img');im.loading='lazy';im.decoding='async';im.width=sl.w;im.height=sl.h;im.src=sl.image;im.alt='Obra: '+sl.title;
     root.appendChild(el);cards.push(el);
   }
   const bar=document.createElement('div');bar.className='pl-bar';
