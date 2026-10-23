@@ -211,6 +211,28 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 .tira{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px;margin-top:32px}
 .tira .ph{height:200px}
 
+
+/* serie Juana */
+.sj{margin-top:clamp(48px,8vw,104px);padding:0 var(--gut)}
+.sj .sjh{max-width:62ch}
+.sj .sjh .hmano{margin:6px 0 12px}
+.sj .sjh p.t{font-size:18px;line-height:1.55;color:#2a231e}
+.sjg{display:grid;max-width:1000px;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2.2vw,30px);margin-top:clamp(24px,3.4vw,40px)}
+.sjc{margin:0}
+.sjc .im{display:block;aspect-ratio:1;background:#fff;padding:clamp(5px,.7vw,9px);box-shadow:0 1px 2px rgba(40,30,20,.12),0 14px 28px -10px rgba(40,30,20,.28)}
+.sjc img{width:100%;height:100%;object-fit:cover;display:block}
+.sjc figcaption{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:12px}
+.sjc .nm{font:400 clamp(24px,2.3vw,30px)/1 var(--mano);text-transform:uppercase;letter-spacing:.05em}
+.sjc small{display:block;font:500 12px var(--sans);letter-spacing:.06em;color:var(--texto-2);margin-top:3px}
+.sjp{display:flex;gap:8px}
+.sjp button{width:24px;height:24px;border-radius:50%;border:1.5px solid rgba(22,19,17,.45);padding:0;cursor:pointer;background:var(--c);position:relative}
+.sjp button[aria-pressed="true"]{outline:2px solid var(--bordo-os);outline-offset:2px}
+.sjp button::after{content:"";position:absolute;inset:-10px}
+.sjp button:focus-visible{outline:2px solid var(--bordo-os);outline-offset:2px}
+.sj .sja{margin-top:clamp(22px,3vw,34px);display:flex;flex-wrap:wrap;gap:16px 26px;align-items:center}
+.sj .sja span{font-size:15px;color:var(--texto-2)}
+@media (max-width:860px){.sjg{grid-template-columns:repeat(2,minmax(0,1fr))}.sjc figcaption{flex-direction:column;align-items:flex-start}}
+.chips i.ok{border-style:solid;border-color:rgba(243,226,224,.7)}
 /* exposición */
 .portada{position:relative;height:clamp(250px,32vw,380px)}
 .portada .ph{position:absolute;inset:0}
@@ -403,7 +425,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   <button class="x" id="cerrar">Cerrar ✕</button>
   <a href="#obras">Obras</a>
   <a href="#taller">Taller</a>
-  <a href="#exposicion">Exposición</a>
+  <a href="#exposicion">Inauguración</a>
   <a href="#tienda">Tienda</a>
   <a href="#sobre">Sobre Vástago</a>
   <a href="#contacto">Contacto</a>
@@ -442,6 +464,26 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
     <a class="lnk" href="#obras">Ver todas las obras →</a>
   </div>
   <div class="pl-root" id="carrusel" role="region" aria-roledescription="carrusel" aria-label="Obras de Vástago" tabindex="0"></div>
+
+  <div class="sj" id="juana">
+    <div class="sjh"><p class="eyebrow">Serie Juana</p><h3 class="hmano">Cuatro obras para Juana</h3>
+      <p class="t">A principios de 2026 nació nuestra primera serie de arte digital impresa en canvas, en honor al nacimiento de nuestra beba. Son cuatro obras, cada una con un dibujo central y una frase de la Biblia que nos acompañó en esta nueva experiencia de ser padres. Se consiguen en tres paletas de color.</p></div>
+    <div class="sjg">
+      <figure class="sjc" data-n="oveja"><span class="im"><img src="juana-oveja-1.webp" width="800" height="800" alt="Oveja: «El Señor es mi pastor, tengo todo lo que necesito», Salmos 23:1" loading="lazy" decoding="async"></span>
+        <figcaption><div><span class="nm">Oveja</span><small>Salmos 23:1</small></div>
+          <div class="sjp" role="group" aria-label="Paleta de Oveja"><button type="button" style="--c:#fff" data-k="1" aria-pressed="true" aria-label="Paleta clara"></button><button type="button" style="--c:#F7A8C8" data-k="2" aria-pressed="false" aria-label="Paleta de color"></button><button type="button" style="--c:#161311" data-k="3" aria-pressed="false" aria-label="Paleta en negro"></button></div></figcaption></figure>
+      <figure class="sjc" data-n="lampara"><span class="im"><img src="juana-lampara-1.webp" width="800" height="800" alt="Lámpara: «Tu palabra es una lámpara que ilumina mi camino», Salmos 119:105" loading="lazy" decoding="async"></span>
+        <figcaption><div><span class="nm">Lámpara</span><small>Salmos 119:105</small></div>
+          <div class="sjp" role="group" aria-label="Paleta de Lámpara"><button type="button" style="--c:#fff" data-k="1" aria-pressed="true" aria-label="Paleta clara"></button><button type="button" style="--c:#1E6BF5" data-k="2" aria-pressed="false" aria-label="Paleta de color"></button><button type="button" style="--c:#161311" data-k="3" aria-pressed="false" aria-label="Paleta en negro"></button></div></figcaption></figure>
+      <figure class="sjc" data-n="ave"><span class="im"><img src="juana-ave-1.webp" width="800" height="800" alt="Ave: «Dios cuida las aves y cuida de mí», Mateo 6:26" loading="lazy" decoding="async"></span>
+        <figcaption><div><span class="nm">Ave</span><small>Mateo 6:26</small></div>
+          <div class="sjp" role="group" aria-label="Paleta de Ave"><button type="button" style="--c:#fff" data-k="1" aria-pressed="true" aria-label="Paleta clara"></button><button type="button" style="--c:#FF6A33" data-k="2" aria-pressed="false" aria-label="Paleta de color"></button><button type="button" style="--c:#161311" data-k="3" aria-pressed="false" aria-label="Paleta en negro"></button></div></figcaption></figure>
+      <figure class="sjc" data-n="hogar"><span class="im"><img src="juana-hogar-1.webp" width="800" height="800" alt="Hogar: «El Señor cuidará en el hogar desde ahora y para siempre», Salmos 121:8" loading="lazy" decoding="async"></span>
+        <figcaption><div><span class="nm">Hogar</span><small>Salmos 121:8</small></div>
+          <div class="sjp" role="group" aria-label="Paleta de Hogar"><button type="button" style="--c:#fff" data-k="1" aria-pressed="true" aria-label="Paleta clara"></button><button type="button" style="--c:#1DB25A" data-k="2" aria-pressed="false" aria-label="Paleta de color"></button><button type="button" style="--c:#161311" data-k="3" aria-pressed="false" aria-label="Paleta en negro"></button></div></figcaption></figure>
+    </div>
+    <div class="sja"><a class="bt" data-wa data-msg="Hola, quiero consultar por la serie Juana." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Consultar por la serie Juana</a><span>Elegí tu paleta con los círculos de cada obra.</span></div>
+  </div>
 </section>
 
 <!-- ENCARGOS: banda -->
@@ -490,15 +532,15 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 
 <p class="vers"><span class="mano">El amor es paciente, es bondadoso</span><small>1 Corintios 13</small></p>
 
-<!-- EXPOSICIÓN -->
+<!-- INAUGURACIÓN DEL TALLER -->
 <section class="s lienzo" id="exposicion">
-  <div class="portada"><div class="ph" style="--a:36deg"><span>Mejor foto de la muestra</span></div>
-    <div class="tx"><p class="eyebrow">La muestra</p><h2>Nombre de la muestra</h2><p class="chips"><i>Lugar pendiente</i><i>Fecha pendiente</i></p></div></div>
+  <div class="portada"><div class="ph" style="--a:36deg"><span>Mejor foto de la inauguración</span></div>
+    <div class="tx"><p class="eyebrow">La inauguración</p><h2>Bienvenidos a Vástago</h2><p class="chips"><i class="ok">Taller de arte</i><i class="ok">San Francisco, Córdoba</i><i class="ok">Octubre de 2026</i></p></div></div>
   <div class="mid">
-    <div><p class="eyebrow">El porqué</p><p class="hmano">Por qué lo hicimos</p>
-      <p class="tx1">Texto en primera persona sobre por qué se hizo la muestra y qué querían mostrar. <i class="pend">Lo cuenta el cliente</i></p>
-      <p class="tx2">Una línea sobre lo que pasó ese día y lo que significó. <i class="pend">Ejemplo</i></p></div>
-    <div class="mos"><div class="ph a" style="--a:44deg"><span>Foto del montaje</span></div><div class="ph" style="--a:52deg"><span>Foto de la gente</span></div><div class="ph" style="--a:46deg"><span>Video</span><i class="vp"></i></div></div>
+    <div><p class="eyebrow">Ese día</p><p class="hmano">Música, arte y literatura</p>
+      <p class="tx1">Abrimos las puertas de nuestro taller con música en vivo, arte y literatura. Gracias a todos los que vinieron y a los que se pusieron el taller al hombro.</p>
+      <p class="tx2">Un espacio para aprender, crear y compartir en comunidad.</p></div>
+    <div class="mos"><div class="ph a" style="--a:44deg"><span>Foto del taller armado</span></div><div class="ph" style="--a:52deg"><span>Foto de la gente</span></div><div class="ph" style="--a:46deg"><span>Video</span><i class="vp"></i></div></div>
   </div>
 </section>
 
@@ -897,6 +939,8 @@ document.querySelectorAll('.origin').forEach(b=>{
 })();
 
 /* WhatsApp: cuando esté el número, se completa acá y todos los botones pasan a abrir el chat */
+/* serie Juana: cambiar de paleta */
+document.querySelectorAll('.sjc').forEach(c=>{const im=c.querySelector('img'),n=c.dataset.n;c.querySelectorAll('.sjp button').forEach(b=>b.addEventListener('click',()=>{im.src='juana-'+n+'-'+b.dataset.k+'.webp';c.querySelectorAll('.sjp button').forEach(x=>x.setAttribute('aria-pressed',x===b))}))});
 const WA_NUMBER='5493564593852';   /* pendiente: número con código de país, solo dígitos (ej. 5491100000000) */
 document.querySelectorAll('a[data-wa]').forEach(a=>{
   if(!WA_NUMBER)return;
