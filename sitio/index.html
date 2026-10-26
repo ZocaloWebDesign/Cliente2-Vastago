@@ -41,6 +41,7 @@ html.loading{overflow:hidden}
 .loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;transition:opacity .8s ease,visibility .8s}
 .loader.out{opacity:0;visibility:hidden}
 .loader svg{width:min(46vw,400px);height:auto;aspect-ratio:1590/725;overflow:visible;display:block}
+@media (max-width:600px){.loader svg{width:min(68vw,320px)}}
 
 /* ---------- navegación ---------- */
 .nav-btn{position:fixed;top:2.2vh;right:4.4vw;z-index:60;font:500 15px var(--sans);display:flex;gap:10px;align-items:center;background:none;border:0;cursor:pointer;color:var(--tinta);padding:10px 4px;min-height:44px}
@@ -317,7 +318,7 @@ section.tienda{position:relative;padding:0;overflow:hidden;background-color:var(
 .it .d{font-size:15px;color:var(--texto-2);margin-top:2px}
 
 @media (max-width:900px){
-  .banda{grid-template-columns:1fr;grid-template-areas:none;padding:44px 34px}
+  .banda{grid-template-columns:1fr;grid-template-areas:none;padding:68px 38px}
   .banda>div,.banda .stp,.banda .resp,.banda .bt{grid-area:auto}
   .banda .bt{justify-self:start}
   .stp{flex-direction:column;gap:14px}
@@ -373,6 +374,11 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .tienda h2.pt{margin-left:auto;margin-right:auto}
 /* versículo escrito a mano entre secciones */
 .vers{position:relative;z-index:1;text-align:center;padding:clamp(20px,4vh,46px) var(--gut)}
+/* el jarrón vive en la franja del versículo (a la derecha del texto): ahí no tapa nada y la sigue donde esté */
+.vers.dec{z-index:0}
+.vdec{position:absolute;right:-90px;top:calc(100% + 12px);width:260px;height:auto;transform:translateY(-50%) rotate(49deg);pointer-events:none}
+@media (max-width:1000px){.vdec{display:none}}
+
 .vers span{display:block;margin:0 auto;font:400 clamp(30px,4.2vw,56px)/1.05 var(--mano);letter-spacing:.04em;color:var(--bordo-os)}
 .vers small{display:block;margin-top:8px;font:600 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(22,19,17,.55)}
 /* de boceto a color: el recuadro se dibuja a lápiz y después se rellena */
@@ -471,7 +477,6 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 <div class="mural" id="mural">
   <div class="fondo" aria-hidden="true">
     <figure style="--x:65.2vw;--y:81.16%;--w:60.96vw;--r:-22.8deg"><img src="fondo/arbol-salmo1.webp" alt="" width="700" height="520" loading="lazy" decoding="async"></figure>
-    <figure style="--x:20.4vw;--y:58.9%;--w:17.47vw;--r:49.0deg"><img src="fondo/jarron-manos.webp" alt="" width="512" height="655" loading="lazy" decoding="async"></figure>
     <figure style="--x:-2.9vw;--y:42.25%;--w:18.15vw;--r:32deg"><img src="fondo/fuente.webp" alt="" width="355" height="570" loading="lazy" decoding="async"></figure>
     <figure style="--x:-1.12vw;--y:21.02%;--w:18.84vw;--r:16.1deg"><img src="fondo/letra-amor.webp" alt="" width="314" height="187" loading="lazy" decoding="async"></figure>
     <figure style="--x:calc(50vw + 545px);--y:27.6%;--w:min(13vw,200px);--r:-17.3deg"><img src="fondo/letra-alegria.webp" alt="" width="306" height="160" loading="lazy" decoding="async"></figure>
@@ -555,7 +560,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   <div class="tira"><div class="ph foto"><img src="taller-espacio.webp" width="1400" height="646" alt="Bastidores de madera y lienzos del taller" loading="lazy" decoding="async"></div><div class="ph foto"><img src="taller-herramientas.webp" width="666" height="1000" alt="Un tablero con las herramientas del taller" loading="lazy" decoding="async" style="object-position:50% 25%"></div><div class="ph" style="--a:56deg"><span>Foto pendiente · una clase</span></div></div>
 </section>
 
-<p class="vers"><span class="mano">El amor es paciente, es bondadoso</span><small>1 Corintios 13</small></p>
+<p class="vers dec"><img class="vdec" src="fondo/jarron-manos.webp" alt="" width="512" height="655" loading="lazy" decoding="async"><span class="mano">El amor es paciente, es bondadoso</span><small>1 Corintios 13</small></p>
 
 <!-- INAUGURACIÓN DEL TALLER -->
 <section class="s lienzo" id="exposicion">
