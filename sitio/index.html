@@ -189,7 +189,11 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 .fab svg{width:30px;height:30px;color:var(--blanco)}
 
 /* encargos: banda */
-.banda{position:relative;max-width:1040px;margin:0 auto;padding:clamp(22px,3.2vw,34px) clamp(26px,4vw,48px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.45fr) auto;gap:clamp(16px,2.4vw,30px);align-items:center}
+.banda{position:relative;max-width:1040px;margin:0 auto;padding:clamp(40px,4.8vw,62px) clamp(38px,5.4vw,72px);display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,2fr);grid-template-areas:"tit pasos" "resp cta";gap:clamp(24px,3vw,38px) clamp(28px,3.8vw,52px);align-items:start}
+.banda>div{grid-area:tit}
+.banda .stp{grid-area:pasos}
+.banda .resp{grid-area:resp;margin:0;align-self:center}
+.banda .bt{grid-area:cta;justify-self:end;align-self:center}
 /* el recuadro no es una línea de CSS: es un marco pintado a pincel sobre el lienzo */
 .banda .pint{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .banda .pint path{fill:none;stroke:var(--tinta);stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
@@ -313,7 +317,9 @@ section.tienda{position:relative;padding:0;overflow:hidden;background-color:var(
 .it .d{font-size:15px;color:var(--texto-2);margin-top:2px}
 
 @media (max-width:900px){
-  .banda{grid-template-columns:1fr;padding:34px 30px}
+  .banda{grid-template-columns:1fr;grid-template-areas:none;padding:44px 34px}
+  .banda>div,.banda .stp,.banda .resp,.banda .bt{grid-area:auto}
+  .banda .bt{justify-self:start}
   .stp{flex-direction:column;gap:14px}
   .mid,.sobre,.cont{grid-template-columns:1fr}
     .col{border-left:0;padding-left:0}
@@ -468,7 +474,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
     <figure style="--x:20.4vw;--y:58.9%;--w:17.47vw;--r:49.0deg"><img src="fondo/jarron-manos.webp" alt="" width="512" height="655" loading="lazy" decoding="async"></figure>
     <figure style="--x:-2.9vw;--y:42.25%;--w:18.15vw;--r:32deg"><img src="fondo/fuente.webp" alt="" width="355" height="570" loading="lazy" decoding="async"></figure>
     <figure style="--x:-1.12vw;--y:21.02%;--w:18.84vw;--r:16.1deg"><img src="fondo/letra-amor.webp" alt="" width="314" height="187" loading="lazy" decoding="async"></figure>
-    <figure style="--x:40.58vw;--y:28.13%;--w:17.12vw;--r:-17.3deg"><img src="fondo/letra-alegria.webp" alt="" width="306" height="160" loading="lazy" decoding="async"></figure>
+    <figure style="--x:calc(50vw + 545px);--y:27.6%;--w:min(13vw,200px);--r:-17.3deg"><img src="fondo/letra-alegria.webp" alt="" width="306" height="160" loading="lazy" decoding="async"></figure>
     <figure style="--x:87.4vw;--y:42.4%;--w:13.36vw;--r:-12.9deg"><img src="fondo/letra-paz.webp" alt="" width="249" height="175" loading="lazy" decoding="async"></figure>
     <figure style="--x:85.6vw;--y:21.3%;--w:12vw;--r:14deg"><img src="fondo/corazon-2.webp" alt="" width="640" height="843" loading="lazy" decoding="async"></figure>
     <figure style="--x:-0.54vw;--y:88.25%;--w:4.79vw;--r:123.6deg"><img src="fondo/flor-amarilla.webp" alt="" width="42" height="64" loading="lazy" decoding="async"></figure>
@@ -506,7 +512,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 </section>
 
 <!-- ENCARGOS: banda -->
-<section class="s lienzo" id="encargos" style="padding-top:0;margin-top:calc(-1 * clamp(28px,3.6vw,52px));padding-bottom:clamp(36px,6vh,70px)">
+<section class="s lienzo" id="encargos" style="padding-top:0;margin-top:clamp(20px,2.6vw,40px);padding-bottom:clamp(36px,6vh,70px)">
   <div class="banda"><svg class="pint" viewBox="0 0 1000 200" preserveAspectRatio="none" aria-hidden="true"><defs><filter id="pincel" x="-5%" y="-20%" width="110%" height="140%"><feTurbulence type="fractalNoise" baseFrequency=".012 .035" numOctaves="3" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="6"/></filter></defs><g filter="url(#pincel)"><path d="M16 14 C260 6 650 18 984 9" stroke-width="7" opacity=".9"/><path d="M60 21 C320 15 700 24 940 17" stroke-width="2" opacity=".3"/><path d="M988 8 C997 70 983 132 992 195" stroke-width="6.5" opacity=".88"/><path d="M994 189 C700 199 330 186 10 195" stroke-width="7" opacity=".9"/><path d="M930 183 C650 190 330 180 70 187" stroke-width="2" opacity=".3"/><path d="M7 197 C15 130 2 70 12 8" stroke-width="6.5" opacity=".88"/></g></svg>
     <div><p class="eyebrow">Por encargo</p><h3>¿No encontrás la que buscás? La pintamos para vos.</h3></div>
     <ol class="stp">
