@@ -51,7 +51,7 @@ body{color:var(--tinta);font:400 16px/1.5 Inter,sans-serif}
   <div class="cap"><div class="n">03 / 04 · Obra</div><div class="t">Sadrac, Mesac y Abednego</div></div>
   <div class="obra" id="obra">
     <svg id="svg" viewBox="0 0 1200 1600" xmlns="http://www.w3.org/2000/svg" aria-label="Sadrac, Mesac y Abednego (animación)">
-      <defs>
+      <defs><radialGradient id="gChY"><stop offset="0" stop-color="#FFE08A"/><stop offset=".45" stop-color="#FFC93C"/><stop offset="1" stop-color="#FFC93C" stop-opacity="0"/></radialGradient><radialGradient id="gChO"><stop offset="0" stop-color="#FFB27A"/><stop offset=".45" stop-color="#FF7A2F"/><stop offset="1" stop-color="#FF7A2F" stop-opacity="0"/></radialGradient>
         <filter id="lengua" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".010 .028" numOctaves="3" seed="7"/><feDisplacementMap in="SourceGraphic" scale="150"/></filter>
         <filter id="rugosoF" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="8"/><feDisplacementMap in="SourceGraphic" scale="26"/></filter>
         <filter id="difuso" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="55"/></filter>
@@ -105,7 +105,7 @@ const NB=34,BARS=[];const gB=$('barras');
 for(let i=0;i<NB;i++){const cx=(i+.5)*W/NB,w=W/NB*1.9;BARS.push({cx,w,d:Math.abs(cx-W/2)/W*.42+rnd(i*3+1)*.14,tip:70+rnd(i*5+2)*120,top:H*(.04+rnd(i*7+3)*.26),p:el('polygon',{points:'0,0'},gB)})}
 /* chispas */
 const gC=$('chispas'),SP=[];
-for(let i=0;i<30;i++){SP.push({e:el('circle',{r:2+rnd(i*3)*3.5,fill:rnd(i*5)<.5?'#FFC93C':'#FF7A2F',filter:'url(#chispa)'},gC),x:W*(.18+rnd(i*7)*.64),y0:H*(.55+rnd(i*11)*.45),v:60+rnd(i*13)*110,ph:rnd(i*17)*6.28})}
+for(let i=0;i<30;i++){SP.push({e:el('circle',{r:(2+rnd(i*3)*3.5)*2,fill:rnd(i*5)<.5?'url(#gChY)':'url(#gChO)'},gC),x:W*(.18+rnd(i*7)*.64),y0:H*(.55+rnd(i*11)*.45),v:60+rnd(i*13)*110,ph:rnd(i*17)*6.28})}
 
 const FASES=[[0,'Scroll {p} % · el lienzo blanco queda listo'],[.04,'Scroll {p} % · el fuego sube desde abajo'],[.38,'Scroll {p} % · aparecen las figuras dentro del fuego'],[.66,'Scroll {p} % · el texto azul se escribe'],[.86,'Scroll {p} % · firma y cita'],[.95,'Scroll {p} % · la obra queda quieta, el fuego se mueve']];
 const pin=$('pincel');
@@ -126,7 +126,7 @@ function render(p,time){
   if(brush){pin.setAttribute('transform',`translate(${brush.x} ${brush.y})`);pin.setAttribute('opacity',1)}else pin.setAttribute('opacity',0);
   // fuego vivo (movimiento propio, sutil)
   const vivo=seg(p,.40,.5);
-  $('tvivo').setAttribute('baseFrequency',`.008 ${(.02+.004*Math.sin(time*1.6)).toFixed(4)}`);
+  $('tvivo').setAttribute('baseFrequency',`.008 ${(.02+.004*Math.sin(Math.floor(time*8)/8*1.6)).toFixed(4)}`);
   $('dvivo').setAttribute('scale',(vivo*5).toFixed(2));
   // chispas
   const sa=seg(p,.18,.4);
@@ -138,7 +138,13 @@ function render(p,time){
 [0,25,50,75,100].forEach(v=>{const u=document.createElement('u');u.style.top=v+'%';const e=document.createElement('em');e.style.top=v+'%';e.textContent=v+'%';$('rail').append(u,e)});
 let target=0,shown=0,t0=performance.now();
 const progresoScroll=()=>clamp(scrollY/($('track').offsetHeight-innerHeight));
-function loop(now){const time=(now-t0)/1000;target=fixedP!==null?fixedP:(reduce?1:progresoScroll());shown+=(target-shown)*(fixedP!==null||reduce?1:.14);if(Math.abs(target-shown)<.0004)shown=target;render(shown,(fixedP!==null&&!LIVE)?(params.get('t')?parseFloat(params.get('t')):1.2):time);requestAnimationFrame(loop)}
+/* rendimiento: dentro del hero solo se dibuja la obra visible; quieta, a 15 cuadros por segundo; en celular, tope de 30 */
+const __MOB=matchMedia('(max-width:900px)').matches;
+if(__MOB)document.querySelectorAll('feTurbulence').forEach(e=>e.setAttribute('numOctaves','1'));
+let __ON=true,__lr=-1,__lt=0;
+if(LIVE)addEventListener('message',e=>{if(e.data&&typeof e.data.on==='boolean'){__ON=e.data.on;if(__ON)__lr=-1}});
+const __go=(s,now)=>{if(!LIVE)return true;const m=Math.abs(s-__lr)>.00005;if(m){if(__MOB&&now-__lt<30)return false;__lr=s;__lt=now;return true}if(s<.002)return false;if(now-__lt>=66){__lt=now;return true}return false};
+function loop(now){if(LIVE&&!__ON){requestAnimationFrame(loop);return}const time=(now-t0)/1000;target=fixedP!==null?fixedP:(reduce?1:progresoScroll());shown+=(target-shown)*(fixedP!==null||reduce?1:.14);if(Math.abs(target-shown)<.0004)shown=target;if(__go(shown,now))render(shown,(fixedP!==null&&!LIVE)?(params.get('t')?parseFloat(params.get('t')):1.2):time);requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 let anim=null;const maxScroll=()=>$('track').offsetHeight-innerHeight;
 function parar(){if(anim){cancelAnimationFrame(anim);anim=null;$('play').textContent='▶ Ver sola'}}

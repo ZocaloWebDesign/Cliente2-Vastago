@@ -147,7 +147,13 @@ function render(p,time){
 [0,25,50,75,100].forEach(v=>{const u=document.createElement('u');u.style.top=v+'%';const e=document.createElement('em');e.style.top=v+'%';e.textContent=v+'%';$('rail').append(u,e)});
 let target=0,shown=0,t0=performance.now();
 const progresoScroll=()=>clamp(scrollY/($('track').offsetHeight-innerHeight));
-function loop(now){const time=(now-t0)/1000;target=fixedP!==null?fixedP:(reduce?1:progresoScroll());shown+=(target-shown)*(fixedP!==null||reduce?1:.14);if(Math.abs(target-shown)<.0004)shown=target;render(shown,(fixedP!==null&&!LIVE)?(params.get('t')?parseFloat(params.get('t')):.4):time);requestAnimationFrame(loop)}
+/* rendimiento: dentro del hero solo se dibuja la obra visible; quieta, a 15 cuadros por segundo; en celular, tope de 30 */
+const __MOB=matchMedia('(max-width:900px)').matches;
+if(__MOB)document.querySelectorAll('feTurbulence').forEach(e=>e.setAttribute('numOctaves','1'));
+let __ON=true,__lr=-1,__lt=0;
+if(LIVE)addEventListener('message',e=>{if(e.data&&typeof e.data.on==='boolean'){__ON=e.data.on;if(__ON)__lr=-1}});
+const __go=(s,now)=>{if(!LIVE)return true;const m=Math.abs(s-__lr)>.00005;if(m){if(__MOB&&now-__lt<30)return false;__lr=s;__lt=now;return true}if(s<.002)return false;if(now-__lt>=66){__lt=now;return true}return false};
+function loop(now){if(LIVE&&!__ON){requestAnimationFrame(loop);return}const time=(now-t0)/1000;target=fixedP!==null?fixedP:(reduce?1:progresoScroll());shown+=(target-shown)*(fixedP!==null||reduce?1:.14);if(Math.abs(target-shown)<.0004)shown=target;if(__go(shown,now))render(shown,(fixedP!==null&&!LIVE)?(params.get('t')?parseFloat(params.get('t')):.4):time);requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 let anim=null;const maxScroll=()=>$('track').offsetHeight-innerHeight;
 function parar(){if(anim){cancelAnimationFrame(anim);anim=null;$('play').textContent='▶ Ver sola'}}
