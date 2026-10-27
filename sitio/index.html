@@ -40,8 +40,8 @@ a{color:inherit}
 html.loading{overflow:hidden}
 .loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;transition:opacity .8s ease,visibility .8s}
 .loader.out{opacity:0;visibility:hidden}
-.loader svg{width:min(46vw,400px);height:auto;aspect-ratio:1590/725;overflow:visible;display:block}
-@media (max-width:600px){.loader svg{width:min(68vw,320px)}}
+.loader canvas{width:min(46vw,400px);height:auto;aspect-ratio:1590/725;display:block}
+@media (max-width:600px){.loader canvas{width:min(68vw,320px)}}
 
 /* ---------- navegación ---------- */
 .nav-btn{position:fixed;top:2.2vh;right:4.4vw;z-index:60;font:500 15px var(--sans);display:flex;gap:10px;align-items:center;background:none;border:0;cursor:pointer;color:var(--tinta);padding:10px 4px;min-height:44px}
@@ -439,16 +439,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 <body>
 
 <div class="loader lienzo" id="loader" role="status" aria-label="Cargando Vástago">
-  <svg viewBox="0 0 1590 725" aria-hidden="true">
-    <defs>
-      <filter id="rev" filterUnits="userSpaceOnUse" x="0" y="0" width="1590" height="725" color-interpolation-filters="sRGB">
-        <feImage href="loader/map.png" x="0" y="0" width="1590" height="725" preserveAspectRatio="none" result="m"/>
-        <feColorMatrix id="rm" in="m" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -60 0 0 0 -6" result="a"/>
-        <feComposite in="SourceGraphic" in2="a" operator="in"/>
-      </filter>
-    </defs>
-    <image href="loader/logo.webp" x="0" y="0" width="1590" height="725" filter="url(#rev)"/>
-  </svg>
+  <canvas id="lc" width="800" height="365" aria-hidden="true"></canvas>
 </div>
 
 <button class="nav-btn" id="abrir" aria-label="Abrir menú" aria-expanded="false">Menú <i></i></button>
@@ -666,22 +657,23 @@ const FILES=['corintios13','jesus','sadrac','jeremias'];
 const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
 const track=document.getElementById('track'),stage=document.getElementById('stage');
 let frames=[];
-const lastP=new Array(FILES.length).fill(-1);
-function buildFrames(){
-  frames=FILES.map((f,i)=>{const fr=document.createElement('iframe');fr.src='animaciones/'+f+'.html?embed=1&p=0';fr.setAttribute('scrolling','no');fr.setAttribute('aria-hidden','true');fr.tabIndex=-1;fr.style.zIndex=10-i;fr.style.visibility='hidden';fr.addEventListener('load',()=>{lastP[i]=-1});stage.appendChild(fr);return fr});
-  lastP.fill(-1);
-}
-function destroyFrames(){frames.forEach(fr=>fr.remove());frames=[]}
+const lastP=new Array(FILES.length).fill(-1),lastOn=new Array(FILES.length).fill(null),lastO=new Array(FILES.length).fill(-1);
+/* solo viven la obra de adelante, la actual y la siguiente: así no se cargan ni se dibujan las cuatro a la vez */
+function mount(i){if(frames[i])return;const fr=document.createElement('iframe');fr.src='animaciones/'+FILES[i]+'.html?embed=1&p=0';fr.setAttribute('scrolling','no');fr.setAttribute('aria-hidden','true');fr.tabIndex=-1;fr.style.zIndex=10-i;fr.style.visibility='hidden';fr.addEventListener('load',()=>{lastP[i]=-1;lastOn[i]=null});stage.appendChild(fr);frames[i]=fr;lastP[i]=-1;lastOn[i]=null;lastO[i]=-1}
+function unmount(i){if(frames[i]){frames[i].remove();frames[i]=null}}
+function buildFrames(){frames=new Array(FILES.length).fill(null);lastP.fill(-1);mount(0)}
+function destroyFrames(){frames.forEach(fr=>fr&&fr.remove());frames=[]}
 buildFrames();
 const total=()=>track.offsetHeight-innerHeight;
 /* cada obra: se pinta (0–70 %), queda quieta (70–88 %) y recién ahí se disuelve hacia la siguiente */
 const PINTA=.70,PAUSA=.88;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let ready=false;{const go=()=>{ready=true};const f0=frames[0];if(f0)f0.addEventListener('load',()=>setTimeout(go,400));setTimeout(go,2500)}
 let shown=0,idle=false;
 function loop(){
   /* con el hero fuera de pantalla no se hace nada: las animaciones son pesadas y comparten hilo con el scroll */
   if(scrollY>track.offsetHeight+50){
-    if(!idle){idle=true;frames.forEach(fr=>{fr.style.visibility='hidden'});document.getElementById('skip').style.opacity=0}
+    if(!idle){idle=true;frames.forEach((fr,i)=>{if(!fr)return;fr.style.visibility='hidden';lastO[i]=-1;if(fr.contentWindow&&lastOn[i]!==false){lastOn[i]=false;fr.contentWindow.postMessage({on:false},'*')}});document.getElementById('skip').style.opacity=0}
     if(frames.length&&scrollY>track.offsetHeight+innerHeight*1.3)destroyFrames();
     else if(!frames.length&&scrollY<track.offsetHeight+innerHeight*.9)buildFrames();
     requestAnimationFrame(loop);return;
@@ -692,13 +684,17 @@ function loop(){
   shown+=(g-shown)*((reduce||lenis)?1:.14);if(Math.abs(g-shown)<.0003)shown=g;
   const x=shown*4,idx=Math.min(3,Math.floor(x)),local=x-idx>=1?1:x-idx;
   const lp=(idx===3&&shown>=.9999)?1:local;
+  for(let i=0;i<FILES.length;i++){if(i>=idx-1&&i<=idx+1&&(i<=idx||ready))mount(i);else if(i<idx-1||i>idx+1)unmount(i)}
   frames.forEach((fr,i)=>{
+    if(!fr)return;
     let p=0,op=0;
     if(i<idx){p=1;op=0}
     else if(i===idx){p=clamp(lp/PINTA);op=1;if(i<3)op=1-clamp((lp-PAUSA)/(1-PAUSA))}
     else if(i===idx+1){p=0;op=1}
-    fr.style.opacity=op;fr.style.visibility=op>0?'visible':'hidden';
-    if(op>0&&fr.contentWindow&&Math.abs(p-lastP[i])>.0004){lastP[i]=p;fr.contentWindow.postMessage({p},'*')}
+    if(lastO[i]!==op){lastO[i]=op;fr.style.opacity=op;fr.style.visibility=op>0?'visible':'hidden'}
+    const on=op>0;
+    if(fr.contentWindow&&lastOn[i]!==on){lastOn[i]=on;fr.contentWindow.postMessage({on},'*')}
+    if(on&&fr.contentWindow&&Math.abs(p-lastP[i])>.0004){lastP[i]=p;fr.contentWindow.postMessage({p},'*')}
   });
   document.getElementById('skip').style.opacity=scrollY>total()+innerHeight*.3?0:1;
   requestAnimationFrame(loop)
@@ -840,7 +836,7 @@ document.querySelectorAll('.origin').forEach(b=>{
   const NS='http://www.w3.org/2000/svg',reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const svg=document.createElementNS(NS,'svg');svg.setAttribute('class','brote');svg.setAttribute('aria-hidden','true');
   mural.insertBefore(svg,mural.querySelector('.fondo').nextSibling);
-  let H=0,Hs=0,Fh=0,x0=0,A=0,leaves=[],tip=null,fsvg=null,flor=null,gota=null,charco=null,lastY=-1;
+  let H=0,Hs=0,Fh=0,x0=0,A=0,leaves=[],tip=null,fsvg=null,flor=null,gota=null,charco=null,lastY=-1,MT=0;
   const xAt=y=>x0+A*Math.sin(y/170)+.5*A*Math.sin(y/61+1);
   const LEAF='M0 0 C6 -8 20 -9 31 0 C20 8 6 8 0 0Z',NERV='M3 0 L24 0';
   const mk=(tag,at)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);return e};
@@ -854,7 +850,7 @@ document.querySelectorAll('.origin').forEach(b=>{
     let d='M'+xAt(0).toFixed(1)+' 0';for(let y=14;y<Hs;y+=14)d+=' L'+xAt(y).toFixed(1)+' '+y;d+=' L'+xAt(Hs).toFixed(1)+' '+Hs;
     svg.appendChild(mk('path',{class:'tallo',d}));svg.appendChild(mk('path',{class:'tallo2',d}));
     const ys=[];
-    const mt=mural.getBoundingClientRect().top+scrollY;
+    const mt=mural.getBoundingClientRect().top+scrollY;MT=mt;
     ['obras','encargos','taller','exposicion','sobre','contacto'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const t=el.getBoundingClientRect().top+scrollY-mt;ys.push(t+(id==='encargos'?30:56))});
     /* hojas grandes en cada sección y chicas entre medio */
     const pts=[];
@@ -913,12 +909,12 @@ document.querySelectorAll('.origin').forEach(b=>{
   }
   function update(){
     if(!H)return;
-    const mt=mural.getBoundingClientRect().top+scrollY;
+    const mt=MT;
     const tyMax=Math.max(Hs+120,document.documentElement.scrollHeight-innerHeight+innerHeight*.72-mt);
     let ty=reduce?tyMax:Math.min(tyMax,Math.max(0,scrollY+innerHeight*.72-mt));
     if(Math.abs(ty-lastY)<1)return;lastY=ty;
     svg.style.clipPath=ty>=Hs?'none':'inset(0 0 '+Math.max(0,H-ty)+'px 0)';
-    leaves.forEach(l=>{const on=+l.dataset.y<ty-6;l.style.transform=l.dataset.b+'scale('+(on?l.dataset.s:0)+')'});
+    leaves.forEach(l=>{const on=+l.dataset.y<ty-6;if(l._on!==on){l._on=on;l.style.transform=l.dataset.b+'scale('+(on?l.dataset.s:0)+')'}});
     const inM=ty>8&&ty<Hs&&!reduce;
     tip.setAttribute('visibility',inM?'visible':'hidden');
     if(inM)tip.setAttribute('transform','translate('+xAt(ty).toFixed(1)+' '+ty.toFixed(1)+')');
@@ -977,13 +973,15 @@ document.querySelectorAll('a[data-wa]').forEach(a=>{
   a.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(a.dataset.msg||'');a.target='_blank';a.rel='noopener';
 });
 
-/* pantalla de carga: el pincel va escribiendo el logo; al terminar y con la página lista, se disuelve */
+/* pantalla de carga: el pincel va escribiendo el logo; al terminar y con la página lista, se disuelve.
+   Se dibuja en un canvas (mismo cálculo que antes, sin filtro SVG animado) para que no trabe en celulares */
 (function(){
   const loader=document.getElementById('loader');
   if(!loader)return;
-  const rm=document.getElementById('rm');
+  const cv=document.getElementById('lc'),cx=cv.getContext('2d');
   const DUR=4200,K=60;
-  const setT=t=>rm.setAttribute('values','0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -'+K+' 0 0 0 '+(K*t).toFixed(3));
+  let imgData=null,mapR=null,logoA=null;
+  const setT=t=>{if(!imgData)return;const d=imgData.data,n=mapR.length;for(let i=0;i<n;i++){let a=K*(t-mapR[i]/255);a=a<0?0:a>1?1:a;d[i*4+3]=logoA[i]*a}cx.putImageData(imgData,0,0)};
   if(lenis)lenis.stop();
   let animDone=false,pageDone=document.readyState==='complete',closed=false;
   const cerrar=()=>{if(closed||!animDone||!pageDone)return;closed=true;
@@ -991,12 +989,18 @@ document.querySelectorAll('a[data-wa]').forEach(a=>{
   if(!pageDone)addEventListener('load',()=>{pageDone=true;cerrar()});
   setTimeout(()=>{pageDone=true;cerrar()},9000); /* tope por si algo tarda de más */
   const fin=()=>{setT(1.05);animDone=true;cerrar()};
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){setTimeout(fin,300);return}
-  setT(-.1);
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pre=[new Image(),new Image()];let listos=0,arrancó=false;
-  const arrancar=()=>{if(arrancó)return;arrancó=true;const t0=performance.now()+250;
+  const prep=()=>{const W=cv.width,H=cv.height,t=document.createElement('canvas');t.width=W;t.height=H;const tx=t.getContext('2d',{willReadFrequently:true});
+    tx.drawImage(pre[0],0,0,W,H);imgData=tx.getImageData(0,0,W,H);
+    tx.clearRect(0,0,W,H);tx.drawImage(pre[1],0,0,W,H);const M=tx.getImageData(0,0,W,H).data;
+    const n=W*H;mapR=new Uint8Array(n);logoA=new Uint8Array(n);for(let i=0;i<n;i++){mapR[i]=M[i*4];logoA[i]=imgData.data[i*4+3]}};
+  const arrancar=()=>{if(arrancó)return;arrancó=true;
+    try{prep()}catch(e){animDone=true;cerrar();return}
+    if(reduce){fin();return}
+    setT(-.1);const t0=performance.now()+250;let last=0;
     (function paso(now){const f=Math.min(1,Math.max(0,(now-t0)/DUR));
-      const t=f*1.0;setT(t*1.05);
+      if(now-last>=33||f>=1){last=now;setT(f*1.05)}
       if(f<1)requestAnimationFrame(paso);else fin()})(performance.now())};
   pre[0].src='loader/logo.webp';pre[1].src='loader/map.png';
   pre.forEach(im=>{im.onload=im.onerror=()=>{if(++listos===2)arrancar()}});
