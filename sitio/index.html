@@ -245,7 +245,7 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 @media (max-width:860px){.sjg{grid-template-columns:repeat(2,minmax(0,1fr))}.sjc figcaption{flex-direction:column;align-items:flex-start}}
 .chips i.ok{border-style:solid;border-color:rgba(243,226,224,.7)}
 /* exposición */
-.portada{position:relative;height:clamp(250px,32vw,380px)}
+.portada{position:relative;height:clamp(300px,46vw,640px)}
 .portada .ph{position:absolute;inset:0}
 .portada .ph span{position:absolute;left:50%;top:34%;transform:translateX(-50%)}
 .portada .tx{position:absolute;left:0;right:0;bottom:0;padding:70px clamp(20px,3vw,44px) 26px;background:linear-gradient(transparent,rgba(22,19,17,.72));z-index:3}
@@ -409,6 +409,11 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .ph.foto{border:0;background:var(--arena);padding:0}
 .ph.foto::before,.ph.foto::after{display:none}
 .ph.foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph.vid{background:#fff;text-decoration:none;color:var(--bordo-os)}
+.ph.vid img{inset:auto;left:50%;top:27%;width:40%;max-width:160px;height:auto;transform:translate(-50%,-50%);object-fit:contain;opacity:.9}
+.ph.vid .vp{top:auto;bottom:52px;margin:0 -31px;transition:transform .2s}
+.ph.vid:hover .vp{transform:scale(1.08)}
+.ph.vid .vc{position:absolute;left:0;right:0;bottom:16px;text-align:center;font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--bordo-os);background:none;padding:0}
 
 /* taller de arte: foto a la izquierda, datos a la derecha */
 .ta{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(22px,3.5vw,48px);margin-top:34px;align-items:stretch}
@@ -537,6 +542,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
         <div><dt>Turno mañana</dt><dd>10 a 11:30</dd></div>
         <div><dt>Turno tarde</dt><dd>18 a 19:30</dd></div>
         <div><dt>Materiales</dt><dd>Incluidos</dd></div>
+        <div><dt>Para</dt><dd>Cualquier persona o grupo</dd></div>
         <div><dt>Edad</dt><dd>Desde los 6 años</dd></div>
         <div><dt>Cupos</dt><dd>8 por turno</dd></div>
         <div><dt>Clase individual</dt><dd>$15.000</dd></div>
@@ -548,14 +554,14 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
       <a class="bt" data-wa data-msg="Hola, quiero consultar por el taller de arte." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Consultar por el taller</a>
     </article>
   </div>
-  <div class="tira"><div class="ph foto"><img src="taller-espacio.webp" width="1400" height="646" alt="Bastidores de madera y lienzos del taller" loading="lazy" decoding="async"></div><div class="ph foto"><img src="taller-herramientas.webp" width="666" height="1000" alt="Un tablero con las herramientas del taller" loading="lazy" decoding="async" style="object-position:50% 25%"></div><div class="ph" style="--a:56deg"><span>Foto pendiente · una clase</span></div></div>
+  <div class="tira"><div class="ph foto"><img src="taller-espacio.webp" width="1400" height="646" alt="Bastidores de madera y lienzos del taller" loading="lazy" decoding="async"></div><div class="ph foto"><img src="taller-herramientas.webp" width="666" height="1000" alt="Un tablero con las herramientas del taller" loading="lazy" decoding="async" style="object-position:50% 25%"></div><a class="ph foto vid" href="https://www.instagram.com/reel/De28Cs6IXHf/" target="_blank" rel="noopener" aria-label="Ver en Instagram el taller en acción"><img src="logos/logo-negro.png" width="900" height="411" alt="" loading="lazy" decoding="async"><i class="vp"></i><span class="vc">Mirá el taller en acción</span></a></div>
 </section>
 
 <p class="vers dec"><img class="vdec" src="fondo/jarron-manos.webp" alt="" width="512" height="655" loading="lazy" decoding="async"><span class="mano">El amor es paciente, es bondadoso</span><small>1 Corintios 13</small></p>
 
 <!-- INAUGURACIÓN DEL TALLER -->
 <section class="s lienzo" id="exposicion">
-  <div class="portada"><div class="ph" style="--a:36deg"><span>Mejor foto de la inauguración</span></div>
+  <div class="portada"><div class="ph foto"><img src="inauguracion.webp" width="1425" height="1148" alt="Gente mirando las obras de Vástago colgadas en la pared durante la inauguración del taller" loading="lazy" decoding="async" style="object-position:50% 46%"></div>
     <div class="tx"><p class="eyebrow">La inauguración</p><h2>Bienvenidos a Vástago</h2><p class="chips"><i class="ok">Taller de arte</i><i class="ok">San Francisco, Córdoba</i><i class="ok">Octubre de 2026</i></p></div></div>
   <div class="mid">
     <div><p class="eyebrow">Ese día</p><p class="hmano">Música, arte y literatura</p>
@@ -656,10 +662,11 @@ addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
 const FILES=['corintios13','jesus','sadrac','jeremias'];
 const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
 const track=document.getElementById('track'),stage=document.getElementById('stage');
+const MOBV=matchMedia('(max-width:900px)').matches; /* en celular las obras se recorren como secuencia de imágenes */
 let frames=[];
 const lastP=new Array(FILES.length).fill(-1),lastOn=new Array(FILES.length).fill(null),lastO=new Array(FILES.length).fill(-1);
 /* solo viven la obra de adelante, la actual y la siguiente: así no se cargan ni se dibujan las cuatro a la vez */
-function mount(i){if(frames[i])return;const fr=document.createElement('iframe');fr.src='animaciones/'+FILES[i]+'.html?embed=1&p=0';fr.setAttribute('scrolling','no');fr.setAttribute('aria-hidden','true');fr.tabIndex=-1;fr.style.zIndex=10-i;fr.style.visibility='hidden';fr.addEventListener('load',()=>{lastP[i]=-1;lastOn[i]=null});stage.appendChild(fr);frames[i]=fr;lastP[i]=-1;lastOn[i]=null;lastO[i]=-1}
+function mount(i){if(frames[i])return;const fr=document.createElement('iframe');fr.src='animaciones/'+FILES[i]+(MOBV?'-m':'')+'.html?embed=1&p=0';fr.setAttribute('scrolling','no');fr.setAttribute('aria-hidden','true');fr.tabIndex=-1;fr.style.zIndex=10-i;fr.style.visibility='hidden';fr.addEventListener('load',()=>{lastP[i]=-1;lastOn[i]=null});stage.appendChild(fr);frames[i]=fr;lastP[i]=-1;lastOn[i]=null;lastO[i]=-1}
 function unmount(i){if(frames[i]){frames[i].remove();frames[i]=null}}
 function buildFrames(){frames=new Array(FILES.length).fill(null);lastP.fill(-1);mount(0)}
 function destroyFrames(){frames.forEach(fr=>fr&&fr.remove());frames=[]}
