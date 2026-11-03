@@ -1,22 +1,30 @@
 <!doctype html>
-<html lang="es-AR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Política de cookies | Vástago</title><meta name="description" content="Política de cookies de Vástago: qué datos se tratan, para qué y cómo ejercer tus derechos."><meta name="robots" content="index,follow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>:root{--arena:#E1D3C0;--camel:#D5BF9E;--bordo:#AA6766;--bordo-os:#8E4F4E;--bordo-tx:#6E3837;--tinta:#161311;--texto-2:#5a4d44;--line:#e7dccd;--serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif}
+<html lang="es-AR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Política de cookies | Vástago</title><meta name="description" content="Política de cookies de Vástago: qué datos se tratan, para qué y cómo ejercer tus derechos."><meta name="robots" content="index,follow"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&family=Just+Another+Hand&display=swap" rel="stylesheet">
+<style>:root{--arena:#E1D3C0;--camel:#D5BF9E;--bordo:#AA6766;--bordo-os:#8E4F4E;--bordo-tx:#6E3837;--tinta:#161311;--texto-2:#5a4d44;--line:#e7dccd;--serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--mano:'Just Another Hand','Patrick Hand',cursive;--gut:clamp(20px,6vw,88px)}
 *,*::before,*::after{box-sizing:border-box}
-body{margin:0;background:#fff;background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.022) 0 1px,transparent 1px 4px);color:var(--tinta);font:400 16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{margin:0;background-color:#fff;background-image:repeating-linear-gradient(0deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(90,80,70,.028) 0 1px,transparent 1px 4px);color:var(--tinta);font:400 16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
 .saltar{position:absolute;left:-999px;top:8px;background:#fff;color:var(--tinta);padding:8px 14px;border-radius:8px;z-index:100}
 .saltar:focus{left:12px}
-a:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
-.legal-hero{background:var(--arena);border-bottom:1px solid var(--camel);padding:44px 20px 88px}
-.legal-hero__in{max-width:820px;margin:0 auto}
-.legal-hero__brand{display:inline-block;margin-bottom:38px}
-.legal-hero__brand img{display:block;height:46px;width:auto}
-.legal-hero__eyebrow{margin:0 0 10px;font:600 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--bordo-tx)}
-.legal-hero h1{margin:0;font:500 clamp(2.1rem,6vw,3.4rem)/1.1 var(--serif);color:var(--tinta)}
-.legal-hero__fecha{margin:16px 0 0;font-size:14px;color:var(--texto-2)}
-.legal-hero__volver{display:inline-block;margin-top:22px;font-weight:500;font-size:14px;color:var(--bordo-tx);text-underline-offset:3px}
-.legal-hero__volver:hover{color:var(--bordo-os)}
-main.doc{max-width:820px;margin:-48px auto 72px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:clamp(22px,5vw,52px);box-shadow:0 18px 44px -26px rgba(22,19,17,.35);position:relative}
-main.doc h2{margin:2.2em 0 .5em;font:500 1.3rem/1.3 var(--serif);color:var(--bordo-tx)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
+.logo{position:absolute;top:22px;left:var(--gut);z-index:5;display:block}
+.logo img{display:block;height:50px;width:auto}
+.nav-btn{position:fixed;top:2.2vh;right:4.4vw;z-index:60;font:500 15px var(--sans);display:flex;gap:10px;align-items:center;background:none;border:0;cursor:pointer;color:var(--tinta);padding:10px 4px;min-height:44px}
+.nav-btn i{display:inline-block;width:26px;height:2px;background:currentColor;box-shadow:0 7px 0 currentColor,0 -7px 0 currentColor}
+.menu{position:fixed;inset:0;z-index:70;background:var(--tinta);color:var(--arena);display:flex;flex-direction:column;justify-content:center;padding:var(--gut);visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
+.menu.on{visibility:visible;opacity:1}
+.menu a{font:400 clamp(32px,6vw,64px)/1.25 var(--serif);text-decoration:none;display:block;width:max-content;color:inherit}
+.menu a:hover{color:var(--camel)}
+.menu .x{position:absolute;top:2.2vh;right:4.4vw;background:none;border:0;color:var(--arena);font:500 15px var(--sans);cursor:pointer;min-height:44px;padding:10px 4px}
+.menu small{font:400 28px var(--mano);color:var(--bordo);margin-top:28px}
+.legal-hero{padding:148px var(--gut) 36px}
+.legal-hero__in{max-width:820px;margin:0 auto;position:relative}
+.legal-hero__eyebrow{margin:0 0 10px;font:600 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--bordo-os)}
+.legal-hero h1{margin:0;font:500 clamp(2.2rem,6vw,3.6rem)/1.1 var(--serif);color:var(--tinta)}
+.legal-hero__fecha{margin:14px 0 0;font-size:14px;color:var(--texto-2)}
+.legal-hero__mano{position:absolute;right:0;top:6px;margin:0;font:400 clamp(26px,4vw,40px)/1 var(--mano);color:var(--bordo);transform:rotate(-4deg)}
+main.doc{max-width:820px;margin:0 auto 72px;width:calc(100% - 2 * var(--gut));background:rgba(255,255,255,.86);border:1px solid var(--line);border-top:4px solid var(--bordo);border-radius:2px;padding:clamp(22px,5vw,52px)}
+main.doc h2{margin:2.1em 0 .5em;font:500 1.3rem/1.3 var(--serif);color:var(--bordo-tx)}
 main.doc h2:first-child{margin-top:0}
 main.doc ul,main.doc ol{padding-left:1.25em}
 main.doc li{margin:.3em 0}
@@ -28,22 +36,34 @@ th{background:var(--arena);color:var(--tinta);font-weight:600}
 mark.completar{background:#fff3b0;padding:0 .25em;border-radius:3px}
 .aviso{background:#f6efe5;border-left:4px solid var(--bordo);padding:12px 16px;margin:0 0 24px;font-size:.92rem}
 .legal-foot{background:var(--tinta);color:var(--arena);font-size:13px}
-.legal-foot__in{max-width:980px;margin:0 auto;padding:24px 20px;display:flex;gap:12px 24px;justify-content:space-between;flex-wrap:wrap;align-items:center}
+.legal-foot__foto{display:block;width:100%;height:clamp(130px,18vw,220px);object-fit:cover;object-position:50% 100%}
+.legal-foot__in{max-width:1100px;margin:0 auto;padding:24px var(--gut);display:flex;gap:12px 24px;justify-content:space-between;flex-wrap:wrap;align-items:center}
 .legal-foot p{margin:0}
 .legal-foot nav{display:flex;gap:6px 18px;flex-wrap:wrap}
 .legal-foot a{color:inherit;text-underline-offset:3px}
 .legal-foot a:hover{color:#fff}
-@media (max-width:640px){.legal-hero{padding:32px 18px 80px}main.doc{margin:-40px 12px 56px}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:640px){.legal-hero{padding:128px 20px 28px}.legal-hero__mano{position:static;display:block;margin-top:10px;transform:none}main.doc{width:calc(100% - 24px)}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style></head><body>
 <a class="saltar" href="#contenido">Saltar al contenido</a>
+<a class="logo" href="/" aria-label="Vástago, volver al inicio"><img src="/logos/logo-negro.svg" alt="Vástago" height="50"></a>
+<button class="nav-btn" id="abrir" aria-expanded="false" aria-controls="menu"><i></i>Menú</button>
+<nav class="menu" id="menu" aria-label="Principal">
+  <button class="x" id="cerrar">Cerrar ✕</button>
+  <a href="/#obras">Obras</a>
+  <a href="/#taller">Taller</a>
+  <a href="/#exposicion">Inauguración</a>
+  <a href="/#tienda">Tienda</a>
+  <a href="/#sobre">Sobre Vástago</a>
+  <a href="/#contacto">Contacto</a>
+  <small>Fe en obra</small>
+</nav>
 <header class="legal-hero">
   <div class="legal-hero__in">
-    <a class="legal-hero__brand" href="/" aria-label="Vástago, volver al inicio"><img src="/logos/logo-negro.svg" alt="Vástago" height="46"></a>
     <p class="legal-hero__eyebrow">Legal</p>
     <h1>Política de cookies</h1>
     <p class="legal-hero__fecha">Última actualización: 3 de noviembre de 2026</p>
-    <a class="legal-hero__volver" href="/">← Volver a la web</a>
+    <p class="legal-hero__mano">Fe en obra</p>
   </div>
 </header>
 <span id="contenido"></span>
@@ -68,9 +88,17 @@ mark.completar{background:#fff3b0;padding:0 .25em;border-radius:3px}
 <p>Para saber cómo tratamos tus datos personales, consultá nuestra <a href="politica-de-privacidad.html">Política de privacidad</a>. Consultas: vastago.obras@gmail.com.</p>
 </main>
 <footer class="legal-foot">
+  <img class="legal-foot__foto" src="/atril-escena.webp" alt="" width="2160" height="1032" loading="lazy">
   <div class="legal-foot__in">
     <p>© 2026 Vástago · Fe en obra</p>
-    <nav aria-label="Información legal"><a href="/politica-de-privacidad.html">Política de privacidad</a><a href="/politica-de-cookies.html">Política de cookies</a><a href="/terminos-y-condiciones.html">Términos y condiciones</a><a href="/">Volver al inicio</a></nav>
+    <nav aria-label="Información legal"><a href="/politica-de-privacidad.html">Política de privacidad</a><a href="/politica-de-cookies.html">Política de cookies</a><a href="/terminos-y-condiciones.html">Términos y condiciones</a><a href="/arrepentimiento.html">Botón de arrepentimiento</a><a href="/">Volver al inicio</a></nav>
   </div>
 </footer>
+<script>
+(function(){var m=document.getElementById('menu'),a=document.getElementById('abrir'),c=document.getElementById('cerrar');if(!m||!a||!c)return;
+function set(on){m.classList.toggle('on',on);a.setAttribute('aria-expanded',on);document.documentElement.style.overflow=on?'hidden':'';if(on)c.focus()}
+a.addEventListener('click',function(){set(true)});c.addEventListener('click',function(){set(false)});
+m.querySelectorAll('a').forEach(function(l){l.addEventListener('click',function(){set(false)})});
+addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});})();
+</script>
 </body></html>
