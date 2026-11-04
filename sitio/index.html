@@ -261,8 +261,8 @@ section.s{padding:clamp(56px,9vh,110px) var(--gut)}
 .hmano{font:400 clamp(44px,5vw,62px)/.95 var(--mano);text-transform:uppercase;letter-spacing:.04em;color:var(--bordo-os);margin:8px 0 14px}
 .mid .tx1{font-size:19px;line-height:1.5;color:#2a231e;max-width:38ch}
 .mid .tx2{margin-top:10px;font-size:17px;color:#3a322c;max-width:38ch}
-.mos{display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:170px 170px;gap:14px;height:354px}
-.mos .ph{height:100%}.mos .a{grid-row:1/3}
+.mos{display:grid;grid-template-columns:1fr 1fr;gap:14px;height:clamp(300px,33vw,430px)}
+.mos .ph{height:100%}
 .vp{position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px;border-radius:50%;background:rgba(255,255,255,.95);box-shadow:0 6px 16px rgba(0,0,0,.2);z-index:3}
 .vp::after{content:"";position:absolute;left:24px;top:19px;border-left:18px solid var(--bordo-os);border-top:12px solid transparent;border-bottom:12px solid transparent}
 
@@ -300,6 +300,7 @@ section.tienda{position:relative;padding:0;overflow:hidden;background-color:var(
 .nm{font:400 clamp(32px,3.4vw,40px)/1.05 var(--serif);margin:clamp(24px,5vh,44px) 0 10px}
 .sdatos .tx1{font-size:18px;color:#2a231e;max-width:46ch;line-height:1.5}
 .sdatos .tx3{font-size:16px;color:#3a322c;max-width:46ch;line-height:1.5;margin-top:8px}.sdatos .tx3 a{color:var(--bordo-os);text-underline-offset:3px}.hrt{color:var(--bordo);font-family:var(--sans)}
+.jrow{display:flex;gap:20px;align-items:flex-start;margin-top:16px}.jrow .juana{margin-top:2px}.jfoto{margin:0;flex:none;width:clamp(104px,10.5vw,146px);background:#fff;padding:6px 6px 20px;box-shadow:0 1px 2px rgba(40,30,20,.14),0 12px 22px -10px rgba(40,30,20,.3);transform:rotate(-2.5deg)}.jfoto img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:50% 30%}
 .juana{font-size:21px;color:var(--bordo-os);margin-top:14px;text-transform:uppercase;letter-spacing:.04em}
 .sdatos hr{border:0;border-top:1px solid rgba(22,19,17,.22);margin:34px 0 26px}
 .frase{font-size:clamp(28px,3vw,36px);line-height:1.05;text-transform:uppercase;letter-spacing:.04em}
@@ -330,7 +331,7 @@ section.tienda{position:relative;padding:0;overflow:hidden;background-color:var(
   .mid,.sobre,.cont{grid-template-columns:1fr}
     .col{border-left:0;padding-left:0}
   .cont h2{font-size:clamp(44px,13vw,70px)}
-  .mos{height:300px;grid-template-rows:140px 140px}
+  .mos{height:300px}
 }
 
 /* ---------- final del lienzo: el atril ---------- */
@@ -581,7 +582,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
     <div><p class="eyebrow">Ese día</p><p class="hmano">Música, arte y literatura</p>
       <p class="tx1">Abrimos las puertas de nuestro taller con música en vivo, arte y literatura. Gracias a todos los que vinieron y a los que se pusieron el taller al hombro.</p>
       <p class="tx2">Un espacio para aprender, crear y compartir en comunidad.</p></div>
-    <div class="mos"><div class="ph a" style="--a:44deg"><span>Foto del taller armado</span></div><div class="ph" style="--a:52deg"><span>Foto de la gente</span></div><div class="ph" style="--a:46deg"><span>Video</span><i class="vp"></i></div></div>
+    <div class="mos"><div class="ph foto"><img src="inauguracion-gente.webp" width="591" height="1280" alt="Gente recorriendo el taller durante la inauguración, entre caballetes con obras de Vástago" loading="lazy" decoding="async" style="object-position:50% 45%"></div><div class="ph foto"><img src="inauguracion-taller.webp" width="591" height="1280" alt="Mesa del taller armada con pinceles, tintas, bloques de madera y láminas, y caballetes con lienzos al fondo" loading="lazy" decoding="async" style="object-position:50% 62%"></div></div>
   </div>
 </section>
 
@@ -607,8 +608,8 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
       <div class="stop"><div><p class="eyebrow">Sobre Vástago</p><h2 class="mano">El brote que nace de una <em>raíz</em></h2><i class="sprout"></i></div><img class="slogo" width="860" height="397" src="logos/logo-negro.svg" alt="Vástago · Fe en obra"></div>
       <p class="nm">Abigail y Matías</p>
       <p class="tx1">Somos Vástago, un taller de arte en San Francisco, Córdoba, un espacio de encuentros y procesos creativos. Ofrecemos clases grupales de dibujo, pintura, escultura y animación, con un acompañamiento individual que parte de los intereses y el proceso de cada aprendiz. Nuestra propuesta está atravesada por la fe, y busca transmitirla a través del arte.</p>
-      <p class="juana mano">Juana es nuestro «Vástago» <span class="hrt" aria-hidden="true">♥</span></p>
-      <p class="tx3">Nos acompaña desde marzo de este año y nos inspiró a crear una serie de cuadros en impresión digital, titulada «Juana». <a href="#juana">Ver la serie</a></p>
+      <div class="jrow"><figure class="jfoto"><img src="juana-foto.webp" width="520" height="693" alt="Matías sostiene en brazos a Juana, que le sonríe; foto en blanco y negro" loading="lazy" decoding="async"></figure><div><p class="juana mano">Juana es nuestro «Vástago» <span class="hrt" aria-hidden="true">♥</span></p>
+      <p class="tx3">Nos acompaña desde marzo de este año y nos inspiró a crear una serie de cuadros en impresión digital, titulada «Juana». <a href="#juana">Ver la serie</a></p></div></div>
       <hr>
       <p class="frase mano">Tu fe también puede ser <em>una obra</em></p>
       <div class="sacc"><a class="bt" data-wa data-msg="Hola, quiero contarles mi idea." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Contanos la tuya</a><span>o seguinos en <a href="https://www.instagram.com/vastago.obras" target="_blank" rel="noopener">@vastago.obras</a></span></div>
