@@ -46,7 +46,7 @@ html.loading{overflow:hidden}
 @media (max-width:600px){.loader canvas{width:min(68vw,320px)}}
 
 /* ---------- navegación ---------- */
-.nav-btn{position:fixed;top:2.2vh;right:4.4vw;z-index:60;font:500 15px var(--sans);display:flex;gap:10px;align-items:center;background:none;border:0;cursor:pointer;color:var(--tinta);padding:10px 4px;min-height:44px}
+.nav-btn{position:fixed;top:2.2vh;right:4.4vw;z-index:60;font:500 15px var(--sans);display:flex;gap:10px;align-items:center;background:rgb(255 255 255 / .9);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:0;border-radius:40px;cursor:pointer;color:var(--tinta);padding:10px 16px;min-height:44px}
 .nav-btn i{display:inline-block;width:26px;height:2px;background:currentColor;box-shadow:0 7px 0 currentColor,0 -7px 0 currentColor}
 .nav-btn:focus-visible,.menu a:focus-visible,.btn:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .menu{position:fixed;inset:0;z-index:70;background:var(--tinta);color:var(--arena);display:flex;flex-direction:column;justify-content:center;padding:var(--gut);visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
@@ -670,13 +670,13 @@ if(window.Lenis&&!reduceMotion){
 }
 /* menú */
 const menu=document.getElementById('menu'),abrir=document.getElementById('abrir');
-const setMenu=on=>{menu.classList.toggle('on',on);abrir.setAttribute('aria-expanded',on);if(lenis)on?lenis.stop():lenis.start()};
+const setMenu=(on,volver)=>{const estaba=menu.classList.contains('on');menu.classList.toggle('on',on);abrir.setAttribute('aria-expanded',on);if(lenis)on?lenis.stop():lenis.start();if(on)setTimeout(()=>document.getElementById('cerrar').focus(),60);else if(volver&&estaba)abrir.focus()};
 /* anclas: con Lenis hay que desplazar por JS */
 document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');const t=id.length>1&&document.querySelector(id);if(!t)return;e.preventDefault();setTimeout(()=>{lenis?lenis.scrollTo(t,{duration:1.6}):t.scrollIntoView({behavior:reduceMotion?'auto':'smooth'})},lenis?60:0)}));
 abrir.onclick=()=>setMenu(true);
-document.getElementById('cerrar').onclick=()=>setMenu(false);
+document.getElementById('cerrar').onclick=()=>setMenu(false,true);
 menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
-addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false,true)});
 
 /* hero: cada tramo de scroll pinta una obra (las animaciones viven en /animaciones) */
 const FILES=['corintios13','jesus','sadrac','jeremias'];
