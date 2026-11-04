@@ -992,10 +992,11 @@ document.querySelectorAll('.origin').forEach(b=>{
   els.forEach(e=>io.observe(e));
 })();
 
-/* WhatsApp: cuando esté el número, se completa acá y todos los botones pasan a abrir el chat */
 /* serie Juana: cambiar de paleta */
-document.querySelectorAll('.sjc').forEach(c=>{const im=c.querySelector('img'),n=c.dataset.n;c.querySelectorAll('.sjp button').forEach(b=>b.addEventListener('click',()=>{im.src='juana-'+n+'-'+b.dataset.k+'.webp';c.querySelectorAll('.sjp button').forEach(x=>x.setAttribute('aria-pressed',x===b))}))});
-const WA_NUMBER='5493564593852';   /* pendiente: número con código de país, solo dígitos (ej. 5491100000000) */
+document.querySelectorAll('.sjc').forEach(c=>{const im=c.querySelector('img'),n=c.dataset.n;c.querySelectorAll('.sjp button').forEach(b=>b.addEventListener('click',()=>{im.src='juana-'+n+'-'+b.dataset.k+'.webp';c.querySelectorAll('.sjp button').forEach(x=>x.setAttribute('aria-pressed',x===b));paletasWA()}))});
+const WA_NUMBER='5493564593852';
+/* la consulta de la serie Juana lleva las paletas que se eligieron */
+function paletasWA(){const a=document.querySelector('.sja a[data-wa]');if(!a)return;const p=[...document.querySelectorAll('.sjc .sjp')].map(g=>g.getAttribute('aria-label').replace('Paleta de ','')+': '+g.querySelector('[aria-pressed="true"]').getAttribute('aria-label').replace('Paleta ','')).join(', ');a.dataset.msg='Hola, quiero consultar por la serie Juana. Paletas que me gustaron: '+p+'.';a.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(a.dataset.msg)}
 document.querySelectorAll('a[data-wa]').forEach(a=>{
   if(!WA_NUMBER)return;
   a.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(a.dataset.msg||'');a.target='_blank';a.rel='noopener';
