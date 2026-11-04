@@ -4,19 +4,21 @@
 <meta charset="utf-8">
 <!-- v2026-10-10b -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vástago · Fe en obra</title>
+<title>Vástago · Taller de arte y obras con fe en San Francisco, Córdoba</title>
+<link rel="canonical" href="https://vastago-sitio.vercel.app/">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
 <meta property="og:site_name" content="Vástago">
-<meta property="og:title" content="Vástago · Fe en obra">
+<meta property="og:title" content="Vástago · Taller de arte y obras con fe en San Francisco, Córdoba">
+<meta property="og:url" content="https://vastago-sitio.vercel.app/">
 <meta property="og:description" content="Obras de arte con pasajes bíblicos pintados a mano. Cuadros, encargos y taller de arte en San Francisco, Córdoba.">
 <meta property="og:image" content="https://vastago-sitio.vercel.app/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="description" content="Obras de arte con pasajes bíblicos pintados a mano. Cuadros, encargos, talleres y esculturas. San Francisco, Córdoba.">
+<meta name="description" content="Obras de arte con pasajes bíblicos pintados a mano. Cuadros, encargos y taller de arte en San Francisco, Córdoba.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&family=Just+Another+Hand&display=swap" rel="stylesheet">
@@ -115,7 +117,9 @@ h2{font:400 clamp(34px,5vw,60px)/1.1 var(--serif);margin:10px 0 14px;letter-spac
 /* carrusel de obras: copias de papel colgadas de una cuerda (port a JS simple del "Polaroid Line Carousel") */
 .pl-root{position:relative;width:calc(100% + 2*var(--gut));margin:34px calc(var(--gut) * -1) 0;height:clamp(560px,56vw,700px);overflow:hidden;color:var(--tinta);user-select:none;-webkit-user-select:none;touch-action:pan-y;outline:none;cursor:grab;--pl-muted:rgba(22,19,17,.55);--pl-line:rgba(22,19,17,.18)}
 .pl-root[data-drag='1']{cursor:grabbing}
-.pl-root:focus-visible{box-shadow:inset 0 0 0 2px var(--bordo-os)}
+.pl-root:focus-visible{outline:none}.pl-root:focus-visible::after{content:"";position:absolute;inset:0;border:3px solid var(--bordo-os);pointer-events:none;z-index:50}
+.skipc{position:fixed;left:12px;top:-80px;z-index:200;background:var(--tinta);color:var(--blanco);padding:12px 18px;border-radius:40px;font:600 14px var(--sans);text-decoration:none}.skipc:focus{top:12px;outline:3px solid var(--bordo-os);outline-offset:2px}
+html{scroll-padding:84px 0 100px}
 .pl-string{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .pl-card{position:absolute;left:0;top:0;transform-origin:50% 0;will-change:transform;cursor:inherit}
 /* cuadro: marco oscuro, filo claro adentro y la tela con sombra; cuelga de un alambre con una argolla */
@@ -294,7 +298,8 @@ section.tienda{position:relative;padding:0;overflow:hidden;background-color:var(
 .sdatos h2 em,.cont h2 em,.frase em{font-style:normal;color:var(--bordo-os)}
 .slogo{height:56px;width:auto;flex:none;margin-top:4px}
 .nm{font:400 clamp(32px,3.4vw,40px)/1.05 var(--serif);margin:clamp(24px,5vh,44px) 0 10px}
-.sdatos .tx1{font-size:18px;color:#2a231e;max-width:40ch;line-height:1.5}
+.sdatos .tx1{font-size:18px;color:#2a231e;max-width:46ch;line-height:1.5}
+.sdatos .tx3{font-size:16px;color:#3a322c;max-width:46ch;line-height:1.5;margin-top:8px}.sdatos .tx3 a{color:var(--bordo-os);text-underline-offset:3px}.hrt{color:var(--bordo);font-family:var(--sans)}
 .juana{font-size:21px;color:var(--bordo-os);margin-top:14px;text-transform:uppercase;letter-spacing:.04em}
 .sdatos hr{border:0;border-top:1px solid rgba(22,19,17,.22);margin:34px 0 26px}
 .frase{font-size:clamp(28px,3vw,36px);line-height:1.05;text-transform:uppercase;letter-spacing:.04em}
@@ -343,6 +348,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .cp{position:absolute;left:22.9%;top:50.6%;font:400 max(11px,.94cqw) var(--sans);opacity:.6}
 .cp a{pointer-events:auto;text-underline-offset:3px;padding:2px 0}
 .cp a:hover{color:var(--bordo-tx);opacity:1}
+.cp a:focus-visible,.cr a:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 .cr{position:absolute;left:22.9%;top:56.2%;margin:0;font:400 max(11px,.94cqw) var(--sans);opacity:.6}
 .cr a{pointer-events:auto;text-underline-offset:3px;padding:2px 0}
 .cr a:hover{color:var(--bordo-tx);opacity:1}
@@ -350,10 +356,10 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   .esc{container-type:normal;overflow:visible}
   .foto{overflow:hidden}
   .foto img{width:126.3vw;margin-left:-26.3vw}
-  .cts{position:static;background:var(--tinta);padding:30px var(--gut) 112px;display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;pointer-events:auto}
+  .cts{position:static;background:var(--tinta);padding:30px var(--gut) 112px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 16px;pointer-events:auto}
   .ct{position:static}
   .ct .k{color:var(--camel);font-size:11px}
-  .ct .v{color:var(--arena);font-size:19px;white-space:normal}
+  .ct .v{color:var(--arena);font-size:19px;white-space:normal;overflow-wrap:anywhere}
   a.v:hover{color:var(--blanco)}
   .cp{position:static;grid-column:1/-1;color:var(--arena);font-size:12px;margin-top:4px;opacity:.6}
   .cr{position:static;grid-column:1/-1;color:var(--arena);font-size:12px;opacity:.6}
@@ -446,8 +452,10 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
   .bt{min-height:44px}
 }
 </style>
+<script type="application/ld+json">[{"@context":"https://schema.org","@type":["LocalBusiness","EducationalOrganization"],"@id":"https://vastago-sitio.vercel.app/#negocio","name":"Vástago · Fe en obra","alternateName":"Vástago","url":"https://vastago-sitio.vercel.app/","image":"https://vastago-sitio.vercel.app/og.jpg","logo":"https://vastago-sitio.vercel.app/logos/logo-negro.svg","description":"Taller de arte (dibujo, pintura, escultura y animación) y obras de arte con pasajes bíblicos pintados a mano, cuadros y encargos.","telephone":"+5493564593852","email":"vastago.obras@gmail.com","address":{"@type":"PostalAddress","streetAddress":"Paraguay 121","addressLocality":"San Francisco","addressRegion":"Córdoba","addressCountry":"AR"},"areaServed":{"@type":"Country","name":"Argentina"},"sameAs":["https://www.instagram.com/vastago.obras"],"founder":[{"@type":"Person","name":"Abigail Giampaoli"},{"@type":"Person","name":"Matías Lezcano"}],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Taller de arte y obras","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Course","name":"Taller de arte: dibujo, pintura, escultura y animación","description":"Clases presenciales para cualquier persona o grupo, desde los 6 años. Lunes y jueves, de 10 a 11:30 y de 18 a 19:30. Materiales incluidos, 8 cupos por turno.","provider":{"@id":"https://vastago-sitio.vercel.app/#negocio"},"courseMode":"onsite","inLanguage":"es-AR"},"priceCurrency":"ARS","price":"60000","description":"Mes completo. Clase individual: $15.000. Hermanos o familia: $45.000 cada uno."},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Obras por encargo","description":"Obras de arte con pasajes bíblicos pintadas a mano. Entrega entre 5 y 10 días hábiles según la complejidad, seña del 50% y envíos a todo el país.","provider":{"@id":"https://vastago-sitio.vercel.app/#negocio"},"areaServed":{"@type":"Country","name":"Argentina"}}}]},"legalName":"Lezcano Matias Ismael","taxID":"20-37610860-1"},{"@context":"https://schema.org","@type":"WebSite","@id":"https://vastago-sitio.vercel.app/#sitio","name":"Vástago · Fe en obra","url":"https://vastago-sitio.vercel.app/","inLanguage":"es-AR","publisher":{"@id":"https://vastago-sitio.vercel.app/#negocio"},"dateModified":"2026-10-29"}]</script>
 </head>
 <body>
+<a class="skipc" href="#contenido">Saltar al contenido</a>
 
 <div class="loader lienzo" id="loader" role="status" aria-label="Cargando Vástago">
   <canvas id="lc" width="800" height="365" aria-hidden="true"></canvas>
@@ -466,7 +474,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
 </nav>
 
 <main id="contenido">
-<h1 class="sr">Vástago · Fe en obra: obras de arte con pasajes bíblicos pintados a mano</h1>
+<h1 class="sr">Vástago · Fe en obra: taller de arte en San Francisco, Córdoba, y obras con pasajes bíblicos pintados a mano</h1>
 <!-- HERO: la pantalla queda fija y el scroll pinta las 4 obras -->
 <div class="track" id="track">
   <p class="sr">Al bajar por la página se van pintando cuatro obras de Vástago: 1 Corintios 13, Jesús, Sadrac, Mesac y Abednego, y Jeremías 18.</p>
@@ -560,7 +568,7 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
       <a class="bt" data-wa data-msg="Hola, quiero consultar por el taller de arte." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Consultar por el taller</a>
     </article>
   </div>
-  <div class="tira"><div class="ph foto"><img src="taller-espacio.webp" width="1400" height="646" alt="Bastidores de madera y lienzos del taller" loading="lazy" decoding="async"></div><div class="ph foto"><img src="taller-herramientas.webp" width="666" height="1000" alt="Un tablero con las herramientas del taller" loading="lazy" decoding="async" style="object-position:50% 25%"></div><a class="ph foto vid" href="https://www.instagram.com/reel/De28Cs6IXHf/" target="_blank" rel="noopener" aria-label="Ver en Instagram el taller en acción"><img src="logos/logo-negro.svg" width="860" height="397" alt="" loading="lazy" decoding="async"><i class="vp"></i><span class="vc">Mirá el taller en acción</span></a></div>
+  <div class="tira"><div class="ph foto"><img src="taller-espacio.webp" width="1400" height="646" alt="Bastidores de madera y lienzos del taller de arte Vástago, en San Francisco, Córdoba" loading="lazy" decoding="async"></div><div class="ph foto"><img src="taller-herramientas.webp" width="666" height="1000" alt="Un tablero con las herramientas del taller" loading="lazy" decoding="async" style="object-position:50% 25%"></div><a class="ph foto vid" href="https://www.instagram.com/reel/De28Cs6IXHf/" target="_blank" rel="noopener" aria-label="Mirá el taller en acción, en Instagram"><img src="logos/logo-negro.svg" width="860" height="397" alt="" loading="lazy" decoding="async"><i class="vp"></i><span class="vc">Mirá el taller en acción</span></a></div>
 </section>
 
 <p class="vers dec"><img class="vdec" src="fondo/jarron-manos.webp" alt="" width="512" height="655" loading="lazy" decoding="async"><span class="mano">El amor es paciente, es bondadoso</span><small>1 Corintios 13</small></p>
@@ -598,8 +606,9 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
     <div class="sdatos">
       <div class="stop"><div><p class="eyebrow">Sobre Vástago</p><h2 class="mano">El brote que nace de una <em>raíz</em></h2><i class="sprout"></i></div><img class="slogo" width="860" height="397" src="logos/logo-negro.svg" alt="Vástago · Fe en obra"></div>
       <p class="nm">Abigail y Matías</p>
-      <p class="tx1">Un texto corto, escrito por ellos, en primera persona.</p>
-      <p class="juana mano">Y Juana, que nos acompaña.</p>
+      <p class="tx1">Somos Vástago, un taller de arte en San Francisco, Córdoba, un espacio de encuentros y procesos creativos. Ofrecemos clases grupales de dibujo, pintura, escultura y animación, con un acompañamiento individual que parte de los intereses y el proceso de cada aprendiz. Nuestra propuesta está atravesada por la fe, y busca transmitirla a través del arte.</p>
+      <p class="juana mano">Juana es nuestro «Vástago» <span class="hrt" aria-hidden="true">♥</span></p>
+      <p class="tx3">Nos acompaña desde marzo de este año y nos inspiró a crear una serie de cuadros en impresión digital, titulada «Juana». <a href="#juana">Ver la serie</a></p>
       <hr>
       <p class="frase mano">Tu fe también puede ser <em>una obra</em></p>
       <div class="sacc"><a class="bt" data-wa data-msg="Hola, quiero contarles mi idea." href="#contacto"><svg class="wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg> Contanos la tuya</a><span>o seguinos en <a href="https://www.instagram.com/vastago.obras" target="_blank" rel="noopener">@vastago.obras</a></span></div>
@@ -622,7 +631,9 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
     <div class="col">
       <div class="it"><p class="k">Instagram</p><a class="v" href="https://www.instagram.com/vastago.obras" target="_blank" rel="noopener">@vastago.obras</a><p class="d">Las obras, el proceso y lo que viene.</p></div>
       <div class="it"><p class="k">Mail</p><a class="v" href="mailto:vastago.obras@gmail.com">vastago.obras@gmail.com</a><p class="d">Si preferís escribir con más calma.</p></div>
-      <div class="it"><p class="k">El taller</p><p class="v">Paraguay 121, San Francisco, Córdoba</p><p class="d">Lunes y jueves, o con cita previa. Escribinos antes de venir.</p></div>
+      <div class="it"><p class="k">Teléfono y WhatsApp</p><a class="v" href="tel:+5493564593852">+54 9 3564 59-3852</a><p class="d">En el horario de atención.</p></div>
+      <div class="it"><p class="k">El taller</p><address class="v" style="font-style:normal">Paraguay 121, San Francisco, Córdoba</address><p class="d">Lunes y jueves, o con cita previa. Escribinos antes de venir.</p></div>
+      <div class="it"><p class="k">Titular</p><p class="v">Lezcano Matias Ismael</p><p class="d">CUIT 20-37610860-1 · Monotributista</p></div>
     </div>
   </div>
 </section>
@@ -643,10 +654,10 @@ a.v:focus-visible{outline:2px solid var(--bordo-os);outline-offset:3px}
     </div>
   </div>
 </footer>
-<a class="fab" data-wa data-msg="Hola, quiero consultar." href="#contacto" aria-label="Escribinos por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></a>
+<aside aria-label="Contacto por WhatsApp"><a class="fab" data-wa data-msg="Hola, quiero consultar." href="#contacto" aria-label="Escribinos por WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg></a></aside>
 
 <script>document.documentElement.classList.add('js','loading')</script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="lenis.min.js"></script>
 <script>
 /* scroll suave (Lenis); con "reducir movimiento" queda el scroll nativo */
 const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
