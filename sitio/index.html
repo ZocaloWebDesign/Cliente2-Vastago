@@ -1005,7 +1005,8 @@ document.querySelectorAll('a[data-wa]').forEach(a=>{
 (function(){
   const loader=document.getElementById('loader');
   if(!loader)return;
-  const cv=document.getElementById('lc'),cx=cv.getContext('2d');
+  const cv=document.getElementById('lc');if(matchMedia('(max-width:600px)').matches){cv.width=560;cv.height=255} /* en celular se dibuja a menor resolución: la mitad de píxeles por cuadro */
+  const cx=cv.getContext('2d');
   const DUR=4200,K=60;
   let imgData=null,mapR=null,logoA=null;
   const setT=t=>{if(!imgData)return;const d=imgData.data,n=mapR.length;for(let i=0;i<n;i++){let a=K*(t-mapR[i]/255);a=a<0?0:a>1?1:a;d[i*4+3]=logoA[i]*a}cx.putImageData(imgData,0,0)};
